@@ -27,6 +27,14 @@ The initial implementation is a web page saying 'Hello world'
 - Maintain CommonJS module.exports pattern
 - Always use absolute paths with path.resolve()
 - Handle module loading errors with try/catch blocks
+- Implement proper application lifecycle management:
+  - Quit application when all windows are closed (cross-platform)
+  - Clean up resources before quitting
+  - Handle window recreation on macOS when dock icon is clicked
+- Manage web server lifecycle:
+  - Start web server when application launches
+  - Stop web server when application quits
+  - Handle server errors gracefully
 
 #### Renderer Process (Pure ES Modules)
 
@@ -36,6 +44,17 @@ The initial implementation is a web page saying 'Hello world'
 - Follow strict ES module guidelines
 - Use path.resolve() for all file paths
 - Implement proper error handling for module loading
+- CSS files must be linked via HTML link tags, never imported as JavaScript modules
+
+  ```html
+  <!-- Correct CSS usage -->
+  <link rel="stylesheet" href="styles.css">
+  ```
+
+  ```javascript
+  // Incorrect CSS usage (will cause MIME type errors)
+  import './styles.css';
+  ```
 
 #### Preload Scripts (CommonJS with ES Module Interop)
 
@@ -145,6 +164,8 @@ The initial implementation is a web page saying 'Hello world'
 - Modern JavaScript (ES2022+)
 - No TypeScript
 - Pure CSS (no preprocessors)
+  - CSS files must be linked via HTML link tags
+  - Never import CSS files as JavaScript modules
 - Consistent code formatting
 - Comprehensive inline documentation
 
@@ -162,6 +183,21 @@ The initial implementation is a web page saying 'Hello world'
 - Graceful degradation
 - User-friendly error messages
 - Logging system implementation
+
+### Application Lifecycle
+
+- Implement cross-platform window management:
+  - Quit application when all windows are closed
+  - Clean up resources (web server, database connections, etc.)
+  - Handle macOS dock icon behavior
+- Ensure proper resource cleanup:
+  - Close all server connections
+  - Release system resources
+  - Save application state
+- Handle application quit scenarios:
+  - Normal quit
+  - Force quit
+  - System shutdown
 
 ## Security Requirements
 

@@ -13,8 +13,10 @@ const __dirname = path.dirname(__filename);
 
 // Import web server using ES modules
 let startWebServer;
+let stopWebServer;
 import('./web-server.js').then(module => {
   startWebServer = module.startWebServer;
+  stopWebServer = module.stopWebServer;
 });
 
 // Configuration constants
@@ -63,13 +65,20 @@ app.whenReady().then(createWindow);
 
 // Quit when all windows are closed
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
+  // Stop the web server before quitting
+  if (stopWebServer) {
+    stopWebServer();
   }
+  app.quit();
 });
 
 app.on('activate', () => {
   if (mainWindow === null) {
     createWindow();
   }
+});
+
+// Handle cleanup on quit
+app.on('will-quit', () => {
+  // Perform any necessary cleanup here
 });

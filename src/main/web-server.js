@@ -36,12 +36,29 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(rendererPath, 'index.html'));
 });
 
+// Server instance reference
+let serverInstance;
+
 // Start web server
 export function startWebServer(port) {
   return new Promise((resolve, reject) => {
-    const server = app.listen(port, '0.0.0.0', () => {
+    serverInstance = app.listen(port, '0.0.0.0', () => {
       console.log(`Web server running on port ${port}`);
-      resolve(server);
+      resolve(serverInstance);
     }).on('error', reject);
+  });
+}
+
+// Stop web server
+export function stopWebServer() {
+  return new Promise((resolve) => {
+    if (serverInstance) {
+      serverInstance.close(() => {
+        console.log('Web server stopped');
+        resolve();
+      });
+    } else {
+      resolve();
+    }
   });
 }

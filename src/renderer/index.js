@@ -1,6 +1,3 @@
-// Import styles
-import './styles.css';
-
 // Initial renderer process setup
 class App {
   constructor() {
