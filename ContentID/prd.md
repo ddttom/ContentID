@@ -1,48 +1,140 @@
-# Project Requirements: Dual-Interface Electron App
+# ContentID Project Specification
 
-Create an Electron application with:
+## Project Overview
 
-1. Local desktop interface running as executable
-2. Web-accessible interface sharing content from Electron app
+ContentID is a dual-interface Electron application that provides both a local desktop interface and a web-accessible interface. The application serves as a content identification and management system, with shared state and functionality between both interfaces.
 
 ## Technical Specifications
 
-### Architecture
+### Core Technologies
 
-- Main process (CommonJS)
-- Renderer process (ES Modules)
-- Web server process for external access
-- Preload scripts for secure IPC
-- Service layer for shared business logic
+- Electron (v28.0.0)
+- Node.js (v18+)
+- Modern JavaScript (ES2022+)
+- HTML5/CSS3
+- Jest (v29.0.0) for testing
+- Supertest for integration testing
 
-### Development Guidelines
+### Interface Specifications
 
-- Use modern JavaScript (ES2022+) without TypeScript
-- Pure CSS only, no preprocessors
+1. Desktop Interface:
+   - Native Electron application
+   - Window-based UI
+   - Secure IPC communication
+   - System integration capabilities
+
+2. Web Interface:
+   - HTTP server running on port 3000
+   - Accessible at <http://0.0.0.0:3000>
+   - External network accessibility
+   - Responsive web design
+
+## Architecture
+
+### Process Architecture
+
+- **Main Process** (CommonJS)
+  - Application lifecycle management
+  - Window creation and management
+  - Web server implementation
+  - System-level operations
+
+- **Renderer Process** (ES Modules)
+  - UI rendering and interaction
+  - Client-side logic
+  - Communication with main process via preload
+
+- **Preload Scripts** (CommonJS)
+  - Secure IPC bridge
+  - API exposure to renderer
+  - Context isolation enforcement
+
+- **Web Server Process**
+  - Built-in HTTP server
+  - Static file serving from renderer directory
+  - Security headers implementation
+  - CORS configuration
+
+### Security Architecture
+
+- Context isolation enabled
+- Secure IPC communication channels
+- Content Security Policy (CSP) headers
+- Input validation on both interfaces
+- CORS configuration for web API
+- Strict path resolution
+
+## Development Guidelines
+
+### Code Organization
+
 - ES Modules for renderer/services
 - CommonJS for main/preload scripts
-- Minimal external dependencies
-- No build-heavy frameworks
-- Context isolation enabled
-- Clear documentation inline
-- Path resolution:
-  - Main process resolves paths relative to src/main/
-  - Use '../' to reference files in sibling directories
-  - Example: '../renderer/index.html' from src/main/
-  - Example: '../preload/index.js' from src/main/
-- Application quits completely on all platforms when all windows are closed
-- Window close handler uses process.platform (not process.process.platform) for proper platform detection
-- Developer tools only open on explicit user request (Cmd+Option+I/Ctrl+Shift+I)
+- Clear separation of concerns
+- Modular architecture
 
-### Security Requirements
+### Style Guidelines
 
-- Proper context isolation between processes
+- Modern JavaScript (ES2022+)
+- No TypeScript
+- Pure CSS (no preprocessors)
+- Consistent code formatting
+- Comprehensive inline documentation
+
+### Testing Strategy
+
+- Unit tests for core functionality
+- Integration tests for web server
+- Jest as the test runner
+- Supertest for HTTP testing
+- Simplified test cases focusing on core functionality
+- Test coverage reporting
+- Continuous integration ready
+
+### Path Resolution
+
+- Main process resolves paths relative to src/main/
+- Use '../' to reference files in sibling directories
+- Example paths:
+  - '../renderer/index.html' from src/main/
+  - '../preload/index.js' from src/main/
+
+### Error Handling
+
+- Comprehensive error handling in all processes
+- Graceful degradation
+- User-friendly error messages
+- Logging system implementation
+
+## Security Requirements
+
+### Core Security Features
+
+- Proper context isolation
 - Secure IPC communication
 - CSP headers for web interface
 - Input validation on both interfaces
 - CORS configuration for web API
+- Content Security Policy:
 
-### Project Structure
+  ```text
+  default-src 'self';
+  style-src 'self' 'unsafe-inline';
+  script-src 'self';
+  img-src 'self' data:;
+  font-src 'self';
+  connect-src 'self'
+  ```
+
+### Network Security
+
+- External accessibility via 0.0.0.0
+- Port 3000 for web interface
+- Basic CORS configuration
+- Rate limiting (future implementation)
+- HTTPS support (future implementation)
+
+## Project Structure
 
 ```bash
 project/
@@ -51,12 +143,18 @@ project/
 │   ├── renderer/       # Renderer process (ES Modules)
 │   ├── preload/        # Preload scripts (CommonJS)
 │   ├── services/       # Shared business logic (ES Modules)
-│   ├── public/         # Static assets
-│   ├── tests/          # Test files (if requested)
+│   ├── public/         # Static assets (favicon, etc.)
+│   ├── tests/          # Test files
 │   └── scripts/        # Build and utility scripts
+├── docs/               # Documentation
+│   └── development-notes/ # Development notes
+├── ContentID/          # Project documentation
+└── log.md              # Development log
 ```
 
-### Required Features
+## Required Features
+
+### Core Features
 
 - Local window interface
 - Web-accessible interface
@@ -67,22 +165,49 @@ project/
 - Logging system
 - Security validations
 
-### Build Process
+### Interface Features
 
-- Simple npm scripts
+- Responsive design
+- Favicon support
+- Developer tools access control
+- Window management
+- Network accessibility
+
+## Build Process
+
+### Development
+
+- Hot-reload support
+- Debugging tools
+- Development server
+
+### Production
+
 - Minimal bundling
-- Development hot-reload
 - Production optimization
+- Security hardening
+- Performance tuning
 
-### Delivery Requirements
+### NPM Scripts
+
+- `start`: Start both Electron and web server
+- `web`: Start web server only
+- `desktop`: Start Electron interface only
+- `test`: Run tests using Jest
+- `test:watch`: Run tests in watch mode
+- `test:coverage`: Run tests with coverage report
+
+## Delivery Requirements
 
 1. Complete source code
 2. Setup instructions
 3. API documentation
 4. Security guidelines
 5. Development notes
+6. Deployment documentation
+7. Maintenance guide
 
-### Development Notes Guidelines
+## Development Notes Guidelines
 
 Development notes should be maintained as Markdown files in the `docs/development-notes/` directory. Each note should follow this structure:
 
@@ -121,20 +246,48 @@ Development notes should be maintained as Markdown files in the `docs/developmen
 - Follow-up tasks
 ```
 
-Examples of good development notes:
+## Current Implementation Details
 
-- Feature implementation details
-- Bug fix documentation
-- Architectural decisions
-- Performance optimizations
-- Security-related changes
+### Web Interface
 
-Do not include:
+- HTTP server running on port 3000
+- Accessible at <http://0.0.0.0:3000>
+- Static file serving from renderer directory
+- Security headers implementation
+- CORS configuration
+- Proper content-length headers for static files
 
-- TypeScript
-- CSS preprocessors
-- Heavy frameworks
-- Complex build systems
-- Test files (unless requested)
+### Desktop Interface
 
-Generate a production-ready application following these specifications.
+- Electron main window
+- Secure IPC communication
+- Developer tools access control
+- System integration
+
+### Testing Implementation
+
+- Jest test runner configured
+- Simplified unit tests for main process
+- Integration tests for web server
+- Test coverage reporting
+- Continuous integration ready
+- Proper mocking of Electron APIs
+- Focused test cases for core functionality
+
+### Shared Components
+
+- Favicon implementation in renderer directory
+- Error handling system
+- Logging mechanism
+- Security validations
+
+## Future Roadmap
+
+- HTTPS implementation
+- Authentication system
+- Rate limiting
+- Improved favicon design
+- Expanded test coverage
+- CI/CD pipeline implementation
+- End-to-end testing
+- Performance benchmarking
