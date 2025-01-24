@@ -1,8 +1,10 @@
-# ContentID Project Specification
+# Project Specification
 
 ## Project Overview
 
-ContentID is a dual-interface Electron application that provides both a local desktop interface and a web-accessible interface. The application serves as a content identification and management system, with shared state and functionality between both interfaces.
+A dual-interface Electron application that provides both a local desktop interface and a web-accessible interface. With shared state and functionality between both interfaces.
+
+The initial implementation is a web page saying 'Hello world'
 
 ## Technical Specifications
 
@@ -80,16 +82,6 @@ ContentID is a dual-interface Electron application that provides both a local de
 - Pure CSS (no preprocessors)
 - Consistent code formatting
 - Comprehensive inline documentation
-
-### Testing Strategy
-
-- Unit tests for core functionality
-- Integration tests for web server
-- Jest as the test runner
-- Supertest for HTTP testing
-- Simplified test cases focusing on core functionality
-- Test coverage reporting
-- Continuous integration ready
 
 ### Path Resolution
 
