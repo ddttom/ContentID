@@ -17,6 +17,71 @@ The initial implementation is a web page saying 'Hello world'
 - Jest (v29.0.0) for testing
 - Supertest for integration testing
 
+### Module System Implementation
+
+#### Main Process (CommonJS with ES Module Interop)
+
+- Use CommonJS require() for Electron-specific imports
+- Use createRequire(import.meta.url) for CommonJS interop
+- Import ES modules using dynamic import()
+- Maintain CommonJS module.exports pattern
+- Always use absolute paths with path.resolve()
+- Handle module loading errors with try/catch blocks
+
+#### Renderer Process (Pure ES Modules)
+
+- Use import/export syntax exclusively
+- No CommonJS require() allowed
+- Use dynamic import() for code splitting
+- Follow strict ES module guidelines
+- Use path.resolve() for all file paths
+- Implement proper error handling for module loading
+
+#### Preload Scripts (CommonJS with ES Module Interop)
+
+- Use CommonJS require() for Electron APIs
+- Use createRequire(import.meta.url) for CommonJS interop
+- Maintain context isolation requirements
+- Follow Electron security best practices
+- Use absolute paths for all file references
+- Implement error handling for IPC communication
+
+#### Web Server (ES Modules)
+
+- Use import/export syntax exclusively
+- No CommonJS require() allowed
+- Use ES module patterns for Express routes
+- Maintain security headers and CORS configuration
+- Use single-line strings for security headers
+- Implement proper error handling for route handlers
+
+#### Shared Services (ES Modules)
+
+- Use import/export syntax exclusively
+- No CommonJS require() allowed
+- Follow strict ES module guidelines
+- Maintain clear separation of concerns
+- Use path.resolve() for all file paths
+- Implement comprehensive error handling
+
+### Path Resolution Guidelines
+
+- Always use path.resolve() for absolute paths
+- Use path.join() for constructing relative paths
+- Never use string concatenation for paths
+- Validate paths before using them
+- Handle path resolution errors gracefully
+- Use consistent path resolution patterns across the project
+
+### Security Header Implementation
+
+- Use single-line strings for security headers
+- Validate header values before setting them
+- Implement proper error handling for header operations
+- Use Content Security Policy (CSP) headers
+- Follow OWASP security header recommendations
+- Test headers in development and production
+
 ### Interface Specifications
 
 1. Desktop Interface:
@@ -35,7 +100,7 @@ The initial implementation is a web page saying 'Hello world'
 
 ### Process Architecture
 
-- **Main Process** (CommonJS)
+- **Main Process** (CommonJS with ES Module Interop)
   - Application lifecycle management
   - Window creation and management
   - Web server implementation
@@ -46,12 +111,12 @@ The initial implementation is a web page saying 'Hello world'
   - Client-side logic
   - Communication with main process via preload
 
-- **Preload Scripts** (CommonJS)
+- **Preload Scripts** (CommonJS with ES Module Interop)
   - Secure IPC bridge
   - API exposure to renderer
   - Context isolation enforcement
 
-- **Web Server Process**
+- **Web Server Process** (ES Modules)
   - Built-in HTTP server
   - Static file serving from renderer directory
   - Security headers implementation
@@ -71,7 +136,7 @@ The initial implementation is a web page saying 'Hello world'
 ### Code Organization
 
 - ES Modules for renderer/services
-- CommonJS for main/preload scripts
+- CommonJS with ES Module Interop for main/preload scripts
 - Clear separation of concerns
 - Modular architecture
 
@@ -131,9 +196,9 @@ The initial implementation is a web page saying 'Hello world'
 ```bash
 project/
 ├── src/
-│   ├── main/           # Main process (CommonJS)
+│   ├── main/           # Main process (CommonJS with ES Module Interop)
 │   ├── renderer/       # Renderer process (ES Modules)
-│   ├── preload/        # Preload scripts (CommonJS)
+│   ├── preload/        # Preload scripts (CommonJS with ES Module Interop)
 │   ├── services/       # Shared business logic (ES Modules)
 │   ├── public/         # Static assets (favicon, etc.)
 │   ├── tests/          # Test files

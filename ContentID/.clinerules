@@ -18,12 +18,49 @@
 
 ## Development Requirements
 
+### Module System Implementation
+
+#### Main Process (CommonJS with ES Module Interop)
+
+- Use CommonJS require() for Electron-specific imports
+- Use createRequire(import.meta.url) for CommonJS interop
+- Import ES modules using dynamic import()
+- Maintain CommonJS module.exports pattern
+
+#### Renderer Process (Pure ES Modules)
+
+- Use import/export syntax exclusively
+- No CommonJS require() allowed
+- Use dynamic import() for code splitting
+- Follow strict ES module guidelines
+
+#### Preload Scripts (CommonJS with ES Module Interop)
+
+- Use CommonJS require() for Electron APIs
+- Use createRequire(import.meta.url) for CommonJS interop
+- Maintain context isolation requirements
+- Follow Electron security best practices
+
+#### Web Server (ES Modules)
+
+- Use import/export syntax exclusively
+- No CommonJS require() allowed
+- Use ES module patterns for Express routes
+- Maintain security headers and CORS configuration
+
+#### Shared Services (ES Modules)
+
+- Use import/export syntax exclusively
+- No CommonJS require() allowed
+- Follow strict ES module guidelines
+- Maintain clear separation of concerns
+
+### General Requirements
+
 - Modern JavaScript (ES modules) without TypeScript
 - Pure CSS without preprocessors
 - No build-heavy frameworks
 - Focus on simplicity and performance
-- ES modules for renderer process and services
-- CommonJS for main process and preload scripts
 - Clear code organization and documentation
 - Security through proper context isolation
 - Minimal dependencies and build steps
@@ -31,9 +68,10 @@
 ## File Structure
 
 - /src - Main source code
-  - /main - Main process code (CommonJS)
-  - /renderer - Renderer process code (ES modules)
-  - /services - Shared services (ES modules)
+  - /main - Main process code (CommonJS with ES Module Interop)
+  - /renderer - Renderer process code (ES Modules)
+  - /preload - Preload scripts (CommonJS with ES Module Interop)
+  - /services - Shared services (ES Modules)
 - /tests - Test files
 - /public - Static assets
 
@@ -48,9 +86,9 @@
 - Avoid global variables
 - Use async/await for asynchronous code
 - Use error handling consistently
-- organize constants into configuration objects
-- all exports at the bottom of the .js
-- never use default exports
+- Organize constants into configuration objects
+- All exports at the bottom of the .js
+- Never use default exports
 
 ## Security Guidelines
 
