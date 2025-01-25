@@ -4,13 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ContentID - Trusted Content Verification</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles/styles.css">
+  <script type="module" src="scripts/lib.js"></script>
+  <script type="module" src="scripts/main.js"></script>
 </head>
 <body>
-  <header class="main-header">
-    <div class="header-content">
+  <div class="header-wrapper">
+    <div class="header block">
       <div class="logo">ContentID</div>
-      <nav class="main-nav">
+      <nav class="nav">
         <ul>
           <li><a href="#">Home</a></li>
           <li><a href="#">Features</a></li>
@@ -18,76 +20,78 @@
           <li><a href="#">About</a></li>
         </ul>
       </nav>
-      <div class="header-actions">
+      <div class="actions">
         <a href="#" class="login-btn">Login</a>
       </div>
     </div>
-  </header>
+  </div>
 
-  <main>
-    <div class="hero">
+  <div class="hero-wrapper">
+    <div class="hero block">
       <h1>Trusted Content Verification</h1>
-      <div class="hero-content">
-        <div class="hero-text">
-          <p>ContentID provides cryptographically signed digital passports for content, establishing a chain of trust and authenticity verification for AI systems.</p>
-          <a href="#" class="cta-btn">Get Started</a>
-        </div>
+      <div class="content">
+        <p>ContentID provides cryptographically signed digital passports for content, establishing a chain of trust and authenticity verification for AI systems.</p>
+        <a href="#" class="cta-btn">Get Started</a>
       </div>
     </div>
+  </div>
 
-    <div class="content-section">
+  <div class="content-wrapper">
+    <div class="content block">
       <h2>Why ContentID Matters</h2>
-      <div class="content-grid">
-        <div class="content-block">
+      <div class="grid">
+        <div class="item">
           <h3>Verified Content</h3>
           <p>Ensure the authenticity of your digital content with cryptographic signatures that create a verifiable chain of trust.</p>
         </div>
-        <div class="content-block">
+        <div class="item">
           <h3>AI Integration</h3>
           <p>Enable AI systems to distinguish between verified and unverified information with our digital passport system.</p>
         </div>
-        <div class="content-block">
+        <div class="item">
           <h3>Enterprise Ready</h3>
           <p>Designed for enterprise content managers, legal teams, and technical documentation specialists.</p>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="content-section">
+  <div class="steps-wrapper">
+    <div class="steps block">
       <h2>How It Works</h2>
-      <div class="content-steps">
+      <div class="step-items">
         <div class="step">
-          <div class="step-number">1</div>
-          <div class="step-content">
+          <div class="number">1</div>
+          <div class="text">
             <h3>Content Creation</h3>
             <p>Create content using your existing tools and workflows.</p>
           </div>
         </div>
         <div class="step">
-          <div class="step-number">2</div>
-          <div class="step-content">
+          <div class="number">2</div>
+          <div class="text">
             <h3>Digital Passport</h3>
             <p>Generate a cryptographic signature that creates a unique digital passport for your content.</p>
           </div>
         </div>
         <div class="step">
-          <div class="step-number">3</div>
-          <div class="step-content">
+          <div class="number">3</div>
+          <div class="text">
             <h3>Verification</h3>
             <p>AI systems and users can verify content authenticity through our verification system.</p>
           </div>
         </div>
       </div>
     </div>
-  </main>
+  </div>
 
-  <footer class="main-footer">
-    <div class="footer-content">
-      <div class="footer-section">
+  <div class="footer-wrapper">
+    <div class="footer block">
+      <div class="section">
         <div class="logo">ContentID</div>
         <p>Trusted Content Verification System</p>
       </div>
-      <div class="footer-section">
+      <div class="section">
         <h4>Quick Links</h4>
         <ul>
           <li><a href="#">Features</a></li>
@@ -95,7 +99,7 @@
           <li><a href="#">Documentation</a></li>
         </ul>
       </div>
-      <div class="footer-section">
+      <div class="section">
         <h4>Legal</h4>
         <ul>
           <li><a href="#">Privacy Policy</a></li>
@@ -106,8 +110,6 @@
     <div class="footer-bottom">
       <p>&copy; 2025 ContentID. All rights reserved.</p>
     </div>
-  </footer>
-  
-  <script type="module" src="index.js"></script>
+  </div>
 </body>
 </html>

@@ -1,18 +1,52 @@
+import spdy from 'spdy';
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
+import compression from 'compression';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 
 // Create Express application
 const app = express();
 
 // Security headers middleware
-app.use((req, res, next) => {
-  res.setHeader('Content-Security-Policy', "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'");
-  res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('X-Frame-Options', 'DENY');
-  res.setHeader('X-XSS-Protection', '1; mode=block');
-  next();
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrc: ["'self'"],
+      imgSrc: ["'self'", 'data:'],
+      fontSrc: ["'self'"],
+      connectSrc: ["'self'"]
+    }
+  },
+  hsts: {
+    maxAge: 31536000,
+    includeSubDomains: true,
+    preload: true
+  },
+  referrerPolicy: { policy: 'same-origin' }
+}));
+
+// Compression middleware
+app.use(compression({
+  level: 6,
+  threshold: 1024,
+  filter: (req, res) => {
+    if (req.headers['x-no-compression']) {
+      return false;
+    }
+    return compression.filter(req, res);
+  }
+}));
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
 });
+app.use(limiter);
 
 // CORS configuration
 app.use(cors({
@@ -25,9 +59,8 @@ app.use(cors({
 const rendererPath = path.join(path.dirname(new URL(import.meta.url).pathname), '../renderer');
 app.use(express.static(rendererPath, {
   setHeaders: (res, path) => {
-    if (path.endsWith('.html')) {
-      res.setHeader('Cache-Control', 'no-store');
-    }
+    const cacheControl = path.endsWith('.html') ? 'no-store' : 'public, max-age=31536000, immutable';
+    res.setHeader('Cache-Control', cacheControl);
   }
 }));
 
@@ -42,10 +75,19 @@ let serverInstance;
 // Start web server
 export function startWebServer(port) {
   return new Promise((resolve, reject) => {
-    serverInstance = app.listen(port, '0.0.0.0', () => {
-      console.log(`Web server running on port ${port}`);
-      resolve(serverInstance);
-    }).on('error', reject);
+    const options = {
+      spdy: {
+        protocols: ['h2', 'http/1.1'],
+        plain: true
+      }
+    };
+    
+    serverInstance = spdy.createServer(options, app)
+      .listen(port, '0.0.0.0', () => {
+        console.log(`Web server running on port ${port} with HTTP/2`);
+        resolve(serverInstance);
+      })
+      .on('error', reject);
   });
 }
 

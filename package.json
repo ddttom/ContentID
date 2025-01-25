@@ -15,7 +15,11 @@
     "electron": "^28.0.0",
     "express": "^4.18.2",
     "cors": "^2.8.5",
-    "module": "^1.0.0"
+    "module": "^1.0.0",
+    "spdy": "^4.0.2",
+    "compression": "^1.7.4",
+    "helmet": "^7.1.0",
+    "express-rate-limit": "^6.7.0"
   },
   "devDependencies": {
     "jest": "^29.0.0",
