@@ -69,11 +69,14 @@ The initial implementation is a web page saying 'Hello world'
 
 - Use import/export syntax exclusively
 - No CommonJS require() allowed
-- Use ES module patterns for Express routes
+- Use ES module patterns for Express.js implementation
+- Implement Express routes using class-based structure
+- Use fileURLToPath for proper ES Modules path resolution
 - Maintain security headers and CORS configuration
 - Use single-line strings for security headers
 - Implement proper error handling for route handlers
-
+- Ensure clean lifecycle management with start/stop methods
+  
 #### Shared Services (ES Modules)
 
 - Use import/export syntax exclusively
