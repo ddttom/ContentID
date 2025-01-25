@@ -233,19 +233,36 @@ The initial implementation is a web page saying 'Hello world'
 ## Project Structure
 
 ```bash
-project/
+.
+├── .clinerules
+├── .gitattributes
+├── .gitignore
+├── package-lock.json
+├── package.json
+├── prd.md
+├── README.md
+├── docs/
+│   ├── architecture.md
+│   ├── development-notes/
+│   │   └── lnitial-build.md
+│   └── templates/
+│       └── template-task.md
 ├── src/
-│   ├── main/           # Main process (CommonJS with ES Module Interop)
-│   ├── renderer/       # Renderer process (ES Modules)
-│   ├── preload/        # Preload scripts (CommonJS with ES Module Interop)
-│   ├── services/       # Shared business logic (ES Modules)
-│   ├── public/         # Static assets (favicon, etc.)
-│   ├── tests/          # Test files
-│   └── scripts/        # Build and utility scripts
-├── docs/               # Documentation
-│   └── development-notes/ # Development notes
-├── ContentID/          # Project documentation
-└── log.md              # Development log
+│   ├── main/
+│   │   ├── index.js
+│   │   └── web-server.js
+│   ├── preload/
+│   │   └── index.js
+│   ├── renderer/
+│   │   ├── favicon.ico
+│   │   ├── index.html
+│   │   ├── index.js
+│   │   └── styles.css
+│   └── services/
+│       └── logger.js
+└── tests/
+    ├── main.test.js
+    └── renderer.test.js
 ```
 
 ## Required Features
