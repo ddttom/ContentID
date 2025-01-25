@@ -19,16 +19,10 @@ OUTPUT: Create responses following these rules. Focus on minimal, efficient solu
 
 ## Task Definition
 
-Taskname: name of md
-Title: {{ Task Title }}
-Scope: {{ Detailed description of what needs to be refactored }}
-Current Architecture: {{ Description of current implementation }}
-Target Architecture: {{ Description of desired end state }}
-Files/Components: {{ List of specific files or components to be refactored }}
-Dependencies: {{ List of known system dependencies }}
-
+Taskname: make-home-page
+Title: Make Home Page
 Scope: The existing Electron app has a hello world message on the home page, i wish to change this into a compelling home page with the objectives and ideas described inn prd.md the hone page should be stylish with a link that takes a user to a logon page, do not create the logon page
-logfilename: same as the Taskname with -log.md appended in docs/development-notes folder
+logfilename: same as the task name with -log.md appended in docs/development-notes folder
 
 ## Essential Constraints
 
@@ -36,7 +30,7 @@ IMPORTANT: All changes must be minimal, affecting only explicitly mentioned code
 
 ### Module System Requirements
 
-we are using contextIsolation in Electron, we can't use require in the renderer process. Instead, we need to use ES modules (import/export) in files
+we're using contextIsolation in Electron, we can't use require in the renderer process. Instead, we need to use ES modules (import/export) in files
 
 ### Error Handling Hierarchy
 
