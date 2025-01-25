@@ -71,74 +71,7 @@ body.appear {
 }
 ```
 
-### 2. Special Blocks (Header/Footer)
-
-#### Header Loading
-
-```javascript
-async function loadHeader(header) {
-  const headerBlock = buildBlock('header', '');
-  header.append(headerBlock);
-  decorateBlock(headerBlock);
-  return loadBlock(headerBlock);
-}
-
-// Usage in main.js
-const header = document.querySelector('header');
-if (header) {
-  await loadHeader(header);
-}
-```
-
-#### Footer Loading
-
-```javascript
-async function loadFooter(footer) {
-  const footerBlock = buildBlock('footer', '');
-  footer.append(footerBlock);
-  decorateBlock(footerBlock);
-  return loadBlock(footerBlock);
-}
-
-// Usage in main.js
-const footer = document.querySelector('footer');
-if (footer) {
-  await loadFooter(footer);
-}
-```
-
-#### Special Block Structure
-
-```bash
-/blocks/
-  /header/
-    - header.css    # Header-specific styles
-    - header.js     # Header decoration and behavior
-  /footer/
-    - footer.css    # Footer-specific styles
-    - footer.js     # Footer decoration and behavior
-```
-
-#### Block Building Utility
-
-```javascript
-function buildBlock(name, content) {
-  const block = document.createElement('div');
-  block.classList.add(name);
-  block.classList.add('block');
-  block.dataset.blockName = name;
-  
-  if (content) {
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = content;
-    block.append(wrapper);
-  }
-  
-  return block;
-}
-```
-
-### 3. Block System
+### 2. Block System
 
 #### Block Registry
 
@@ -149,11 +82,16 @@ export function registerBlock(name, mod) {
   blocks[name] = mod;
 }
 
-async function loadBlock(block) {
-  const name = block.classList[0];
+export async function loadBlock(block) {
+  const name = block.dataset.blockName || block.classList[0];
   if (!blocks[name]) {
-    const mod = await import(`../blocks/${name}/${name}.js`);
-    registerBlock(name, mod);
+    try {
+      const mod = await import(`../blocks/${name}/${name}.js`);
+      registerBlock(name, mod);
+    } catch (error) {
+      console.error(`Failed to load block ${name}:`, error);
+      return;
+    }
   }
   await blocks[name].default(block);
 }
@@ -163,7 +101,12 @@ async function loadBlock(block) {
 
 ```javascript
 // blocks/example/example.js
+import { loadCSS } from '../../scripts/lib.js';
+
 export default async function decorate(block) {
+  // Load block CSS
+  await loadCSS(`/blocks/${block.dataset.blockName}/${block.dataset.blockName}.css`);
+  
   // Status tracking
   block.dataset.blockStatus = 'loading';
   
@@ -173,13 +116,74 @@ export default async function decorate(block) {
   block.parentNode.insertBefore(wrapper, block);
   wrapper.appendChild(block);
   
-  // Load resources
-  await Promise.all([
-    loadCSS(`blocks/example/example.css`),
-    loadBlockResources(block)
-  ]);
-  
   block.dataset.blockStatus = 'loaded';
+}
+```
+
+### 3. Common Blocks
+
+#### Header Block
+
+```javascript
+// blocks/header/header.js
+import { loadCSS } from '../../scripts/lib.js';
+
+export default async function decorate(block) {
+  await loadCSS('/blocks/header/header.css');
+  
+  // Header implementation...
+}
+```
+
+#### Footer Block
+
+```javascript
+// blocks/footer/footer.js
+import { loadCSS } from '../../scripts/lib.js';
+
+export default async function decorate(block) {
+  await loadCSS('/blocks/footer/footer.css');
+  
+  // Footer implementation...
+}
+```
+
+#### Hero Block
+
+```javascript
+// blocks/hero/hero.js
+import { loadCSS } from '../../scripts/lib.js';
+
+export default async function decorate(block) {
+  await loadCSS('/blocks/hero/hero.css');
+  
+  // Hero implementation...
+}
+```
+
+#### Content Block
+
+```javascript
+// blocks/content/content.js
+import { loadCSS } from '../../scripts/lib.js';
+
+export default async function decorate(block) {
+  await loadCSS('/blocks/content/content.css');
+  
+  // Content implementation...
+}
+```
+
+#### Steps Block
+
+```javascript
+// blocks/steps/steps.js
+import { loadCSS } from '../../scripts/lib.js';
+
+export default async function decorate(block) {
+  await loadCSS('/blocks/steps/steps.css');
+  
+  // Steps implementation...
 }
 ```
 
@@ -190,12 +194,12 @@ export default async function decorate(block) {
 ```javascript
 const loadPage = async () => {
   // Eager: Critical
-  await loadCriticalContent();
+  await loadHeader();
   document.body.classList.add('appear');
   
   // Lazy: Non-critical
   requestIdleCallback(() => {
-    loadLazyStyles();
+    loadFooter();
     initializeBlocks();
   });
   
@@ -206,95 +210,7 @@ const loadPage = async () => {
 };
 ```
 
-#### Resource Loading
-
-```javascript
-async function loadCSS(href) {
-  return new Promise((resolve, reject) => {
-    if (!document.querySelector(`head > link[href="${href}"]`)) {
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = href;
-      link.onload = resolve;
-      link.onerror = reject;
-      document.head.appendChild(link);
-    } else {
-      resolve();
-    }
-  });
-}
-
-async function loadScript(src, attrs = {}) {
-  return new Promise((resolve, reject) => {
-    if (!document.querySelector(`script[src="${src}"]`)) {
-      const script = document.createElement('script');
-      script.src = src;
-      Object.entries(attrs).forEach(([key, value]) => {
-        script.setAttribute(key, value);
-      });
-      script.onload = resolve;
-      script.onerror = reject;
-      document.head.appendChild(script);
-    } else {
-      resolve();
-    }
-  });
-}
-```
-
-### 5. Performance Optimizations
-
-#### Image Optimization
-
-```javascript
-function createOptimizedPicture(src, alt, eager = false, breakpoints = [
-  { width: 400, media: '(max-width: 400px)' },
-  { width: 800, media: '(max-width: 800px)' },
-  { width: 1200, media: '(max-width: 1200px)' },
-  { width: 2000 }
-]) {
-  const picture = document.createElement('picture');
-  
-  breakpoints.forEach(({ width, media }) => {
-    const source = document.createElement('source');
-    if (media) source.setAttribute('media', media);
-    source.setAttribute('srcset', `${src}?width=${width}&format=webp`);
-    source.setAttribute('type', 'image/webp');
-    picture.appendChild(source);
-  });
-  
-  const img = document.createElement('img');
-  img.src = `${src}?width=2000`;
-  img.alt = alt;
-  img.loading = eager ? 'eager' : 'lazy';
-  picture.appendChild(img);
-  
-  return picture;
-}
-```
-
-#### Intersection Observer
-
-```javascript
-const blockObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      loadBlock(entry.target);
-      blockObserver.unobserve(entry.target);
-    }
-  });
-}, {
-  rootMargin: '50px 0px'
-});
-
-function initializeBlocks() {
-  document.querySelectorAll('.block').forEach(block => {
-    blockObserver.observe(block);
-  });
-}
-```
-
-### 6. Best Practices
+### 5. Best Practices
 
 #### Performance Checklist
 
