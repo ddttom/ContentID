@@ -59,13 +59,18 @@ app.use(cors({
 const rendererPath = path.join(path.dirname(new URL(import.meta.url).pathname), '../renderer');
 app.use(express.static(rendererPath, {
   setHeaders: (res, path) => {
+    // Set proper cache headers
     const cacheControl = path.endsWith('.html') ? 'no-store' : 'public, max-age=31536000, immutable';
     res.setHeader('Cache-Control', cacheControl);
-  }
+  },
+  // Enable directory indexing for block modules
+  index: ['index.html'],
+  // Allow loading of .js modules
+  extensions: ['js', 'css', 'html']
 }));
 
-// Root route handler
-app.get('/', (req, res) => {
+// Ensure all routes serve index.html for client-side routing
+app.get('*', (req, res) => {
   res.sendFile(path.join(rendererPath, 'index.html'));
 });
 

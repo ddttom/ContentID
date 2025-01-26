@@ -23,10 +23,13 @@ export async function loadBlock(block) {
 // CSS loading
 export async function loadCSS(href) {
   return new Promise((resolve, reject) => {
-    if (!document.querySelector(`link[href="${href}"]`)) {
+    // Remove leading slash to make path relative
+    const path = href.startsWith('/') ? href.substring(1) : href;
+    
+    if (!document.querySelector(`link[href="${path}"]`)) {
       const link = document.createElement('link');
       link.rel = 'stylesheet';
-      link.href = href;
+      link.href = path;
       link.onload = resolve;
       link.onerror = reject;
       document.head.appendChild(link);

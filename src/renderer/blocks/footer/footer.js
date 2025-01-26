@@ -2,7 +2,7 @@ import { loadCSS } from '../../scripts/lib.js';
 
 export default async function decorate(block) {
   // Load footer CSS
-  await loadCSS('/blocks/footer/footer.css');
+  await loadCSS('blocks/footer/footer.css');
   
   // Create footer structure
   const footer = document.createElement('footer');

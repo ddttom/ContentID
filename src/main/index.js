@@ -23,6 +23,10 @@ import('./web-server.js').then(module => {
 const isDevelopment = process.env.NODE_ENV === 'development';
 const WEB_SERVER_PORT = 3000;
 
+// Default window dimensions increased by 50%
+const DEFAULT_WIDTH = 1800;  // increased from 1200
+const DEFAULT_HEIGHT = 1200; // increased from 800
+
 // Keep a global reference of the window object
 let mainWindow;
 
@@ -33,25 +37,27 @@ async function createWindow() {
   }
 
   // Start the web server
-  startWebServer(WEB_SERVER_PORT);
+  await startWebServer(WEB_SERVER_PORT);
 
-  // Create the browser window
+  // Create the browser window with 50% larger dimensions
   mainWindow = new BrowserWindow({
-    width: 1200,
-    height: 800,
+    width: DEFAULT_WIDTH,
+    height: DEFAULT_HEIGHT,
     webPreferences: {
       preload: path.join(__dirname, '../preload/index.js'),
       contextIsolation: true,
-      nodeIntegration: false
+      nodeIntegration: false,
+      webSecurity: true
     }
   });
 
   // Load the web interface
   if (isDevelopment) {
-    mainWindow.loadURL(`http://localhost:${WEB_SERVER_PORT}`);
+    await mainWindow.loadURL(`http://localhost:${WEB_SERVER_PORT}`);
     mainWindow.webContents.openDevTools();
   } else {
-    mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'));
+    // In production, we'll use the same web server to serve the app
+    await mainWindow.loadURL(`http://localhost:${WEB_SERVER_PORT}`);
   }
 
   // Emitted when the window is closed

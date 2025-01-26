@@ -4,16 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ContentID - Trusted Content Verification</title>
+  <!-- Load base styles first -->
   <link rel="stylesheet" href="styles/styles.css">
+  <!-- Scripts after styles -->
   <script type="module" src="scripts/lib.js"></script>
   <script type="module" src="scripts/main.js"></script>
 </head>
 <body>
-  <header class="header block" data-block-name="header"></header>
+  <div class="block" data-block-name="header"></div>
 
   <div class="content">
     <div class="hero-wrapper">
-      <div class="hero block">
+      <div class="block" data-block-name="hero">
         <h1>Trusted Content Verification</h1>
         <div class="content">
           <p>ContentID provides cryptographically signed digital passports for content, establishing a chain of trust and authenticity verification for AI systems.</p>
@@ -23,7 +25,7 @@
     </div>
 
     <div class="content-wrapper">
-      <div class="content block">
+      <div class="block" data-block-name="content">
         <h2>Why ContentID Matters</h2>
         <div class="grid">
           <div class="item">
@@ -43,7 +45,7 @@
     </div>
 
     <div class="steps-wrapper">
-      <div class="steps block">
+      <div class="block" data-block-name="steps">
         <h2>How It Works</h2>
         <div class="step-items">
           <div class="step">
@@ -72,6 +74,6 @@
     </div>
   </div>
 
-  <footer class="footer block" data-block-name="footer"></footer>
+  <div class="block" data-block-name="footer"></div>
 </body>
 </html>

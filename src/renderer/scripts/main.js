@@ -1,4 +1,4 @@
-import { loadBlock } from './lib.js';
+import { loadBlock, loadCSS } from './lib.js';
 
 async function loadHeader() {
   const header = document.querySelector('header');
@@ -15,15 +15,18 @@ async function loadFooter() {
 }
 
 async function loadPage() {
-  // Load critical content
-  await loadHeader();
-  document.body.classList.add('appear');
+  // Make sure base styles are loaded
+  await loadCSS('styles/styles.css');
   
-  // Load non-critical content
-  requestIdleCallback(async () => {
-    await loadFooter();
-    initializeBlocks();
-  });
+  // Load blocks
+  await Promise.all([
+    loadHeader(),
+    loadFooter(),
+    initializeBlocks()
+  ]);
+  
+  // Show content after everything is loaded
+  document.body.classList.add('appear');
 }
 
 function initializeBlocks() {

@@ -2,7 +2,7 @@ import { loadCSS } from '../../scripts/lib.js';
 
 export default async function decorate(block) {
   // Load header CSS
-  await loadCSS('/blocks/header/header.css');
+  await loadCSS('blocks/header/header.css');
   
   // Create header structure
   const header = document.createElement('header');
