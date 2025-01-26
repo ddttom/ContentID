@@ -1,4 +1,4 @@
-import { loadBlock, loadCSS } from './lib.js';
+import { loadBlock, loadCSS, initializePage } from './lib.js';
 
 async function loadHeader() {
   const header = document.querySelector('header');
@@ -37,5 +37,5 @@ function initializeBlocks() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  loadPage();
+  initializePage().catch(console.error);
 });

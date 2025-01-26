@@ -8,16 +8,38 @@ export function registerBlock(name, mod) {
 // Block loading
 export async function loadBlock(block) {
   const name = block.dataset.blockName || block.classList[0];
+  
+  // Set initial loading status
+  block.dataset.blockStatus = 'loading';
+  
   if (!blocks[name]) {
     try {
       const mod = await import(`../blocks/${name}/${name}.js`);
       registerBlock(name, mod);
     } catch (error) {
       console.error(`Failed to load block ${name}:`, error);
+      block.dataset.blockStatus = 'error';
       return;
     }
   }
-  await blocks[name].default(block);
+  
+  try {
+    await blocks[name].default(block);
+    block.dataset.blockStatus = 'loaded';
+  } catch (error) {
+    console.error(`Failed to initialize block ${name}:`, error);
+    block.dataset.blockStatus = 'error';
+  }
+}
+
+// Update page loading
+export async function initializePage() {
+  // Wait for all blocks to load
+  const blocks = document.querySelectorAll('.block');
+  await Promise.all(Array.from(blocks).map(block => loadBlock(block)));
+  
+  // Show the page only after all blocks are loaded
+  document.body.classList.add('appear');
 }
 
 // CSS loading

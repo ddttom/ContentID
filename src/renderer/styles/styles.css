@@ -41,18 +41,20 @@
   --spacing-md: 4px;
 }
 
+/* Hide content until ready */
 body {
+  opacity: 0;  /* Change from display: none to opacity for smoother transition */
+  transition: opacity 0.2s ease-in;
   font-size: var(--body-font-size-m);
   margin: 0;
   font-family: var(--body-font-family);
   line-height: 1.4;
   color: var(--text-color);
   background-color: var(--background-color);
-  display: none;
 }
 
 body.appear {
-  display: block;
+  opacity: 1;  /* Fade in when ready */
 }
 
 /* Typography */
@@ -84,6 +86,12 @@ a:hover {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--spacing-xs);  /* minimal padding */
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
+}
+
+.block[data-block-status="loaded"] {
+  opacity: 1;
 }
 
 /* Header */
@@ -103,12 +111,12 @@ a:hover {
 /* Content Sections */
 .hero-wrapper {
   background: var(--light-color);
-  padding: var(--spacing-xs) 0;
+  padding: 0;  /* removed padding */
 }
 
 .content-wrapper,
 .steps-wrapper {
-  padding: var(--spacing-xs) 0;
+  padding: 0;  /* removed padding */
 }
 
 /* Grid Layouts */
@@ -148,10 +156,11 @@ a:hover {
   border-radius: 2px;
   text-decoration: none;
   margin-top: var(--spacing-sm);
+  content: none;
 }
 
 .cta-btn:after {
-  content: "Get Started";
+  display: none;
 }
 
 .button:hover, .cta-btn:hover {

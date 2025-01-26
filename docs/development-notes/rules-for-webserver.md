@@ -60,14 +60,24 @@
   --heading-font: system-ui;
 }
 
+/* FOUC Prevention */
 body {
-  font-family: var(--body-font);
-  margin: 0;
-  display: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
 }
 
 body.appear {
-  display: block;
+  opacity: 1;
+}
+
+/* Block Loading States */
+.block {
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
+}
+
+.block[data-block-status="loaded"] {
+  opacity: 1;
 }
 ```
 
