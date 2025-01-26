@@ -13,11 +13,11 @@
    - Independent loading
    - Isolated styling
 
-3. **Performance First**
-   - Target Lighthouse 100
-   - No bundling required
-   - HTTP/3 optimized
-   - Modern browser APIs
+3. **Content Processing**
+   - Markdown-to-HTML conversion
+   - Dynamic block generation
+   - Template-based rendering
+   - Static asset serving
 
 ## Project Structure
 
@@ -36,44 +36,63 @@
 /utils/
   - decorators.js
   - loaders.js
+/templates/
+  - template.txt  # Base template
+/static/
+  - header.html
+  - footer.html
 ```
+
+## Content Processing System
+
+### Request Flow
+
+1. Server receives request for HTML file (e.g., page.html)
+2. System looks for corresponding markdown file (page.md)
+3. Markdown is converted to HTML using the following rules:
+   - Standard markdown syntax converts normally
+   - Tables receive special processing
+   - Content is inserted into template.txt
+
+### Table Processing Rules
+
+Tables in markdown are processed into block-based HTML structures:
+
+1. First cell determines block type:
+
+   ```markdown
+   | Block Type (modifier) |  |
+   | :---- | :---- |
+   | content | content |
+   ```
+
+   Converts to:
+
+   ```html
+   <div class="block-type modifier">
+     <div>
+       <div>content</div>
+       <div>content</div>
+     </div>
+   </div>
+   ```
+
+2. Rules:
+   - First cell content becomes main class
+   - Content in parentheses becomes additional class
+   - Maintains nested div structure
+   - Preserves markdown formatting within cells
+
+### Template System
+
+1. template.txt contains base HTML structure
+2. Includes designated content insertion point: {{ INSERT_CONTENT_HERE }}
+3. Static header.html and footer.html included in template
+4. System merges converted content into template
 
 ## Implementation Guide
 
-### 1. Core Infrastructure
-
-#### Head Setup
-
-```html
-<head>
-  <link rel="stylesheet" href="styles/styles.css">
-  <script type="module" src="scripts/lib.js"></script>
-  <script type="module" src="scripts/main.js"></script>
-</head>
-```
-
-### Critical CSS
-
-```css
-:root {
-  --body-font: system-ui;
-  --heading-font: system-ui;
-}
-
-body {
-  font-family: var(--body-font);
-  margin: 0;
-  display: none;
-}
-
-body.appear {
-  display: block;
-}
-```
-
-### 2. Block System
-
-#### Block Registry
+### Block Registry
 
 ```javascript
 const blocks = {};
@@ -97,97 +116,49 @@ export async function loadBlock(block) {
 }
 ```
 
-#### Block Structure
+### Content Processor
 
 ```javascript
-// blocks/example/example.js
-import { loadCSS } from '../../scripts/lib.js';
+export async function processContent(filepath) {
+  // Read markdown file
+  const mdContent = await fs.readFile(filepath, 'utf8');
+  
+  // Convert markdown to HTML
+  let html = convertMarkdown(mdContent);
+  
+  // Process tables into blocks
+  html = processTablesIntoBlocks(html);
+  
+  // Read template
+  const template = await fs.readFile('template.txt', 'utf8');
+  
+  // Insert content
+  return template.replace('{{ INSERT_CONTENT_HERE }}', html);
+}
 
-export default async function decorate(block) {
-  // Load block CSS
-  await loadCSS(`/blocks/${block.dataset.blockName}/${block.dataset.blockName}.css`);
+function processTablesIntoBlocks(html) {
+  // Find table elements
+  const tables = html.matchAll(/<table>(.*?)<\/table>/gs);
   
-  // Status tracking
-  block.dataset.blockStatus = 'loading';
+  for (const table of tables) {
+    const firstCell = extractFirstCell(table[1]);
+    const [blockType, modifier] = parseBlockType(firstCell);
+    const content = convertTableToBlockContent(table[1]);
+    
+    const blockHtml = `
+      <div class="${blockType}${modifier ? ' ' + modifier : ''}">
+        <div>${content}</div>
+      </div>
+    `;
+    
+    html = html.replace(table[0], blockHtml);
+  }
   
-  // DOM manipulation
-  const wrapper = document.createElement('div');
-  wrapper.className = 'example-wrapper';
-  block.parentNode.insertBefore(wrapper, block);
-  wrapper.appendChild(block);
-  
-  block.dataset.blockStatus = 'loaded';
+  return html;
 }
 ```
 
-### 3. Common Blocks
-
-#### Header Block
-
-```javascript
-// blocks/header/header.js
-import { loadCSS } from '../../scripts/lib.js';
-
-export default async function decorate(block) {
-  await loadCSS('/blocks/header/header.css');
-  
-  // Header implementation...
-}
-```
-
-#### Footer Block
-
-```javascript
-// blocks/footer/footer.js
-import { loadCSS } from '../../scripts/lib.js';
-
-export default async function decorate(block) {
-  await loadCSS('/blocks/footer/footer.css');
-  
-  // Footer implementation...
-}
-```
-
-#### Hero Block
-
-```javascript
-// blocks/hero/hero.js
-import { loadCSS } from '../../scripts/lib.js';
-
-export default async function decorate(block) {
-  await loadCSS('/blocks/hero/hero.css');
-  
-  // Hero implementation...
-}
-```
-
-#### Content Block
-
-```javascript
-// blocks/content/content.js
-import { loadCSS } from '../../scripts/lib.js';
-
-export default async function decorate(block) {
-  await loadCSS('/blocks/content/content.css');
-  
-  // Content implementation...
-}
-```
-
-#### Steps Block
-
-```javascript
-// blocks/steps/steps.js
-import { loadCSS } from '../../scripts/lib.js';
-
-export default async function decorate(block) {
-  await loadCSS('/blocks/steps/steps.css');
-  
-  // Steps implementation...
-}
-```
-
-### 4. Loading Strategy
+### Loading Strategy
 
 #### E-L-D Implementation
 
@@ -210,42 +181,18 @@ const loadPage = async () => {
 };
 ```
 
-### 5. Best Practices
-
-#### Performance Checklist
-
-- [ ] Implement E-L-D pattern
-- [ ] Optimize images with WebP
-- [ ] Lazy load below-fold content
-- [ ] Use intersection observer
-- [ ] Enable HTTP/2 push
-- [ ] Set proper cache headers
-- [ ] Compress responses
-- [ ] Monitor Lighthouse scores
-
-#### Code Quality
-
-- [ ] Keep blocks isolated
-- [ ] Use semantic HTML
-- [ ] Follow BEM CSS naming
-- [ ] Document components
-- [ ] Implement error handling
-- [ ] Add status tracking
-- [ ] Test cross-browser
-- [ ] Validate accessibility
-
-#### Security
-
-- [ ] Set CSP headers
-- [ ] Enable HSTS
-- [ ] Configure rate limiting
-- [ ] Validate user input
-- [ ] Sanitize HTML content
-- [ ] Use secure dependencies
-- [ ] Monitor for vulnerabilities
-- [ ] Implement CORS policy
-
 ## Testing Strategy
+
+### Content Processing Tests
+
+1. Verify markdown conversion
+2. Test table-to-block conversion
+3. Validate template merging
+4. Check block loading
+5. Verify content integrity
+6. Test special characters
+7. Validate nested structures
+8. Check markdown formatting
 
 ### Performance Testing
 
@@ -257,38 +204,3 @@ const loadPage = async () => {
 6. Test on slow networks
 7. Monitor memory usage
 8. Profile JavaScript
-
-### Cross-Browser Testing
-
-1. Test modern browsers
-2. Verify iOS/Android
-3. Check responsive design
-4. Test keyboard navigation
-5. Validate screen readers
-6. Check color contrast
-7. Verify focus management
-8. Test without JavaScript
-
-## Deployment Checklist
-
-### Pre-Deploy
-
-- [ ] Minify resources
-- [ ] Optimize images
-- [ ] Set cache headers
-- [ ] Configure CSP
-- [ ] Enable compression
-- [ ] Verify SSL/TLS
-- [ ] Test performance
-- [ ] Check accessibility
-
-### Post-Deploy
-
-- [ ] Monitor errors
-- [ ] Check analytics
-- [ ] Verify CDN
-- [ ] Test live site
-- [ ] Check security
-- [ ] Validate forms
-- [ ] Test third-party
-- [ ] Monitor performance
