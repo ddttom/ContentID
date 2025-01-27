@@ -59,160 +59,25 @@ Secondary Users:
 
 ## 3. Technical Architecture
 
-### 3.1 Core Architecture
+For detailed technical architecture documentation, including:
 
-#### Content Management Interface
+- Core Architecture (Content Management Interface, Main Process, Renderer Process, etc.)
+- Security Architecture
+- Content Infrastructure
+- Development Guidelines
+- Project Structure
 
-- Block-Based Architecture implementation
-- Three main interfaces:
-  1. Content List (list.html)
-     - Paginated content table
-     - Search and filtering
-     - Sort functionality
-     - Quick actions (edit/view)
-  2. Content Entry (entry.html)
-     - Structured content form
-     - Draft saving
-     - Section-based organization
-     - Real-time validation
-  3. Content Editor (editor.html)
-     - Version history tracking
-     - Approval workflow
-     - Content relationships
-     - Status management
+Please refer to [docs/architecture.md](./docs/architecture.md).
 
-- Form Sections:
-  - Content Details
-  - Variations (social, email, print)
-  - Content Blocks
-  - Approvals (legal, marketing, compliance)
-  - Usage Parameters
-  - Brand Requirements
-  - Temporal Context
-  - Content Relationships
+For implementation details, including:
 
-- Implementation Features:
-  - E-L-D Loading Pattern
-  - Pure CSS without preprocessors
-  - ES Modules architecture
-  - Local JSON storage
-  - GUID-based indexing
-  - Draft auto-saving
-  - Form validation
-  - Relationship management
+- Development setup and guidelines
+- Project structure
+- Testing procedures
+- Security configuration
+- Accessibility implementation
 
-#### Web Server (ES Modules)
-
-- Express.js server using ES Modules architecture
-- Class-based implementation with lifecycle management
-- Built-in HTTP server running on port 3000
-- Static file serving from renderer directory
-- Security headers implementation
-- CORS configuration
-- Uses import/export syntax exclusively
-- Clean separation of middleware and routes
-- Comprehensive error handling
-- Path resolution using ES Modules patterns
-
-- Application lifecycle management
-- Window creation and management
-- Web server implementation
-- System-level operations
-- Uses CommonJS require() for Electron-specific imports
-- Implements createRequire(import.meta.url) for CommonJS interop
-- Uses dynamic import() for ES modules
-- Maintains CommonJS module.exports pattern
-
-#### Renderer Process (Pure ES Modules)
-
-- UI rendering and interaction
-- Client-side logic
-- Communication with main process via preload
-- Uses import/export syntax exclusively
-- Implements dynamic import() for code splitting
-- Follows strict ES module guidelines
-
-#### Preload Scripts (CommonJS with ES Module Interop)
-
-- Secure IPC bridge
-- API exposure to renderer
-- Context isolation enforcement
-- Uses CommonJS require() for Electron APIs
-- Implements createRequire(import.meta.url) for CommonJS interop
-
-#### Shared Services (ES Modules)
-
-- Shared business logic
-- Uses import/export syntax exclusively
-- Maintains clear separation of concerns
-
-### 3.2 Security Architecture
-
-#### Core Security Features
-
-- Context isolation enabled
-- Secure IPC communication channels
-- Content Security Policy (CSP) headers
-- Input validation on both interfaces
-- CORS configuration for web API
-- Strict path resolution
-
-#### Content Security Policy
-
-```text
-default-src 'self';
-style-src 'self' 'unsafe-inline';
-script-src 'self';
-img-src 'self' data:;
-font-src 'self';
-connect-src 'self'
-```
-
-### 3.3 Content Lake Infrastructure
-
-- Verified data pools
-- Dynamic content assembly
-- Cross-platform preservation
-- Version control system
-- Metadata management
-- Content relationship mapping
-
-### 3.4 Content Lifecycle Management
-
-- Content Creation & Ingestion
-  - Authoring tools
-  - Import procedures
-  - Quality checks
-  - Initial verification
-  - Metadata assignment
-
-- Verification & Approval
-  - Legal review process
-  - Compliance checks
-  - Authority validation
-  - Version control
-  - Change tracking
-
-- Distribution & Usage
-  - Access controls
-  - Usage tracking
-  - Rights management
-  - Translation workflow
-  - Distribution channels
-
-- Archival & Deprecation
-  - Archive criteria
-  - Retention policies
-  - Version management
-  - Content retirement
-  - Historical preservation
-
-- Cross-Platform Sync
-  - Synchronization rules
-  - Conflict resolution
-  - Update propagation
-  - Platform compatibility
-  - State management
+Please refer to [README.md](./README.md).
 
 ## 4. Verification System
 
@@ -278,89 +143,9 @@ connect-src 'self'
   - Change management
   - History preservation
 
-## 5. Development Guidelines
+## 5. Monitoring & Analytics
 
-### 5.1 Code Organization
-
-- Clear separation of concerns
-- Modular architecture
-- Consistent path resolution
-- Comprehensive error handling
-
-### 5.2 Style Guidelines
-
-- Modern JavaScript (ES2022+)
-- No TypeScript
-- Pure CSS (no preprocessors)
-- Consistent code formatting
-- Comprehensive inline documentation
-
-### 5.3 Accessibility Requirements
-
-- ARIA landmark implementation
-  - Required landmarks for all pages
-  - Proper role attributes
-  - Meaningful labels and descriptions
-  - Dynamic content announcements
-
-- Semantic HTML Structure
-  - Use of semantic HTML5 elements
-  - Proper heading hierarchy
-  - List and table semantics
-  - Form field associations
-
-- Screen Reader Support
-  - ARIA live regions for updates
-  - Status announcements
-  - Error notifications
-  - Loading state indicators
-
-- Keyboard Navigation
-  - Logical tab order
-  - Focus management
-  - Skip links
-  - Keyboard shortcuts
-
-- WCAG 2.1 AA Compliance
-  - Color contrast requirements
-  - Text resizing support
-  - Motion control
-  - Time limit adjustments
-
-- Dynamic Content Handling
-  - State changes announcements
-  - Modal dialog management
-  - Form validation feedback
-  - Progress indicators
-
-## 6. Project Structure
-
-```bash
-project/
-├── src/
-│   ├── main/           # Main process (CommonJS with ES Module Interop)
-│   ├── renderer/       # Renderer process (ES Modules)
-│   ├── preload/        # Preload scripts (CommonJS with ES Module Interop)
-│   ├── services/       # Shared business logic (ES Modules)
-│   ├── tests/          # Test files
-│   └── scripts/        # Build and utility scripts
-├── docs/               # Documentation
-│   └── development-notes/ # Development notes
-├── ContentID/          # Project documentation
-└── log.md             # Development log
-```
-
-### 6.4 Risk Management
-
-- Risk assessment
-- Mitigation strategies
-- Contingency planning
-- Incident response
-- Recovery procedures
-
-## 7. Monitoring & Analytics
-
-### 7.1 Performance Metrics
+### 5.1 Performance Metrics
 
 - System performance
 - Response times
@@ -368,7 +153,7 @@ project/
 - Availability
 - Resource utilization
 
-### 7.2 Usage Analytics
+### 5.2 Usage Analytics
 
 - User engagement
 - Feature adoption
@@ -376,7 +161,7 @@ project/
 - Verification patterns
 - System utilization
 
-### 7.3 Quality Assurance
+### 5.3 Quality Assurance
 
 - Content quality
 - Verification accuracy
@@ -384,7 +169,7 @@ project/
 - Service availability
 - User satisfaction
 
-### 7.4 Business Impact
+### 5.4 Business Impact
 
 - Cost savings
 - Efficiency gains
@@ -392,9 +177,9 @@ project/
 - Compliance improvement
 - ROI measurement
 
-## 8. Compliance Requirements
+## 6. Compliance Requirements
 
-### 8.1 Regulatory Compliance
+### 6.1 Regulatory Compliance
 
 - Meet GDPR requirements
 - Comply with CCPA regulations
@@ -402,7 +187,7 @@ project/
 - Maintain audit trails
 - Enable compliance reporting
 
-### 8.2 Data Privacy
+### 6.2 Data Privacy
 
 - Protect sensitive information
 - Enable data sovereignty
@@ -410,9 +195,9 @@ project/
 - Enable data deletion
 - Maintain privacy logs
 
-## 9. Performance Requirements
+## 7. Performance Requirements
 
-### 9.1 System Performance
+### 7.1 System Performance
 
 - Verification response time < 100ms
 - API response time < 200ms
@@ -420,7 +205,7 @@ project/
 - Support for 1M+ daily transactions
 - Global distribution with < 300ms latency
 
-### 9.2 Scalability Metrics
+### 7.2 Scalability Metrics
 
 - Support for 100K+ concurrent users
 - Handle 1PB+ of content
@@ -428,9 +213,9 @@ project/
 - Support 100K+ organizations
 - Maintain 10M+ digital identities
 
-## 10. Future Development Plans
+## 8. Future Development Plans
 
-### 10.1 Distributed Verification Network
+### 8.1 Distributed Verification Network
 
 #### Phase 1: Foundation (Current)
 
@@ -467,7 +252,7 @@ project/
 - Custom verification rule implementation
 - Multi-tenant authority management
 
-### 10.2 Technical Evolution
+### 8.2 Technical Evolution
 
 #### Current Architecture Extension
 
@@ -497,7 +282,7 @@ project/
   - Content usage tracking
   - Verification metadata management
 
-### 10.3 Integration Strategy
+### 8.3 Integration Strategy
 
 #### API Evolution
 
@@ -515,9 +300,9 @@ project/
 - Compliance reporting tools
 - Audit trail generation
 
-## 11. Related Documents
+## 9. Related Documents
 
-- [README.md](./README.md) - Project overview and setup instructions
+- [README.md](./README.md) - Project overview, setup instructions, and implementation details
 - [docs/architecture.md](./docs/architecture.md) - Detailed technical architecture documentation
 - [docs/development-notes/rules-for-webserver.md](./docs/development-notes/rules-for-webserver.md) - Comprehensive guide to web server optimization, including HTTP/2 implementation, compression, security headers, and performance best practices
 - [docs/usermanual.md](./docs/usermanual.md) - Complete user guide for content management interface, including workflows, features, and troubleshooting

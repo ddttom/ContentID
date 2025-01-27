@@ -30,7 +30,7 @@ A distributed digital identity system for content verification that enables AI s
 - Node.js (v18+)
 - Express.js (with ES Modules)
 - Modern JavaScript (ES2022+)
-- HTML5/CSS3
+- HTML5/CSS3 with semantic structure
 - Jest (v29.0.0) for testing
 - Supertest for integration testing
 
@@ -68,6 +68,9 @@ A distributed digital identity system for content verification that enables AI s
 - Uses import/export syntax exclusively
 - Implements dynamic import() for code splitting
 - Follows strict ES module guidelines
+- Semantic HTML structure
+- Centralized CSS styling
+- Direct component implementation
 
 ### Preload Scripts (CommonJS with ES Module Interop)
 
@@ -99,6 +102,11 @@ project/
 ├── src/
 │   ├── main/           # Main process (CommonJS with ES Module Interop)
 │   ├── renderer/       # Renderer process (ES Modules)
+│   │   ├── styles/     # Centralized CSS
+│   │   ├── index.html  # Landing page
+│   │   ├── list.html   # Content listing
+│   │   ├── entry.html  # Content entry
+│   │   └── editor.html # Content editor
 │   ├── preload/        # Preload scripts (CommonJS with ES Module Interop)
 │   ├── services/       # Shared business logic (ES Modules)
 │   ├── tests/          # Test files

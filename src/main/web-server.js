@@ -69,9 +69,18 @@ app.use(express.static(rendererPath, {
   extensions: ['js', 'css', 'html']
 }));
 
-// Ensure all routes serve index.html for client-side routing
+// Try to serve the actual file first, then fall back to index.html
 app.get('*', (req, res) => {
-  res.sendFile(path.join(rendererPath, 'index.html'));
+  const filePath = path.join(rendererPath, req.path);
+  if (path.extname(req.path) === '.html' && req.path !== '/index.html') {
+    res.sendFile(filePath, (err) => {
+      if (err) {
+        res.sendFile(path.join(rendererPath, 'index.html'));
+      }
+    });
+  } else {
+    res.sendFile(path.join(rendererPath, 'index.html'));
+  }
 });
 
 // Server instance reference

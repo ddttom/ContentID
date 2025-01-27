@@ -4,82 +4,108 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ContentID - Trusted Content Verification</title>
-  <!-- Load base styles first -->
   <link rel="stylesheet" href="styles/styles.css">
-  <!-- Scripts after styles -->
-  <script type="module" src="scripts/lib.js"></script>
-  <script type="module" src="scripts/main.js"></script>
 </head>
 <body>
-  <header>
-    <div class="block" data-block-name="header" role="banner"></div>
+  <header class="header">
+    <div class="header-wrapper">
+      <div class="logo">ContentID</div>
+      <nav class="nav">
+        <a href="#">Home</a>
+        <a href="#">Features</a>
+        <a href="#">Pricing</a>
+        <a href="#">About</a>
+      </nav>
+      <div class="actions">
+        <a href="#" class="login-btn">Login</a>
+      </div>
+    </div>
   </header>
 
   <main role="main">
-    <div class="content">
-      <section class="hero-wrapper" aria-labelledby="hero-title">
-        <div class="block" data-block-name="hero">
-          <h1 id="hero-title">Trusted Content Verification</h1>
-          <div class="content">
-            <p>ContentID provides cryptographically signed digital passports for content, establishing a chain of trust and authenticity verification for AI systems.</p>
-            <a href="list.html" class="cta-btn" role="button" aria-label="Get Started with ContentID">Get Started</a>
-          </div>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-wrapper">
+        <h1 id="hero-title">Trusted Content Verification</h1>
+        <div class="content">
+          <p>ContentID provides cryptographically signed digital passports for content, establishing a chain of trust and authenticity verification for AI systems.</p>
+          <a href="list.html" class="cta-btn" role="button" aria-label="Get Started with ContentID">Get Started</a>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="content-wrapper" aria-labelledby="why-contentid">
-        <div class="block" data-block-name="content">
-          <h2 id="why-contentid">Why ContentID Matters</h2>
-          <div class="grid" role="list">
-            <div class="item" role="listitem">
-              <h3>Verified Content</h3>
-              <p>Ensure the authenticity of your digital content with cryptographic signatures that create a verifiable chain of trust.</p>
-            </div>
-            <div class="item" role="listitem">
-              <h3>AI Integration</h3>
-              <p>Enable AI systems to distinguish between verified and unverified information with our digital passport system.</p>
-            </div>
-            <div class="item" role="listitem">
-              <h3>Enterprise Ready</h3>
-              <p>Designed for enterprise content managers, legal teams, and technical documentation specialists.</p>
-            </div>
+    <section class="content" aria-labelledby="why-contentid">
+      <div class="content-wrapper">
+        <h2 id="why-contentid">Why ContentID Matters</h2>
+        <div class="grid" role="list">
+          <div class="item" role="listitem">
+            <h3>Verified Content</h3>
+            <p>Ensure the authenticity of your digital content with cryptographic signatures that create a verifiable chain of trust.</p>
+          </div>
+          <div class="item" role="listitem">
+            <h3>AI Integration</h3>
+            <p>Enable AI systems to distinguish between verified and unverified information with our digital passport system.</p>
+          </div>
+          <div class="item" role="listitem">
+            <h3>Enterprise Ready</h3>
+            <p>Designed for enterprise content managers, legal teams, and technical documentation specialists.</p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="steps-wrapper" aria-labelledby="how-it-works">
-        <div class="block" data-block-name="steps">
-          <h2 id="how-it-works">How It Works</h2>
-          <div class="step-items" role="list">
-            <div class="step" role="listitem">
-              <div class="number" aria-hidden="true">1</div>
-              <div class="text">
-                <h3>Content Creation</h3>
-                <p>Create content using your existing tools and workflows.</p>
-              </div>
+    <section class="steps" aria-labelledby="how-it-works">
+      <div class="steps-wrapper">
+        <h2 id="how-it-works">How It Works</h2>
+        <div class="step-items" role="list">
+          <div class="step" role="listitem">
+            <div class="number" aria-hidden="true">1</div>
+            <div class="text">
+              <h3>Content Creation</h3>
+              <p>Create content using your existing tools and workflows.</p>
             </div>
-            <div class="step" role="listitem">
-              <div class="number" aria-hidden="true">2</div>
-              <div class="text">
-                <h3>Digital Passport</h3>
-                <p>Generate a cryptographic signature that creates a unique digital passport for your content.</p>
-              </div>
+          </div>
+          <div class="step" role="listitem">
+            <div class="number" aria-hidden="true">2</div>
+            <div class="text">
+              <h3>Digital Passport</h3>
+              <p>Generate a cryptographic signature that creates a unique digital passport for your content.</p>
             </div>
-            <div class="step" role="listitem">
-              <div class="number" aria-hidden="true">3</div>
-              <div class="text">
-                <h3>Verification</h3>
-                <p>AI systems and users can verify content authenticity through our verification system.</p>
-              </div>
+          </div>
+          <div class="step" role="listitem">
+            <div class="number" aria-hidden="true">3</div>
+            <div class="text">
+              <h3>Verification</h3>
+              <p>AI systems and users can verify content authenticity through our verification system.</p>
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   </main>
 
-  <footer>
-    <div class="block" data-block-name="footer" role="contentinfo"></div>
+  <footer class="footer">
+    <div class="footer-wrapper">
+      <div class="section">
+        <div class="logo">ContentID</div>
+        <p>Trusted Content Verification System</p>
+      </div>
+      <div class="section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Documentation</a></li>
+        </ul>
+      </div>
+      <div class="section">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 ContentID. All rights reserved.</div>
   </footer>
 </body>
 </html>

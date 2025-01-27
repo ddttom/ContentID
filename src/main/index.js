@@ -51,6 +51,16 @@ async function createWindow() {
     }
   });
 
+  // Handle navigation events
+  mainWindow.webContents.on('will-navigate', (event, url) => {
+    // Allow navigation to local URLs
+    if (url.startsWith(`http://localhost:${WEB_SERVER_PORT}`)) {
+      return;
+    }
+    // Prevent navigation to external URLs
+    event.preventDefault();
+  });
+
   // Load the web interface
   if (isDevelopment) {
     await mainWindow.loadURL(`http://localhost:${WEB_SERVER_PORT}`);

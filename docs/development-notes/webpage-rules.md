@@ -24,19 +24,25 @@ blocks/
 
 **Block Implementation Pattern
 
+Block JavaScript files should be empty by default:
+
 ```javascript
 // blocks/{blockName}/{blockName}.js
-import { loadCSS } from '../../scripts/lib.js';
-
 export default async function decorate(block) {
-  await loadCSS(`/blocks/${block.dataset.blockName}/${block.dataset.blockName}.css`);
-  block.dataset.blockStatus = 'loading';
-  
-  // Block implementation
-  
-  block.dataset.blockStatus = 'loaded';
+  // Empty decorator - only add code if block needs specific functionality
 }
 ```
+
+The lib.js handles all common block functionality:
+- Loading block-specific CSS
+- Setting block loading status
+- Managing block initialization
+
+Block JavaScript files should only contain code when:
+1. The block needs specific functionality beyond basic rendering
+2. Event handlers need to be attached
+3. Dynamic content needs to be managed
+4. Custom initialization logic is required
 
 ### Loading Strategy (E-L-D Pattern)
 
@@ -143,19 +149,40 @@ export default async function decorate(block) {
 ### Block Loading
 
 ```javascript
-const blocks = {};
-
-export function registerBlock(name, mod) {
-  blocks[name] = mod;
-}
-
+// Block loading in lib.js
 export async function loadBlock(block) {
   const name = block.dataset.blockName;
-  if (!blocks[name]) {
-    const mod = await import(`../blocks/${name}/${name}.js`);
-    registerBlock(name, mod);
+  
+  // Set initial loading status
+  block.dataset.blockStatus = 'loading';
+  
+  try {
+    // Load block CSS first
+    await loadCSS(`blocks/${name}/${name}.css`);
+    
+    // Load and execute block JS if it exists and has functionality
+    if (!blocks[name]) {
+      try {
+        const mod = await import(`../blocks/${name}/${name}.js`);
+        registerBlock(name, mod);
+      } catch (error) {
+        console.error(`Failed to load block ${name}:`, error);
+        block.dataset.blockStatus = 'error';
+        return;
+      }
+    }
+    
+    // Execute block's decorate function if it exists
+    if (blocks[name]) {
+      await blocks[name].default(block);
+    }
+    
+    // Set block as loaded
+    block.dataset.blockStatus = 'loaded';
+  } catch (error) {
+    console.error(`Failed to initialize block ${name}:`, error);
+    block.dataset.blockStatus = 'error';
   }
-  await blocks[name].default(block);
 }
 ```
 

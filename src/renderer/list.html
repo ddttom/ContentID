@@ -5,17 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Content List - ContentID Manager</title>
   <link rel="stylesheet" href="styles/styles.css">
-  <script type="module" src="scripts/lib.js"></script>
-  <script type="module" src="scripts/main.js"></script>
 </head>
 <body>
-  <header>
-    <div class="block" data-block-name="header" role="banner"></div>
+  <header class="header">
+    <div class="header-wrapper">
+      <div class="logo">ContentID</div>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="#">Features</a>
+        <a href="#">Pricing</a>
+        <a href="#">About</a>
+      </nav>
+      <div class="actions">
+        <a href="#" class="login-btn">Login</a>
+      </div>
+    </div>
   </header>
 
   <main role="main">
     <div class="content">
-      <div class="block" data-block-name="contentTable" role="region" aria-labelledby="content-table-title">
+      <div class="content-wrapper">
         <h1 id="content-table-title" class="sr-only">Content List</h1>
         
         <div class="content-table-header">
@@ -71,22 +80,29 @@
     </div>
   </main>
 
-  <footer>
-    <div class="block" data-block-name="footer" role="contentinfo"></div>
+  <footer class="footer">
+    <div class="footer-wrapper">
+      <div class="section">
+        <div class="logo">ContentID</div>
+        <p>Trusted Content Verification System</p>
+      </div>
+      <div class="section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Documentation</a></li>
+        </ul>
+      </div>
+      <div class="section">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2025 ContentID. All rights reserved.</div>
   </footer>
-
-  <style>
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-  </style>
 </body>
 </html>
