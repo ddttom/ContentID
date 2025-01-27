@@ -160,17 +160,20 @@ ContentID is a distributed digital identity system for content verification. Thi
 
 ### Common Issues
 
-**Draft Recovery**
+**Draft Recovery
+
 1. Check auto-saved drafts
 2. Use recovery option
 3. Contact support if needed
 
-**Approval Issues**
+**Approval Issues
+
 1. Verify all required fields
 2. Check approval permissions
 3. Review rejection reasons
 
-**Search Problems**
+**Search Problems
+
 1. Try different search terms
 2. Use filters to narrow results
 3. Clear all filters and try again
@@ -200,7 +203,7 @@ ContentID is a distributed digital identity system for content verification. Thi
 3. Save drafts frequently
 4. Review before submission
 
-### Content Management
+### Content Management2
 
 1. Regular content reviews
 2. Archive outdated content
@@ -247,6 +250,7 @@ ContentID is a distributed digital identity system for content verification. Thi
 - Technical support
 
 For additional assistance, contact:
-- Email: support@contentid.com
+
+- Email: <support@contentid.com>
 - Phone: 1-800-CONTENT
 - Web: help.contentid.com

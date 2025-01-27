@@ -4,15 +4,17 @@
 
 ### Block-Based Architecture
 
-1. **Block Definition**
-   - Self-contained functional components
-   - Independent CSS and JavaScript
-   - Progressive enhancement pattern
-   - Isolated state management
-   - Clear data-block-name attributes
+**Block Definition
 
-2. **Block Structure**
-```
+- Self-contained functional components
+- Independent CSS and JavaScript
+- Progressive enhancement pattern
+- Isolated state management
+- Clear data-block-name attributes
+
+ **Block Structure
+
+```bash
 blocks/
 ├── {blockName}/
 │   ├── {blockName}.css
@@ -20,7 +22,8 @@ blocks/
 │   └── README.md
 ```
 
-3. **Block Implementation Pattern**
+1. **Block Implementation Pattern
+
 ```javascript
 // blocks/{blockName}/{blockName}.js
 import { loadCSS } from '../../scripts/lib.js';
@@ -61,6 +64,7 @@ export default async function decorate(block) {
 ## HTML Standards
 
 ### Base Template
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -79,6 +83,7 @@ export default async function decorate(block) {
 ```
 
 ### Block HTML Structure
+
 ```html
 <div class="block" data-block-name="example">
   <div class="example-content">
@@ -90,6 +95,7 @@ export default async function decorate(block) {
 ## CSS Implementation
 
 ### Naming Convention
+
 - Follow BEM (Block Element Modifier) methodology
 - Use descriptive, semantic class names
 - Maintain consistent naming patterns
@@ -97,6 +103,7 @@ export default async function decorate(block) {
 - Use data attributes for states
 
 ### CSS Organization
+
 ```css
 /* Block container */
 .block {
@@ -126,6 +133,7 @@ export default async function decorate(block) {
 ## JavaScript Architecture
 
 ### Module System
+
 - Use ES Modules exclusively
 - No CommonJS in renderer process
 - Dynamic imports for code splitting
@@ -133,6 +141,7 @@ export default async function decorate(block) {
 - Modular block implementation
 
 ### Block Loading
+
 ```javascript
 const blocks = {};
 
@@ -151,6 +160,7 @@ export async function loadBlock(block) {
 ```
 
 ### State Management
+
 - Block-level state containment
 - Event-driven updates
 - Clear data flow
@@ -160,6 +170,7 @@ export async function loadBlock(block) {
 ## Performance Guidelines
 
 ### Loading Performance
+
 - Implement E-L-D pattern
 - Optimize critical rendering path
 - Minimize initial payload
@@ -167,6 +178,7 @@ export async function loadBlock(block) {
 - Enable text compression
 
 ### Runtime Performance
+
 - Efficient DOM operations
 - Debounce event handlers
 - Use requestAnimationFrame
@@ -174,6 +186,7 @@ export async function loadBlock(block) {
 - Monitor memory usage
 
 ### CSS Performance
+
 - Minimize specificity
 - Use efficient selectors
 - Avoid expensive properties
@@ -183,6 +196,7 @@ export async function loadBlock(block) {
 ## Security Requirements
 
 ### Content Security Policy
+
 ```text
 default-src 'self';
 style-src 'self' 'unsafe-inline';
@@ -193,6 +207,7 @@ connect-src 'self';
 ```
 
 ### Input Validation
+
 - Sanitize user input
 - Validate data types
 - Implement CSRF protection
@@ -202,6 +217,7 @@ connect-src 'self';
 ## Accessibility Standards
 
 ### ARIA Implementation
+
 - Proper role attributes
 - Meaningful labels
 - Keyboard navigation
@@ -209,6 +225,7 @@ connect-src 'self';
 - Screen reader support
 
 ### Semantic Structure
+
 - Use semantic HTML elements
 - Maintain heading hierarchy
 - Provide alt text
@@ -218,6 +235,7 @@ connect-src 'self';
 ## Testing Requirements
 
 ### Unit Testing
+
 - Test block functionality
 - Validate state changes
 - Check event handlers
@@ -225,6 +243,7 @@ connect-src 'self';
 - Test error scenarios
 
 ### Integration Testing
+
 - Test block interactions
 - Validate loading patterns
 - Check state propagation
@@ -232,6 +251,7 @@ connect-src 'self';
 - Verify API integration
 
 ### Performance Testing
+
 - Measure load times
 - Monitor memory usage
 - Test responsiveness
@@ -241,6 +261,7 @@ connect-src 'self';
 ## Documentation Standards
 
 ### Block Documentation
+
 - Implementation details
 - Usage examples
 - Props/parameters
@@ -248,6 +269,7 @@ connect-src 'self';
 - State management
 
 ### Code Comments
+
 - Clear function purpose
 - Complex logic explanation
 - Important warnings
@@ -257,6 +279,7 @@ connect-src 'self';
 ## Version Control
 
 ### Branch Strategy
+
 - Feature branches
 - Clean commits
 - Meaningful messages
@@ -264,6 +287,7 @@ connect-src 'self';
 - Proper tagging
 
 ### Code Review
+
 - Performance review
 - Security check
 - Accessibility audit

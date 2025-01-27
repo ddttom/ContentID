@@ -10,7 +10,7 @@ A distributed digital identity system for content verification that enables AI s
 - Trust chain validation
 - Content lifecycle tracking
 - Local window interface
-- Web-accessible interface (http://0.0.0.0:3000)
+- Web-accessible interface (<http://0.0.0.0:3000>)
 - Shared state management
 - Secure IPC communication
 - Built-in logging system
