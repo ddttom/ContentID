@@ -10,10 +10,17 @@ A distributed digital identity system for content verification that enables AI s
 - Trust chain validation
 - Content lifecycle tracking
 - Local window interface
-- Web-accessible interface (<http://0.0.0.0:3000>)
+- Web-accessible interface (http://0.0.0.0:3000)
 - Shared state management
 - Secure IPC communication
 - Built-in logging system
+- Content Management Interface:
+  - Content listing with search and filtering
+  - Content creation with draft saving
+  - Version history tracking
+  - Approval workflow management
+  - Content relationship mapping
+  - Real-time validation
 
 ## Technical Specifications
 
@@ -165,7 +172,13 @@ connect-src 'self'
 
 ## Documentation
 
-Development notes are maintained in `docs/development-notes/` following a standardized format.
+The following documentation is available:
+
+- [User Manual](./docs/usermanual.md) - Complete guide for using the content management interface
+- [Architecture Guide](./docs/architecture.md) - Detailed technical architecture documentation
+- [Web Server Rules](./docs/development-notes/rules-for-webserver.md) - Web server optimization guide
+- [Webpage Rules](./docs/development-notes/webpage-rules.md) - Frontend development standards
+- Development notes in `docs/development-notes/` following a standardized format
 
 ## License
 

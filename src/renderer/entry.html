@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Content Entry - ContentID Manager</title>
+  <link rel="stylesheet" href="styles/styles.css">
+  <script type="module" src="scripts/lib.js"></script>
+  <script type="module" src="scripts/main.js"></script>
+</head>
+<body>
+  <div class="block" data-block-name="header"></div>
+
+  <div class="content">
+    <div class="block" data-block-name="contentForm">
+      <form class="content-form">
+        <!-- Content Details -->
+        <section class="form-section" data-section="details">
+          <h2>Content Details</h2>
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" required>
+          </div>
+          <div class="form-group">
+            <label for="type">Type</label>
+            <select id="type" name="type" required>
+              <option value="">Select Type</option>
+              <option value="product_name">Product Name</option>
+              <option value="product_description">Product Description</option>
+              <option value="marketing_copy">Marketing Copy</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" required></textarea>
+          </div>
+        </section>
+
+        <!-- Variations -->
+        <section class="form-section" data-section="variations">
+          <h2>Variations</h2>
+          <div class="variations-container">
+            <div class="variation-group">
+              <h3>Social</h3>
+              <textarea name="variation_social" placeholder="Social media variation"></textarea>
+            </div>
+            <div class="variation-group">
+              <h3>Email</h3>
+              <textarea name="variation_email" placeholder="Email variation"></textarea>
+            </div>
+            <div class="variation-group">
+              <h3>Print</h3>
+              <textarea name="variation_print" placeholder="Print variation"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- Content Blocks -->
+        <section class="form-section" data-section="blocks">
+          <h2>Content Blocks</h2>
+          <div class="content-blocks-container">
+            <div class="form-group">
+              <label for="paragraph">Paragraph</label>
+              <textarea id="paragraph" name="block_paragraph"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="features">Features</label>
+              <textarea id="features" name="block_features"></textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- Approvals -->
+        <section class="form-section" data-section="approvals">
+          <h2>Approvals</h2>
+          <div class="approvals-grid">
+            <div class="approval-item">
+              <label>Legal</label>
+              <div class="approval-status pending">Pending</div>
+            </div>
+            <div class="approval-item">
+              <label>Marketing</label>
+              <div class="approval-status pending">Pending</div>
+            </div>
+            <div class="approval-item">
+              <label>Compliance</label>
+              <div class="approval-status pending">Pending</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Usage Parameters -->
+        <section class="form-section" data-section="usage">
+          <h2>Usage Parameters</h2>
+          <div class="form-group">
+            <label>Regions</label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="region_na" value="NA"> North America</label>
+              <label><input type="checkbox" name="region_eu" value="EU"> Europe</label>
+              <label><input type="checkbox" name="region_apac" value="APAC"> Asia Pacific</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="translatable">Translatable</label>
+            <input type="checkbox" id="translatable" name="translatable">
+          </div>
+          <div class="form-group">
+            <label for="verbatim">Verbatim Required</label>
+            <input type="checkbox" id="verbatim" name="verbatim_required">
+          </div>
+        </section>
+
+        <!-- Brand Requirements -->
+        <section class="form-section" data-section="brand">
+          <h2>Brand Requirements</h2>
+          <div class="form-group">
+            <label for="trademark">Trademark</label>
+            <input type="checkbox" id="trademark" name="trademark_required">
+          </div>
+          <div class="form-group">
+            <label for="slogan">Slogan</label>
+            <input type="checkbox" id="slogan" name="slogan_required">
+          </div>
+          <div class="style-guidelines">
+            <h3>Style Guidelines</h3>
+            <div class="form-group">
+              <label>Font</label>
+              <input type="text" name="style_font" value="SF Pro Text" readonly>
+            </div>
+            <div class="form-group">
+              <label>Color</label>
+              <input type="text" name="style_color" value="#1D1D1F" readonly>
+            </div>
+            <div class="form-group">
+              <label>Spacing</label>
+              <input type="text" name="style_spacing" value="relaxed" readonly>
+            </div>
+          </div>
+        </section>
+
+        <!-- Temporal Context -->
+        <section class="form-section" data-section="temporal">
+          <h2>Temporal Context</h2>
+          <div class="form-group">
+            <label for="created">Created</label>
+            <input type="date" id="created" name="created_date" required>
+          </div>
+          <div class="form-group">
+            <label for="valid_until">Valid Until</label>
+            <input type="date" id="valid_until" name="valid_until" required>
+          </div>
+          <div class="form-group">
+            <label for="version">Version</label>
+            <input type="text" id="version" name="version" value="1" readonly>
+          </div>
+        </section>
+
+        <!-- Content Relationships -->
+        <section class="form-section" data-section="relationships">
+          <h2>Content Relationships</h2>
+          <div class="relationships-container">
+            <div class="relationship-item">
+              <input type="text" class="relationship-search" placeholder="Search content...">
+              <div class="relationship-results"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <button type="button" class="save-draft">Save Draft</button>
+          <button type="submit" class="save-content">Save Content</button>
+          <button type="button" class="cancel">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="block" data-block-name="footer"></div>
+</body>
+</html>

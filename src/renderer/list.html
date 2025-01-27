@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content List - ContentID Manager</title>
+  <link rel="stylesheet" href="styles/styles.css">
+  <script type="module" src="scripts/lib.js"></script>
+  <script type="module" src="scripts/main.js"></script>
+</head>
+<body>
+  <div class="block" data-block-name="header"></div>
+
+  <div class="content">
+    <div class="block" data-block-name="contentTable">
+      <div class="content-table-header">
+        <div class="search-filters">
+          <input type="search" placeholder="Search content..." class="search-input">
+          <select class="filter-type">
+            <option value="">All Types</option>
+          </select>
+          <select class="filter-status">
+            <option value="">All Statuses</option>
+          </select>
+        </div>
+      </div>
+      
+      <table class="content-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Approval Status</th>
+            <th>Created Date</th>
+            <th>Valid Until</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Content rows will be populated by JavaScript -->
+        </tbody>
+      </table>
+
+      <div class="pagination-controls">
+        <button class="prev-page">Previous</button>
+        <span class="page-info">Page <span class="current-page">1</span></span>
+        <button class="next-page">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="block" data-block-name="footer"></div>
+</body>
+</html>
