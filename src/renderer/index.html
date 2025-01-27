@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' blob:; script-src 'self'; connect-src 'self'">
   <title>ContentID - Trusted Content Verification</title>
-  <base href="./">
-  <link rel="stylesheet" href="styles/styles.css">
+  <link rel="stylesheet" href="./styles/styles.css">
+  <script type="module" src="./scripts/init.js"></script>
 </head>
 <body>
   <div id="header-container"></div>
@@ -73,10 +73,5 @@
   </main>
 
   <div id="footer-container"></div>
-
-  <script type="module">
-    import { loadCommonComponents } from './scripts/components.js';
-    loadCommonComponents();
-  </script>
 </body>
 </html>

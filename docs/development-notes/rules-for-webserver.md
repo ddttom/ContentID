@@ -41,6 +41,7 @@
   - lib.js           # Utilities
   - main.js          # Core app
   - components.js    # Component loader
+  - init.js          # Component initialization
 /components/
   - header.html      # Header markup
   - footer.html      # Footer markup
@@ -59,15 +60,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';">
   <base href="./">
   <link rel="stylesheet" href="styles/styles.css">
-  <script type="module" src="scripts/components.js"></script>
-  <script type="module" src="scripts/main.js"></script>
+  <script type="module" src="scripts/init.js"></script>
 </head>
 ```
 
-### 2. CSS Architecture
+### 2. Component System
+
+#### Component Loading
+
+```javascript
+// components.js
+export async function loadComponent(path, targetSelector) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) {
+      throw new Error(`Failed to load component: ${path}`);
+    }
+    const html = await response.text();
+    const target = document.querySelector(targetSelector);
+    if (!target) {
+      throw new Error(`Target element not found: ${targetSelector}`);
+    }
+    target.innerHTML = html;
+  } catch (error) {
+    console.error('Error loading component:', error);
+  }
+}
+
+export async function loadCommonComponents() {
+  await Promise.all([
+    loadComponent('./components/header.html', '#header-container'),
+    loadComponent('./components/footer.html', '#footer-container')
+  ]);
+}
+
+// init.js
+import { loadCommonComponents } from './components.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadCommonComponents();
+});
+```
+
+### 3. CSS Architecture
 
 #### Base Styles
 
@@ -130,37 +168,6 @@ body {
 @import './pages/_list.css';
 @import './pages/_entry.css';
 @import './pages/_editor.css';
-```
-
-### 3. Component System
-
-#### Component Loading
-
-```javascript
-// components.js
-export async function loadComponent(path, targetSelector) {
-  try {
-    const response = await fetch(path);
-    if (!response.ok) {
-      throw new Error(`Failed to load component: ${path}`);
-    }
-    const html = await response.text();
-    const target = document.querySelector(targetSelector);
-    if (!target) {
-      throw new Error(`Target element not found: ${targetSelector}`);
-    }
-    target.innerHTML = html;
-  } catch (error) {
-    console.error('Error loading component:', error);
-  }
-}
-
-export async function loadCommonComponents() {
-  await Promise.all([
-    loadComponent('./components/header.html', '#header-container'),
-    loadComponent('./components/footer.html', '#footer-container')
-  ]);
-}
 ```
 
 ### 4. Loading Strategy

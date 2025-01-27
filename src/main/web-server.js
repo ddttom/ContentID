@@ -62,6 +62,11 @@ app.use(express.static(rendererPath, {
     // Set proper cache headers
     const cacheControl = path.endsWith('.html') ? 'no-store' : 'public, max-age=31536000, immutable';
     res.setHeader('Cache-Control', cacheControl);
+
+    // Set proper MIME types
+    if (path.endsWith('.css')) {
+      res.setHeader('Content-Type', 'text/css');
+    }
   },
   // Enable directory indexing for block modules
   index: ['index.html'],

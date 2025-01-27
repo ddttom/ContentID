@@ -14,6 +14,7 @@
 .hero h1 {
   font-size: var(--font-size-xxxl);
   margin-bottom: var(--spacing-md);
+  color: var(--color-text);
 }
 
 .hero .content {
@@ -34,11 +35,13 @@
   color: var(--color-background);
   text-decoration: none;
   border-radius: var(--border-radius);
-  transition: background 0.2s;
+  transition: background-color 0.2s;
+  font-weight: var(--font-weight-medium);
 }
 
 .cta-btn:hover {
   background: var(--color-primary-dark);
+  color: var(--color-background);
 }
 
 /* Content section */
@@ -56,6 +59,7 @@
   text-align: center;
   margin-bottom: var(--spacing-xl);
   font-size: var(--font-size-xxl);
+  color: var(--color-text);
 }
 
 .grid {
@@ -74,6 +78,7 @@
 .item h3 {
   margin-bottom: var(--spacing-md);
   font-size: var(--font-size-xl);
+  color: var(--color-text);
 }
 
 .item p {
@@ -96,6 +101,7 @@
   text-align: center;
   margin-bottom: var(--spacing-xl);
   font-size: var(--font-size-xxl);
+  color: var(--color-text);
 }
 
 .step-items {
@@ -130,6 +136,7 @@
 .step .text h3 {
   margin-bottom: var(--spacing-sm);
   font-size: var(--font-size-lg);
+  color: var(--color-text);
 }
 
 .step .text p {
