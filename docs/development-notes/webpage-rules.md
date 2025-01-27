@@ -12,7 +12,7 @@
 - Isolated state management
 - Clear data-block-name attributes
 
- **Block Structure
+**Block Structure
 
 ```bash
 blocks/
@@ -22,7 +22,7 @@ blocks/
 │   └── README.md
 ```
 
-1. **Block Implementation Pattern
+**Block Implementation Pattern
 
 ```javascript
 // blocks/{blockName}/{blockName}.js
@@ -218,19 +218,124 @@ connect-src 'self';
 
 ### ARIA Implementation
 
-- Proper role attributes
-- Meaningful labels
-- Keyboard navigation
-- Focus management
-- Screen reader support
+#### Required ARIA Landmarks
+
+```html
+<body>
+  <header role="banner">
+    <!-- Site header content -->
+  </header>
+
+  <nav role="navigation" aria-label="Main">
+    <!-- Navigation content -->
+  </nav>
+
+  <main role="main">
+    <!-- Main content -->
+  </main>
+
+  <aside role="complementary">
+    <!-- Sidebar content -->
+  </aside>
+
+  <footer role="contentinfo">
+    <!-- Footer content -->
+  </footer>
+</body>
+```
+
+#### Block-Level ARIA Requirements
+
+```html
+<!-- Standard Block Pattern -->
+<div 
+  class="block" 
+  data-block-name="example"
+  role="region"
+  aria-labelledby="block-title"
+>
+  <h2 id="block-title">Block Title</h2>
+  <!-- Block content -->
+</div>
+
+<!-- Interactive Block Pattern -->
+<div 
+  class="block" 
+  data-block-name="form"
+  role="form"
+  aria-labelledby="form-title"
+  aria-describedby="form-desc"
+>
+  <h2 id="form-title">Form Title</h2>
+  <p id="form-desc">Form description</p>
+  <!-- Form content -->
+</div>
+```
+
+#### Interactive Elements
+
+```html
+<!-- Buttons -->
+<button 
+  aria-label="Close dialog" 
+  aria-pressed="false"
+  aria-controls="dialog-1"
+>
+  <span aria-hidden="true">&times;</span>
+</button>
+
+<!-- Links -->
+<a 
+  href="list.html" 
+  role="button" 
+  aria-label="Get Started with ContentID"
+>
+  Get Started
+</a>
+
+<!-- Form Controls -->
+<label for="search">Search content</label>
+<input 
+  type="search" 
+  id="search" 
+  aria-describedby="search-help"
+  aria-required="true"
+>
+<span id="search-help">Enter keywords to search content</span>
+```
+
+#### Dynamic Content
+
+```html
+<!-- Status Messages -->
+<div 
+  role="status" 
+  aria-live="polite"
+  aria-atomic="true"
+>
+  Changes saved successfully
+</div>
+
+<!-- Error Messages -->
+<div 
+  role="alert" 
+  aria-live="assertive"
+  aria-atomic="true"
+>
+  Please correct the form errors
+</div>
+```
 
 ### Semantic Structure
 
-- Use semantic HTML elements
-- Maintain heading hierarchy
-- Provide alt text
-- Implement ARIA landmarks
-- Ensure color contrast
+- Use semantic HTML5 elements (header, nav, main, etc.)
+- Maintain proper heading hierarchy (h1-h6)
+- Implement landmark regions with ARIA roles
+- Provide skip links for keyboard navigation
+- Include proper meta information
+- Ensure proper color contrast (WCAG 2.1 AA)
+- Use appropriate text alternatives
+- Implement proper focus indicators
 
 ## Testing Requirements
 

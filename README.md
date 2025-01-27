@@ -178,7 +178,29 @@ The following documentation is available:
 - [Architecture Guide](./docs/architecture.md) - Detailed technical architecture documentation
 - [Web Server Rules](./docs/development-notes/rules-for-webserver.md) - Web server optimization guide
 - [Webpage Rules](./docs/development-notes/webpage-rules.md) - Frontend development standards
+- [Troubleshooting Guide](./docs/development-notes/troubleshooting.md) - Common issues and resolutions
 - Development notes in `docs/development-notes/` following a standardized format
+
+### Common Issues and Solutions
+
+For common development issues, warnings, and their solutions, refer to the [Troubleshooting Guide](./docs/development-notes/troubleshooting.md). This includes:
+
+- Node.js deprecation warnings
+- HTTP/2 configuration
+- Accessibility implementation
+- Development environment setup
+- Production deployment considerations
+
+## Accessibility
+
+The application follows WCAG 2.1 guidelines with:
+
+- Semantic HTML structure
+- ARIA landmarks and labels
+- Keyboard navigation support
+- Screen reader compatibility
+- High contrast support
+- Focus management
 
 ## License
 

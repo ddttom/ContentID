@@ -481,3 +481,4 @@ project/
 - [docs/architecture.md](./docs/architecture.md) - Detailed technical architecture documentation
 - [docs/development-notes/rules-for-webserver.md](./docs/development-notes/rules-for-webserver.md) - Comprehensive guide to web server optimization, including HTTP/2 implementation, compression, security headers, and performance best practices
 - [docs/usermanual.md](./docs/usermanual.md) - Complete user guide for content management interface, including workflows, features, and troubleshooting
+- [docs/development-notes/troubleshooting.md](./docs/development-notes/troubleshooting.md) - Development troubleshooting guide including common issues, warnings, and resolutions
