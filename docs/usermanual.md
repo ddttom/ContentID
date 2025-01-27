@@ -11,7 +11,7 @@
 
 ## Introduction
 
-ContentID is a distributed digital identity system for content verification. This manual guides you through using the content management interface to create, edit, and manage verified content.
+ContentID is a distributed digital identity system for content verification. This manual guides you through using the web-based content management interface to create, edit, and manage verified content.
 
 ### Key Features
 
@@ -29,11 +29,13 @@ ContentID is a distributed digital identity system for content verification. Thi
 - Modern web browser (Chrome, Firefox, Safari, Edge)
 - Network connection for real-time updates
 - Appropriate user permissions
+- JavaScript enabled
+- Minimum screen resolution: 1024x768
 
 ### Accessing the System
 
-1. Launch the ContentID application
-2. Navigate to the content management interface
+1. Open your web browser
+2. Navigate to the ContentID URL (e.g., <http://localhost:3000> for local development)
 3. Log in with your credentials
 
 ## Content Management
@@ -160,6 +162,12 @@ ContentID is a distributed digital identity system for content verification. Thi
 
 ### Common Issues
 
+**Browser Compatibility
+
+1. Ensure using supported browser
+2. Clear browser cache
+3. Update browser if needed
+
 **Draft Recovery
 
 1. Check auto-saved drafts
@@ -192,7 +200,7 @@ ContentID is a distributed digital identity system for content verification. Thi
 - Contact system administrator
 - Review documentation
 - Submit support ticket
-- Check error logs
+- Check browser console for errors
 
 ## Tips and Best Practices
 
@@ -212,12 +220,12 @@ ContentID is a distributed digital identity system for content verification. Thi
 
 ### Workflow Optimization
 
-1. Use keyboard shortcuts
+1. Use browser bookmarks
 2. Leverage batch operations
 3. Set up saved searches
 4. Follow naming conventions
 
-## Keyboard Shortcuts
+## Browser Shortcuts
 
 | Action | Windows/Linux | macOS |
 |--------|--------------|-------|
@@ -225,6 +233,8 @@ ContentID is a distributed digital identity system for content verification. Thi
 | Submit | Ctrl + Enter | ⌘ + Return |
 | Search | Ctrl + F | ⌘ + F |
 | New Content | Ctrl + N | ⌘ + N |
+| Refresh | F5 | ⌘ + R |
+| Print | Ctrl + P | ⌘ + P |
 
 ## System Updates
 
@@ -236,10 +246,10 @@ ContentID is a distributed digital identity system for content verification. Thi
 ### Update Process
 
 1. Save all work
-2. Close application
-3. Install updates
-4. Restart application
-5. Verify functionality
+2. Clear browser cache
+3. Refresh page
+4. Verify functionality
+5. Report any issues
 
 ## Support Resources
 
@@ -252,5 +262,4 @@ ContentID is a distributed digital identity system for content verification. Thi
 For additional assistance, contact:
 
 - Email: <support@contentid.com>
-- Phone: 1-800-CONTENT
 - Web: help.contentid.com

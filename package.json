@@ -1,18 +1,16 @@
 {
   "name": "contentid",
   "version": "1.0.0",
-  "description": "Dual-interface Electron application",
-  "main": "src/main/index.js",
+  "description": "Node.js web application for content identification",
+  "main": "src/main/web-server.js",
   "scripts": {
-    "start": "electron .",
-    "web": "node src/main/web-server.js",
-    "desktop": "electron . --desktop-only",
+    "start": "node src/main/web-server.js",
+    "dev": "NODE_ENV=development node src/main/web-server.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
-    "electron": "^28.0.0",
     "express": "^4.18.2",
     "cors": "^2.8.5",
     "module": "^1.0.0",
@@ -23,8 +21,7 @@
   },
   "devDependencies": {
     "jest": "^29.0.0",
-    "supertest": "^6.3.3",
-    "electron-mocks": "^1.0.0"
+    "supertest": "^6.3.3"
   },
   "type": "module",
   "engines": {

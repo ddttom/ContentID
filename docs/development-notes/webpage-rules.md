@@ -2,72 +2,13 @@
 
 ## Core Architecture
 
-### Block-Based Architecture
+### Component-Based Architecture
 
-**Block Definition
-
-- Self-contained functional components
-- Independent CSS and JavaScript
-- Progressive enhancement pattern
-- Isolated state management
-- Clear data-block-name attributes
-
-**Block Structure
-
-```bash
-blocks/
-├── {blockName}/
-│   ├── {blockName}.css
-│   ├── {blockName}.js
-│   └── README.md
-```
-
-**Block Implementation Pattern
-
-Block JavaScript files should be empty by default:
-
-```javascript
-// blocks/{blockName}/{blockName}.js
-export default async function decorate(block) {
-  // Empty decorator - only add code if block needs specific functionality
-}
-```
-
-The lib.js handles all common block functionality:
-
-- Loading block-specific CSS
-- Setting block loading status
-- Managing block initialization
-
-Block JavaScript files should only contain code when:
-
-1. The block needs specific functionality beyond basic rendering
-2. Event handlers need to be attached
-3. Dynamic content needs to be managed
-4. Custom initialization logic is required
-
-### Loading Strategy (E-L-D Pattern)
-
-1. **Eager Loading**
-   - Critical UI components
-   - Above-the-fold content
-   - Core functionality
-   - Navigation elements
-   - Essential forms
-
-2. **Lazy Loading**
-   - Below-fold content
-   - Secondary features
-   - Non-critical images
-   - Additional blocks
-   - Supplementary data
-
-3. **Delayed Loading**
-   - Analytics
-   - Third-party widgets
-   - Social media integrations
-   - Background processes
-   - Enhancement features
+- Modular components
+- Progressive enhancement
+- Independent loading
+- Isolated styling
+- Clear separation of concerns
 
 ## HTML Standards
 
@@ -79,25 +20,67 @@ Block JavaScript files should only contain code when:
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';">
+  <base href="./">
   <title>ContentID Manager</title>
   <link rel="stylesheet" href="styles/styles.css">
-  <script type="module" src="scripts/lib.js"></script>
-  <script type="module" src="scripts/main.js"></script>
+  <script type="module" src="scripts/init.js"></script>
 </head>
 <body>
-  <!-- Block-based content structure -->
+  <div id="header-container"></div>
+  <main role="main">
+    <!-- Page content -->
+  </main>
+  <div id="footer-container"></div>
 </body>
 </html>
 ```
 
-### Block HTML Structure
+### Component HTML Structure
 
 ```html
-<div class="block" data-block-name="example">
-  <div class="example-content">
-    <!-- Block-specific content -->
-  </div>
-</div>
+<!-- Header Component Container -->
+<div id="header-container"></div>
+
+<!-- Footer Component Container -->
+<div id="footer-container"></div>
+```
+
+### Component Loading
+
+```javascript
+// init.js
+import { loadCommonComponents } from './components.js';
+
+// Initialize components when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+  loadCommonComponents();
+});
+
+// components.js
+export async function loadComponent(path, targetSelector) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) {
+      throw new Error(`Failed to load component: ${path}`);
+    }
+    const html = await response.text();
+    const target = document.querySelector(targetSelector);
+    if (!target) {
+      throw new Error(`Target element not found: ${targetSelector}`);
+    }
+    target.innerHTML = html;
+  } catch (error) {
+    console.error('Error loading component:', error);
+  }
+}
+
+export async function loadCommonComponents() {
+  await Promise.all([
+    loadComponent('./components/header.html', '#header-container'),
+    loadComponent('./components/footer.html', '#footer-container')
+  ]);
+}
 ```
 
 ## CSS Implementation
@@ -173,22 +156,6 @@ body {
 }
 ```
 
-#### Page-Specific Styles
-
-```css
-/* _index.css */
-.hero {
-  padding: var(--spacing-xxl) var(--spacing-md);
-  text-align: center;
-}
-
-/* _list.css */
-.content-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-```
-
 #### Main Stylesheet
 
 ```css
@@ -244,84 +211,20 @@ body {
 ### Module System
 
 - Use ES Modules exclusively
-- No CommonJS in renderer process
 - Dynamic imports for code splitting
 - Clear dependency management
-- Modular block implementation
+- Modular component implementation
 
-### Block Loading
+### Performance Guidelines
 
-```javascript
-// Block loading in lib.js
-export async function loadBlock(block) {
-  const name = block.dataset.blockName;
-  
-  // Set initial loading status
-  block.dataset.blockStatus = 'loading';
-  
-  try {
-    // Load block CSS first
-    await loadCSS(`blocks/${name}/${name}.css`);
-    
-    // Load and execute block JS if it exists and has functionality
-    if (!blocks[name]) {
-      try {
-        const mod = await import(`../blocks/${name}/${name}.js`);
-        registerBlock(name, mod);
-      } catch (error) {
-        console.error(`Failed to load block ${name}:`, error);
-        block.dataset.blockStatus = 'error';
-        return;
-      }
-    }
-    
-    // Execute block's decorate function if it exists
-    if (blocks[name]) {
-      await blocks[name].default(block);
-    }
-    
-    // Set block as loaded
-    block.dataset.blockStatus = 'loaded';
-  } catch (error) {
-    console.error(`Failed to initialize block ${name}:`, error);
-    block.dataset.blockStatus = 'error';
-  }
-}
-```
-
-### State Management
-
-- Block-level state containment
-- Event-driven updates
-- Clear data flow
-- Predictable state changes
-- Error boundary implementation
-
-## Performance Guidelines
-
-### Loading Performance
-
-- Implement E-L-D pattern
 - Optimize critical rendering path
 - Minimize initial payload
 - Use appropriate image formats
 - Enable text compression
-
-### Runtime Performance
-
 - Efficient DOM operations
 - Debounce event handlers
 - Use requestAnimationFrame
-- Optimize loops and iterations
 - Monitor memory usage
-
-### CSS Performance
-
-- Minimize specificity
-- Use efficient selectors
-- Avoid expensive properties
-- Optimize transitions
-- Reduce paint operations
 
 ## Security Requirements
 
@@ -364,106 +267,20 @@ connect-src 'self';
     <!-- Main content -->
   </main>
 
-  <aside role="complementary">
-    <!-- Sidebar content -->
-  </aside>
-
   <footer role="contentinfo">
     <!-- Footer content -->
   </footer>
 </body>
 ```
 
-#### Block-Level ARIA Requirements
-
-```html
-<!-- Standard Block Pattern -->
-<div 
-  class="block" 
-  data-block-name="example"
-  role="region"
-  aria-labelledby="block-title"
->
-  <h2 id="block-title">Block Title</h2>
-  <!-- Block content -->
-</div>
-
-<!-- Interactive Block Pattern -->
-<div 
-  class="block" 
-  data-block-name="form"
-  role="form"
-  aria-labelledby="form-title"
-  aria-describedby="form-desc"
->
-  <h2 id="form-title">Form Title</h2>
-  <p id="form-desc">Form description</p>
-  <!-- Form content -->
-</div>
-```
-
-#### Interactive Elements
-
-```html
-<!-- Buttons -->
-<button 
-  aria-label="Close dialog" 
-  aria-pressed="false"
-  aria-controls="dialog-1"
->
-  <span aria-hidden="true">&times;</span>
-</button>
-
-<!-- Links -->
-<a 
-  href="list.html" 
-  role="button" 
-  aria-label="Get Started with ContentID"
->
-  Get Started
-</a>
-
-<!-- Form Controls -->
-<label for="search">Search content</label>
-<input 
-  type="search" 
-  id="search" 
-  aria-describedby="search-help"
-  aria-required="true"
->
-<span id="search-help">Enter keywords to search content</span>
-```
-
-#### Dynamic Content
-
-```html
-<!-- Status Messages -->
-<div 
-  role="status" 
-  aria-live="polite"
-  aria-atomic="true"
->
-  Changes saved successfully
-</div>
-
-<!-- Error Messages -->
-<div 
-  role="alert" 
-  aria-live="assertive"
-  aria-atomic="true"
->
-  Please correct the form errors
-</div>
-```
-
 ### Semantic Structure
 
-- Use semantic HTML5 elements (header, nav, main, etc.)
-- Maintain proper heading hierarchy (h1-h6)
-- Implement landmark regions with ARIA roles
-- Provide skip links for keyboard navigation
+- Use semantic HTML5 elements
+- Maintain proper heading hierarchy
+- Implement landmark regions
+- Provide skip links
 - Include proper meta information
-- Ensure proper color contrast (WCAG 2.1 AA)
+- Ensure proper color contrast
 - Use appropriate text alternatives
 - Implement proper focus indicators
 
@@ -471,7 +288,7 @@ connect-src 'self';
 
 ### Unit Testing
 
-- Test block functionality
+- Test component functionality
 - Validate state changes
 - Check event handlers
 - Verify data flow
@@ -479,7 +296,7 @@ connect-src 'self';
 
 ### Integration Testing
 
-- Test block interactions
+- Test component interactions
 - Validate loading patterns
 - Check state propagation
 - Test form submissions
@@ -495,7 +312,7 @@ connect-src 'self';
 
 ## Documentation Standards
 
-### Block Documentation
+### Component Documentation
 
 - Implementation details
 - Usage examples

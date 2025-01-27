@@ -1,6 +1,6 @@
 # ContentID
 
-A distributed digital identity system for content verification that enables AI systems to distinguish between verified and unverified information. Built as a dual-interface Electron application providing both local desktop and web-accessible interfaces with shared state functionality.
+A distributed digital identity system for content verification that enables AI systems to distinguish between verified and unverified information. Built as a modern Node.js web application with HTTP/2 support and comprehensive security features.
 
 ## Core Features
 
@@ -9,10 +9,7 @@ A distributed digital identity system for content verification that enables AI s
 - Verification authority management
 - Trust chain validation
 - Content lifecycle tracking
-- Local window interface
-- Web-accessible interface (<http://0.0.0.0:3000>)
-- Shared state management
-- Secure IPC communication
+- Web interface (<http://localhost:3000>)
 - Built-in logging system
 - Content Management Interface:
   - Content listing with search and filtering
@@ -26,9 +23,8 @@ A distributed digital identity system for content verification that enables AI s
 
 ### Core Technologies
 
-- Electron (v28.0.0)
 - Node.js (v18+)
-- Express.js (with ES Modules)
+- Express.js (with HTTP/2 via SPDY)
 - Modern JavaScript (ES2022+)
 - HTML5/CSS3 with semantic structure
 - Jest (v29.0.0) for testing
@@ -38,47 +34,25 @@ A distributed digital identity system for content verification that enables AI s
 
 ### Web Server (ES Modules)
 
-- Express.js server using ES Modules architecture
+- HTTP/2-enabled Express server using SPDY
 - Class-based implementation with lifecycle management
 - Built-in HTTP server running on port 3000
-- Static file serving from renderer directory
-- Security headers implementation
+- Static file serving with proper caching
+- Comprehensive security headers
 - CORS configuration
 - Uses import/export syntax exclusively
 - Clean separation of middleware and routes
 - Comprehensive error handling
 - Path resolution using ES Modules patterns
 
-### Main Process (CommonJS with ES Module Interop)
+### Frontend Architecture
 
-- Application lifecycle management
-- Window creation and management
-- Web server implementation
-- System-level operations
-- Uses CommonJS require() for Electron-specific imports
-- Implements createRequire(import.meta.url) for CommonJS interop
-- Uses dynamic import() for ES modules
-- Maintains CommonJS module.exports pattern
-
-### Renderer Process (Pure ES Modules)
-
-- UI rendering and interaction
-- Client-side logic
-- Communication with main process via preload
-- Uses import/export syntax exclusively
-- Implements dynamic import() for code splitting
-- Follows strict ES module guidelines
+- Component-based implementation
+- ES Modules throughout
+- Dynamic component loading
 - Semantic HTML structure
 - Modular CSS architecture
-- Component-based implementation
-
-### Preload Scripts (CommonJS with ES Module Interop)
-
-- Secure IPC bridge
-- API exposure to renderer
-- Context isolation enforcement
-- Uses CommonJS require() for Electron APIs
-- Implements createRequire(import.meta.url) for CommonJS interop
+- Progressive enhancement
 
 ### Shared Services (ES Modules)
 
@@ -100,8 +74,9 @@ Additional endpoints coming soon.
 ```bash
 project/
 ├── src/
-│   ├── main/           # Main process (CommonJS with ES Module Interop)
-│   ├── renderer/       # Renderer process (ES Modules)
+│   ├── main/           # Server-side code (ES Modules)
+│   │   └── web-server.js  # HTTP/2 server implementation
+│   ├── renderer/       # Frontend code (ES Modules)
 │   │   ├── styles/     # CSS architecture
 │   │   │   ├── base/          # Base styles
 │   │   │   │   ├── _variables.css  # Design tokens
@@ -122,18 +97,15 @@ project/
 │   │   │   └── footer.html   # Footer markup
 │   │   ├── scripts/    # JavaScript modules
 │   │   │   ├── components.js # Component loader
-│   │   │   └── main.js       # Main application
+│   │   │   └── init.js       # Component initialization
 │   │   ├── index.html  # Landing page
 │   │   ├── list.html   # Content listing
 │   │   ├── entry.html  # Content entry
 │   │   └── editor.html # Content editor
-│   ├── preload/        # Preload scripts (CommonJS with ES Module Interop)
 │   ├── services/       # Shared business logic (ES Modules)
-│   ├── tests/          # Test files
-│   └── scripts/        # Build and utility scripts
+│   └── tests/          # Test files
 ├── docs/               # Documentation
 │   └── development-notes/ # Development notes
-├── ContentID/          # Project documentation
 └── log.md             # Development log
 ```
 
@@ -147,23 +119,17 @@ project/
    ```
 
 3. Start development:
-   - Start both interfaces:
 
-     ```bash
-     npm start
-     ```
+   ```bash
+   # Development mode
+   npm run dev
 
-   - Web interface only:
+   # Production mode
+   npm start
 
-     ```bash
-     npm run web
-     ```
-
-   - Desktop interface only:
-
-     ```bash
-     npm run desktop
-     ```
+   # Custom port
+   PORT=8080 npm start
+   ```
 
 ## Testing
 
@@ -180,12 +146,13 @@ Additional test commands:
 
 ## Security
 
-- Context isolation enabled
-- Secure IPC communication channels
 - Content Security Policy (CSP) headers
-- Input validation on both interfaces
-- CORS configuration for web API
+- HTTP/2 with SPDY
+- Rate limiting
+- Input validation
+- CORS configuration
 - Strict path resolution
+- Comprehensive security headers
 
 ### Content Security Policy
 

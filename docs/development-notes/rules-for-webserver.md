@@ -2,21 +2,16 @@
 
 ## Core Principles
 
-1. **E-L-D Loading Pattern**
-   - Eager: Critical content for LCP
-   - Lazy: Non-critical content
-   - Delayed: Third-party content
-
-2. **Component-Based Architecture**
+1. **Component-Based Architecture**
    - Modular components
    - Progressive enhancement
    - Independent loading
    - Isolated styling
 
-3. **Performance First**
+2. **Performance First**
    - Target Lighthouse 100
    - No bundling required
-   - HTTP/3 optimized
+   - HTTP/2 optimized
    - Modern browser APIs
 
 ## Project Structure
@@ -53,6 +48,98 @@
 ## Implementation Guide
 
 ### 1. Core Infrastructure
+
+#### Server Configuration
+
+```javascript
+// web-server.js
+import spdy from 'spdy';
+import express from 'express';
+import path from 'path';
+import cors from 'cors';
+import compression from 'compression';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Create Express application
+const app = express();
+
+// Security headers
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrc: ["'self'"],
+      imgSrc: ["'self'", 'data:'],
+      fontSrc: ["'self'"],
+      connectSrc: ["'self'"]
+    }
+  },
+  hsts: {
+    maxAge: 31536000,
+    includeSubDomains: true,
+    preload: true
+  },
+  referrerPolicy: { policy: 'same-origin' }
+}));
+
+// Compression
+app.use(compression({
+  level: 6,
+  threshold: 1024
+}));
+
+// Rate limiting
+app.use(rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100
+}));
+
+// CORS configuration
+app.use(cors({
+  origin: process.env.NODE_ENV === 'development' ? '*' : 'https://example.com',
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+// Serve static files
+app.use(express.static(path.join(__dirname, '../renderer'), {
+  setHeaders: (res, path) => {
+    const cacheControl = path.endsWith('.html') ? 'no-store' : 'public, max-age=31536000, immutable';
+    res.setHeader('Cache-Control', cacheControl);
+    if (path.endsWith('.css')) {
+      res.setHeader('Content-Type', 'text/css');
+    }
+  },
+  index: ['index.html'],
+  extensions: ['js', 'css', 'html']
+}));
+
+// SPA fallback
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../renderer/index.html'));
+});
+
+// HTTP/2 server options
+const options = {
+  spdy: {
+    protocols: ['h2', 'http/1.1'],
+    plain: true
+  }
+};
+
+// Start server
+const PORT = process.env.PORT || 3000;
+spdy.createServer(options, app)
+  .listen(PORT, () => {
+    console.log(`Server running on port ${PORT} with HTTP/2`);
+  });
+```
 
 #### Head Setup
 
@@ -170,36 +257,12 @@ body {
 @import './pages/_editor.css';
 ```
 
-### 4. Loading Strategy
-
-#### E-L-D Implementation
-
-```javascript
-const loadPage = async () => {
-  // Eager: Critical
-  await loadCommonComponents();
-  document.body.classList.add('appear');
-  
-  // Lazy: Non-critical
-  requestIdleCallback(() => {
-    initializeComponents();
-  });
-  
-  // Delayed: Third-party
-  setTimeout(() => {
-    loadThirdParty();
-  }, 3000);
-};
-```
-
-### 5. Best Practices
+### 4. Best Practices
 
 #### Performance Checklist
 
-- [ ] Implement E-L-D pattern
 - [ ] Optimize images with WebP
-- [ ] Lazy load below-fold content
-- [ ] Use intersection observer
+- [ ] Use intersection observer for lazy loading
 - [ ] Enable HTTP/2 push
 - [ ] Set proper cache headers
 - [ ] Compress responses

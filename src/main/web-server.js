@@ -5,6 +5,10 @@ import cors from 'cors';
 import compression from 'compression';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Create Express application
 const app = express();
@@ -56,7 +60,7 @@ app.use(cors({
 }));
 
 // Serve static files from renderer directory
-const rendererPath = path.join(path.dirname(new URL(import.meta.url).pathname), '../renderer');
+const rendererPath = path.join(__dirname, '../renderer');
 app.use(express.static(rendererPath, {
   setHeaders: (res, path) => {
     // Set proper cache headers
@@ -88,11 +92,11 @@ app.get('*', (req, res) => {
   }
 });
 
-// Server instance reference
-let serverInstance;
+// Default port
+const PORT = process.env.PORT || 3000;
 
 // Start web server
-export function startWebServer(port) {
+function startWebServer(port = PORT) {
   return new Promise((resolve, reject) => {
     const options = {
       spdy: {
@@ -101,25 +105,19 @@ export function startWebServer(port) {
       }
     };
     
-    serverInstance = spdy.createServer(options, app)
+    const server = spdy.createServer(options, app)
       .listen(port, '0.0.0.0', () => {
         console.log(`Web server running on port ${port} with HTTP/2`);
-        resolve(serverInstance);
+        console.log(`Mode: ${process.env.NODE_ENV || 'production'}`);
+        resolve(server);
       })
       .on('error', reject);
   });
 }
 
-// Stop web server
-export function stopWebServer() {
-  return new Promise((resolve) => {
-    if (serverInstance) {
-      serverInstance.close(() => {
-        console.log('Web server stopped');
-        resolve();
-      });
-    } else {
-      resolve();
-    }
-  });
+// If this file is run directly (not imported as a module)
+if (import.meta.url === `file://${process.argv[1]}`) {
+  startWebServer().catch(console.error);
 }
+
+export { startWebServer, app };

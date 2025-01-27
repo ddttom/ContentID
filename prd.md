@@ -52,7 +52,6 @@ Secondary Users:
 | CSP     | Content Security Policy | Security standard for preventing content injection attacks |
 | ES      | ECMAScript | Standard for JavaScript implementation |
 | GDPR    | General Data Protection Regulation | European Union data protection law |
-| IPC     | Inter-Process Communication | Mechanism for processes to exchange data |
 | REST    | Representational State Transfer | Architectural style for web services |
 | SDK     | Software Development Kit | Collection of tools for building applications |
 | WCAG    | Web Content Accessibility Guidelines | International accessibility standard |
@@ -61,8 +60,8 @@ Secondary Users:
 
 For detailed technical architecture documentation, including:
 
-- Core Architecture (Content Management Interface, Main Process, Renderer Process, etc.)
-- Security Architecture
+- Core Architecture (Web Server, Content Management Interface, Services)
+- Security Architecture (HTTP/2, CSP, Rate Limiting)
 - Content Infrastructure
 - Development Guidelines
 - Project Structure
@@ -219,7 +218,8 @@ Please refer to [README.md](./README.md).
 
 #### Phase 1: Foundation (Current)
 
-- Dual-interface Electron application establishing core infrastructure
+- Pure Node.js web application establishing core infrastructure
+- HTTP/2-enabled web server with comprehensive security
 - Basic content verification API implementation
 - Local authority management and verification processes
 - Single-node content validation
@@ -256,7 +256,7 @@ Please refer to [README.md](./README.md).
 
 #### Current Architecture Extension
 
-- Extend current Electron application to serve as authority node
+- Extend current web application to serve as authority node
 - Implement distributed database for content verification
 - Add peer-to-peer communication layer
 - Develop authority management interface
