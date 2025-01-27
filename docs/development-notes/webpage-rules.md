@@ -34,11 +34,13 @@ export default async function decorate(block) {
 ```
 
 The lib.js handles all common block functionality:
+
 - Loading block-specific CSS
 - Setting block loading status
 - Managing block initialization
 
 Block JavaScript files should only contain code when:
+
 1. The block needs specific functionality beyond basic rendering
 2. Event handlers need to be attached
 3. Dynamic content needs to be managed
@@ -100,41 +102,142 @@ Block JavaScript files should only contain code when:
 
 ## CSS Implementation
 
-### Naming Convention
+### Directory Structure
 
-- Follow BEM (Block Element Modifier) methodology
-- Use descriptive, semantic class names
-- Maintain consistent naming patterns
-- Avoid deep nesting
-- Use data attributes for states
+```bash
+styles/
+├── base/
+│   ├── _variables.css    # Design tokens and CSS custom properties
+│   ├── _reset.css        # Base styles and resets
+│   └── _utilities.css    # Utility classes
+├── components/
+│   ├── _header.css       # Header component styles
+│   ├── _footer.css       # Footer component styles
+│   └── _forms.css        # Shared form styles
+├── pages/
+│   ├── _index.css        # Landing page styles
+│   ├── _list.css         # Content listing styles
+│   ├── _entry.css        # Content entry styles
+│   └── _editor.css       # Content editor styles
+└── styles.css            # Main stylesheet with imports
+```
 
 ### CSS Organization
 
+#### Base Styles
+
 ```css
-/* Block container */
-.block {
-  opacity: 0;
-  transition: opacity 0.2s ease-in;
+/* _variables.css - Design tokens */
+:root {
+  --color-primary: #007bff;
+  --spacing-md: 1rem;
+  --font-size-base: 1rem;
 }
 
-.block[data-block-status="loaded"] {
-  opacity: 1;
+/* _reset.css - Base styles */
+body {
+  margin: 0;
+  font-family: var(--font-family);
+  line-height: var(--line-height);
 }
 
-/* Block-specific styles */
-.example-content {
-  /* Component styles */
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  /* Tablet styles */
-}
-
-@media (max-width: 480px) {
-  /* Mobile styles */
+/* _utilities.css - Helper classes */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 ```
+
+#### Component Styles
+
+```css
+/* _header.css */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: var(--z-index-header);
+}
+
+/* _footer.css */
+.footer {
+  background: var(--color-background-light);
+  padding: var(--spacing-xl) 0;
+}
+
+/* _forms.css */
+.form-group {
+  margin-bottom: var(--spacing-lg);
+}
+```
+
+#### Page-Specific Styles
+
+```css
+/* _index.css */
+.hero {
+  padding: var(--spacing-xxl) var(--spacing-md);
+  text-align: center;
+}
+
+/* _list.css */
+.content-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+```
+
+#### Main Stylesheet
+
+```css
+/* styles.css */
+@import './base/_variables.css';
+@import './base/_reset.css';
+@import './base/_utilities.css';
+
+@import './components/_header.css';
+@import './components/_footer.css';
+@import './components/_forms.css';
+
+@import './pages/_index.css';
+@import './pages/_list.css';
+@import './pages/_entry.css';
+@import './pages/_editor.css';
+```
+
+### CSS Best Practices
+
+1. Organization:
+   - Group related styles together
+   - Use consistent naming patterns
+   - Maintain clear file structure
+   - Follow import order
+
+2. Variables:
+   - Use CSS custom properties
+   - Define tokens in _variables.css
+   - Use semantic naming
+   - Maintain single source of truth
+
+3. Components:
+   - Encapsulate styles
+   - Avoid deep nesting
+   - Use meaningful class names
+   - Keep components independent
+
+4. Maintainability:
+   - Write reusable code
+   - Document complex styles
+   - Use consistent formatting
+   - Follow naming conventions
+
+5. Performance:
+   - Minimize specificity
+   - Optimize selectors
+   - Reduce redundancy
+   - Use efficient properties
 
 ## JavaScript Architecture
 

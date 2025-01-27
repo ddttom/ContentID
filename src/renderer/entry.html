@@ -3,24 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline';">
   <title>New Content Entry - ContentID Manager</title>
+  <base href="./">
   <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-  <header class="header">
-    <div class="header-wrapper">
-      <div class="logo">ContentID</div>
-      <nav class="nav">
-        <a href="index.html">Home</a>
-        <a href="#">Features</a>
-        <a href="#">Pricing</a>
-        <a href="#">About</a>
-      </nav>
-      <div class="actions">
-        <a href="#" class="login-btn">Login</a>
-      </div>
-    </div>
-  </header>
+  <div id="header-container"></div>
 
   <main role="main">
     <div class="content">
@@ -212,29 +201,11 @@
     </div>
   </main>
 
-  <footer class="footer">
-    <div class="footer-wrapper">
-      <div class="section">
-        <div class="logo">ContentID</div>
-        <p>Trusted Content Verification System</p>
-      </div>
-      <div class="section">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="#">Features</a></li>
-          <li><a href="#">Pricing</a></li>
-          <li><a href="#">Documentation</a></li>
-        </ul>
-      </div>
-      <div class="section">
-        <h4>Legal</h4>
-        <ul>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Service</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">© 2025 ContentID. All rights reserved.</div>
-  </footer>
+  <div id="footer-container"></div>
+
+  <script type="module">
+    import { loadCommonComponents } from './scripts/components.js';
+    loadCommonComponents();
+  </script>
 </body>
 </html>

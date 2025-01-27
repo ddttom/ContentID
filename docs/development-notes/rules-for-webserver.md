@@ -7,8 +7,8 @@
    - Lazy: Non-critical content
    - Delayed: Third-party content
 
-2. **Block-Based Architecture**
-   - Self-contained components
+2. **Component-Based Architecture**
+   - Modular components
    - Progressive enhancement
    - Independent loading
    - Isolated styling
@@ -22,17 +22,28 @@
 ## Project Structure
 
 ```bash
-/blocks/
-  /{blockName}/
-    - {blockName}.css
-    - {blockName}.js
-    - README.md
-/scripts/
-  - lib.js      # Utilities
-  - main.js     # Core app
 /styles/
-  - styles.css  # Critical
-  - lazy.css    # Non-critical
+  /base/
+    _variables.css    # Design tokens
+    _reset.css        # Base styles
+    _utilities.css    # Helper classes
+  /components/
+    _header.css       # Header styles
+    _footer.css       # Footer styles
+    _forms.css        # Form styles
+  /pages/
+    _index.css        # Landing page
+    _list.css         # Content listing
+    _entry.css        # Content entry
+    _editor.css       # Content editor
+  styles.css          # Main stylesheet
+/scripts/
+  - lib.js           # Utilities
+  - main.js          # Core app
+  - components.js    # Component loader
+/components/
+  - header.html      # Header markup
+  - footer.html      # Footer markup
 /utils/
   - decorators.js
   - loaders.js
@@ -46,154 +57,109 @@
 
 ```html
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline';">
+  <base href="./">
   <link rel="stylesheet" href="styles/styles.css">
-  <script type="module" src="scripts/lib.js"></script>
+  <script type="module" src="scripts/components.js"></script>
   <script type="module" src="scripts/main.js"></script>
 </head>
 ```
 
-### Critical CSS
+### 2. CSS Architecture
+
+#### Base Styles
 
 ```css
+/* _variables.css */
 :root {
-  --body-font: system-ui;
-  --heading-font: system-ui;
+  --color-primary: #007bff;
+  --color-text: #333;
+  --spacing-md: 1rem;
+  --font-family: system-ui, -apple-system, sans-serif;
 }
 
-/* FOUC Prevention */
+/* _reset.css */
 body {
-  opacity: 0;
-  transition: opacity 0.2s ease-in;
+  margin: 0;
+  font-family: var(--font-family);
+  color: var(--color-text);
 }
 
-body.appear {
-  opacity: 1;
-}
-
-/* Block Loading States */
-.block {
-  opacity: 0;
-  transition: opacity 0.2s ease-in;
-}
-
-.block[data-block-status="loaded"] {
-  opacity: 1;
+/* _utilities.css */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
 }
 ```
 
-### 2. Block System
+#### Component Styles
 
-#### Block Registry
-
-```javascript
-const blocks = {};
-
-export function registerBlock(name, mod) {
-  blocks[name] = mod;
+```css
+/* _header.css */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: var(--z-index-header);
 }
 
-export async function loadBlock(block) {
-  const name = block.dataset.blockName || block.classList[0];
-  if (!blocks[name]) {
-    try {
-      const mod = await import(`../blocks/${name}/${name}.js`);
-      registerBlock(name, mod);
-    } catch (error) {
-      console.error(`Failed to load block ${name}:`, error);
-      return;
+/* _footer.css */
+.footer {
+  background: var(--color-background-light);
+  padding: var(--spacing-xl) 0;
+}
+```
+
+#### Main Stylesheet
+
+```css
+/* styles.css */
+@import './base/_variables.css';
+@import './base/_reset.css';
+@import './base/_utilities.css';
+
+@import './components/_header.css';
+@import './components/_footer.css';
+@import './components/_forms.css';
+
+@import './pages/_index.css';
+@import './pages/_list.css';
+@import './pages/_entry.css';
+@import './pages/_editor.css';
+```
+
+### 3. Component System
+
+#### Component Loading
+
+```javascript
+// components.js
+export async function loadComponent(path, targetSelector) {
+  try {
+    const response = await fetch(path);
+    if (!response.ok) {
+      throw new Error(`Failed to load component: ${path}`);
     }
+    const html = await response.text();
+    const target = document.querySelector(targetSelector);
+    if (!target) {
+      throw new Error(`Target element not found: ${targetSelector}`);
+    }
+    target.innerHTML = html;
+  } catch (error) {
+    console.error('Error loading component:', error);
   }
-  await blocks[name].default(block);
 }
-```
 
-#### Block Structure
-
-```javascript
-// blocks/example/example.js
-import { loadCSS } from '../../scripts/lib.js';
-
-export default async function decorate(block) {
-  // Load block CSS
-  await loadCSS(`/blocks/${block.dataset.blockName}/${block.dataset.blockName}.css`);
-  
-  // Status tracking
-  block.dataset.blockStatus = 'loading';
-  
-  // DOM manipulation
-  const wrapper = document.createElement('div');
-  wrapper.className = 'example-wrapper';
-  block.parentNode.insertBefore(wrapper, block);
-  wrapper.appendChild(block);
-  
-  block.dataset.blockStatus = 'loaded';
-}
-```
-
-### 3. Common Blocks
-
-#### Header Block
-
-```javascript
-// blocks/header/header.js
-import { loadCSS } from '../../scripts/lib.js';
-
-export default async function decorate(block) {
-  await loadCSS('/blocks/header/header.css');
-  
-  // Header implementation...
-}
-```
-
-#### Footer Block
-
-```javascript
-// blocks/footer/footer.js
-import { loadCSS } from '../../scripts/lib.js';
-
-export default async function decorate(block) {
-  await loadCSS('/blocks/footer/footer.css');
-  
-  // Footer implementation...
-}
-```
-
-#### Hero Block
-
-```javascript
-// blocks/hero/hero.js
-import { loadCSS } from '../../scripts/lib.js';
-
-export default async function decorate(block) {
-  await loadCSS('/blocks/hero/hero.css');
-  
-  // Hero implementation...
-}
-```
-
-#### Content Block
-
-```javascript
-// blocks/content/content.js
-import { loadCSS } from '../../scripts/lib.js';
-
-export default async function decorate(block) {
-  await loadCSS('/blocks/content/content.css');
-  
-  // Content implementation...
-}
-```
-
-#### Steps Block
-
-```javascript
-// blocks/steps/steps.js
-import { loadCSS } from '../../scripts/lib.js';
-
-export default async function decorate(block) {
-  await loadCSS('/blocks/steps/steps.css');
-  
-  // Steps implementation...
+export async function loadCommonComponents() {
+  await Promise.all([
+    loadComponent('./components/header.html', '#header-container'),
+    loadComponent('./components/footer.html', '#footer-container')
+  ]);
 }
 ```
 
@@ -204,13 +170,12 @@ export default async function decorate(block) {
 ```javascript
 const loadPage = async () => {
   // Eager: Critical
-  await loadHeader();
+  await loadCommonComponents();
   document.body.classList.add('appear');
   
   // Lazy: Non-critical
   requestIdleCallback(() => {
-    loadFooter();
-    initializeBlocks();
+    initializeComponents();
   });
   
   // Delayed: Third-party
@@ -235,7 +200,7 @@ const loadPage = async () => {
 
 #### Code Quality
 
-- [ ] Keep blocks isolated
+- [ ] Keep components isolated
 - [ ] Use semantic HTML
 - [ ] Follow BEM CSS naming
 - [ ] Document components

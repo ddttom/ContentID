@@ -1,0 +1,48 @@
+/* Entry page specific styles */
+.content-editor {
+  padding: var(--spacing-xl);
+  max-width: var(--container-max-width);
+  margin: 60px auto 0; /* Account for fixed header */
+}
+
+/* Entry form specific overrides */
+.content-form {
+  background: var(--color-background);
+}
+
+/* Entry page specific form section spacing */
+.form-section:first-of-type {
+  margin-top: 0;
+}
+
+.form-section:last-of-type {
+  margin-bottom: var(--spacing-xl);
+}
+
+/* Entry page specific validation styles */
+.form-group input:invalid,
+.form-group select:invalid,
+.form-group textarea:invalid {
+  border-color: var(--color-danger);
+}
+
+.form-group input:invalid:focus,
+.form-group select:invalid:focus,
+.form-group textarea:invalid:focus {
+  outline-color: var(--color-danger);
+}
+
+/* Required field indicator */
+.form-group label[for]:has(+ input[required]),
+.form-group label[for]:has(+ select[required]),
+.form-group label[for]:has(+ textarea[required]) {
+  position: relative;
+}
+
+.form-group label[for]:has(+ input[required])::after,
+.form-group label[for]:has(+ select[required])::after,
+.form-group label[for]:has(+ textarea[required])::after {
+  content: "*";
+  color: var(--color-danger);
+  margin-left: var(--spacing-xs);
+}

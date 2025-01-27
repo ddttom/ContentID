@@ -69,8 +69,8 @@ A distributed digital identity system for content verification that enables AI s
 - Implements dynamic import() for code splitting
 - Follows strict ES module guidelines
 - Semantic HTML structure
-- Centralized CSS styling
-- Direct component implementation
+- Modular CSS architecture
+- Component-based implementation
 
 ### Preload Scripts (CommonJS with ES Module Interop)
 
@@ -102,7 +102,27 @@ project/
 ├── src/
 │   ├── main/           # Main process (CommonJS with ES Module Interop)
 │   ├── renderer/       # Renderer process (ES Modules)
-│   │   ├── styles/     # Centralized CSS
+│   │   ├── styles/     # CSS architecture
+│   │   │   ├── base/          # Base styles
+│   │   │   │   ├── _variables.css  # Design tokens
+│   │   │   │   ├── _reset.css      # Base styles
+│   │   │   │   └── _utilities.css  # Helper classes
+│   │   │   ├── components/    # Component styles
+│   │   │   │   ├── _header.css     # Header styles
+│   │   │   │   ├── _footer.css     # Footer styles
+│   │   │   │   └── _forms.css      # Form styles
+│   │   │   ├── pages/        # Page-specific styles
+│   │   │   │   ├── _index.css      # Landing page
+│   │   │   │   ├── _list.css       # Content listing
+│   │   │   │   ├── _entry.css      # Content entry
+│   │   │   │   └── _editor.css     # Content editor
+│   │   │   └── styles.css    # Main stylesheet
+│   │   ├── components/  # HTML components
+│   │   │   ├── header.html   # Header markup
+│   │   │   └── footer.html   # Footer markup
+│   │   ├── scripts/    # JavaScript modules
+│   │   │   ├── components.js # Component loader
+│   │   │   └── main.js       # Main application
 │   │   ├── index.html  # Landing page
 │   │   ├── list.html   # Content listing
 │   │   ├── entry.html  # Content entry
