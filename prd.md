@@ -142,6 +142,19 @@ The content management system uses a JSON-based database with the following stru
 
 ## 4. Technical Architecture
 
+Note: The project intentionally avoids TypeScript to maintain simplicity and reduce build complexity. Instead, we focus on clear code organization through consistent module usage, comprehensive documentation, and thorough testing to ensure code quality. The project continues to maintain its focus on simplicity and performance while addressing core security and structural needs identified in the code review checklist.
+
+### Development Requirements
+
+- Modern JavaScript (ES modules) without TypeScript
+- Pure CSS without preprocessors
+- No build-heavy frameworks
+- Focus on simplicity and performance
+- ES modules for application code and services
+- Clear code organization and documentation
+- Security through proper application hardening
+- Minimal dependencies and build steps
+
 For detailed technical architecture documentation, including:
 
 - Core Architecture (Web Server, Content Management Interface, Services)
