@@ -1,5 +1,9 @@
 // Form handling for content entry
-document.addEventListener('DOMContentLoaded', () => {
+import { loadCommonComponents } from './components.js';
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadCommonComponents();
+  
   const form = document.querySelector('.content-form');
   const formStatus = document.getElementById('form-status');
 
@@ -109,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
       const result = await response.json();
       showStatus('Content submitted successfully');
+      window.location.href = 'list.html'; // Redirect after successful submission
       return result;
     } catch (error) {
       console.error('Error submitting content:', error);
@@ -117,34 +122,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // Handle save draft button
-  document.querySelector('.save-draft')?.addEventListener('click', async (e) => {
-    e.preventDefault();
-    const formData = new FormData(form);
-    try {
-      await saveDraft(formData);
-    } catch (error) {
-      // Error already handled in saveDraft
-    }
-  });
-
-  // Handle form submission
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
+  // Handle toolbar save button
+  document.getElementById('save-entry')?.addEventListener('click', async () => {
     const formData = new FormData(form);
     try {
       await submitContent(formData);
-      // Optionally redirect to list page after successful submission
-      // window.location.href = 'list.html';
     } catch (error) {
       // Error already handled in submitContent
-    }
-  });
-
-  // Handle cancel button
-  document.querySelector('.cancel')?.addEventListener('click', () => {
-    if (confirm('Are you sure you want to cancel? Any unsaved changes will be lost.')) {
-      window.location.href = 'list.html';
     }
   });
 

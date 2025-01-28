@@ -1,10 +1,13 @@
 // Content list management
+import { loadCommonComponents } from './components.js';
+
 let currentPage = 1;
 const itemsPerPage = 10;
 let contentItems = [];
 
 // Initialize page
 document.addEventListener('DOMContentLoaded', async () => {
+  await loadCommonComponents();
   await loadContent();
   setupEventListeners();
 });
