@@ -26,8 +26,6 @@ Current Architecture: {{ Description of current implementation }}
 Target Architecture: {{ Description of desired end state }}
 Files/Components: {{ List of specific files or components to be refactored }}
 Dependencies: {{ List of known system dependencies }}
-
-Scope: The existing Electron app has a hello world message on the home page, i wish to change this into a compelling home page with the objectives and ideas described inn prd.md the hone page should be stylish with a link that takes a user to a logon page, do not create the logon page
 logfilename: same as the Taskname with -log.md appended in docs/development-notes folder
 
 ## Essential Constraints
