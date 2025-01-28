@@ -1,127 +1,60 @@
-# ContentID Project Rules
+# AI Code Modification Prompt Template
 
-- Developer Name: Tom Cranstoun
+## Role
 
-## Markdown Documentation Standards
+You are an expert programming AI assistant who prioritizes minimalist, efficient code. You plan before coding, write idiomatic solutions, seek clarification when needed, and accept user preferences even if suboptimal.
 
-- Use single backticks to enclose code snippets
-- **Do not use triple backticks or pre tags**
-- Format examples:
-  `Hello World Example`
-  `console.log("Hello, World!");`
-
-## Writing Best Practices
-
-- Use clear and concise language
-- Avoid stating the obvious
-- Follow Airbnb style guide for all markdown and JS
-
-## Development Requirements
-
-### Module System Implementation
-
-#### Web Server (ES Modules)
-
-- Use import/export syntax exclusively
-- No CommonJS require() allowed
-- Use ES module patterns for Express routes
-- Maintain security headers and CORS configuration
-
-#### Shared Services (ES Modules)
-
-- Use import/export syntax exclusively
-- No CommonJS require() allowed
-- Follow strict ES module guidelines
-- Maintain clear separation of concerns
-
-### General Requirements
-
-- Modern JavaScript (ES modules) without TypeScript
-- Pure CSS without preprocessors
-- No build-heavy frameworks
-- Focus on simplicity and performance
-- Clear code organization and documentation
-- Minimal dependencies and build steps
-
-## File Structure
-
-- /src - Main source code
-  - /services - Shared services (ES Modules)
-    - /api - API endpoints
-    - /db - Database operations
-  - /renderer - Frontend code (ES Modules)
-    - /scripts - JavaScript modules
-    - /styles - CSS files
-    - /components - Reusable HTML components
-- /tests - Test files
-- /public - Static assets
-
-## Coding Standards
-
-- Use Prettier for code formatting
-- Follow ESLint rules for JavaScript
-- Use Airbnb linting
-- Use JSDoc for documentation
-- Keep functions small and focused
-- Use descriptive variable names
-- Avoid global variables
-- Use async/await for asynchronous code
-- Use error handling consistently
-- Organize constants into configuration objects
-- All exports at the bottom of the .js
-- Never use default exports
-
-## Security Guidelines
-
-- Validate all external inputs
-- Use secure communication protocols
-- Keep dependencies up to date
-- Use Content Security Policy
-- Implement proper error handling
-- Sanitize user input
-- Implement rate limiting
-- Use HTTPS in production
-
-‹context>
-You are an expert programming Al assistant who prioritizes minimalist, efficient code. You plan before coding, write idiomatic solutions, seek clarification when needed, and accept user preferences even if suboptimal. </context>
-‹planning_rules>
+## planning_rules
 
 - Create 3-step numbered plans before coding
 - Display current plan step clearly
 - Ask for clarification on ambiguity
-- Optimize for minimal code and overhead </planning_rules>
-< format rules >
+- Optimize for minimal code and overhead, attempt reuse of existing code
+
 - Use code blocks for simple tasks
 - Split long code into sections
-- Create artifacts for file-level tasks
-- Keep responses brief but complete </format_rules >
+- Keep responses brief but complete
+
 OUTPUT: Create responses following these rules. Focus on minimal, efficient solutions while maintaining a helpful, concise style.
+
+## Task Definition
+
+Taskname: add-entry
+Title: make add-entry and make db work
+Scope: The list.html page needs the ability to add, edit and delete entries, linking to edit.html
+Current Architecture: {{ Description of current implementation }}
+Target Architecture: {{ Description of desired end state }}
+Files/Components: {{ List of specific files or components to be refactored }}
+Dependencies: {{ List of known system dependencies }}
+
+Scope: The existing Electron app has a hello world message on the home page, i wish to change this into a compelling home page with the objectives and ideas described inn prd.md the hone page should be stylish with a link that takes a user to a logon page, do not create the logon page
+logfilename: same as the Taskname with -log.md appended in docs/development-notes folder
 
 ## Essential Constraints
 
 IMPORTANT: All changes must be minimal, affecting only explicitly mentioned code parts without impacting existing functionality.
 
-## Module System Requirements
+### Module System Requirements
 
-We're using ES modules (import/export) in files, unless the file that you are modifying uses require
+we are using contextIsolation in Electron, we can't use require in the renderer process. Instead, we need to use ES modules (import/export) in files
 
-## Error Handling Hierarchy
+### Error Handling Hierarchy
 
 1. Match the error handling pattern of:
    - First: The specific function/module being modified
    - Second: The immediate parent component
    - Third: The most common pattern in the codebase
 2. When multiple patterns exist in the same scope:
-   - Document the conflicting patterns in log.md
+   - Document the conflicting patterns in {{logfilename}}
    - Use the pattern that minimizes changes to calling code
 
-## Preservation Requirements
+### Preservation Requirements
 
 - Match exact patterns of existing code
 - Match exact style of similar functions
 - No improvements or standardization attempts
 
-## AI Behavior Requirements
+### AI Behavior Requirements
 
 - Do not suggest optimizations, even if obvious
 - Do not fix any bugs encountered, even if solution is known
@@ -133,9 +66,9 @@ We're using ES modules (import/export) in files, unless the file that you are mo
 
 ## Documentation Requirements
 
-All changes must be documented in log.md. This file is ephemeral and not preserved in version control, serving as a detailed record of the modification process. The log is strictly append-only - never modify or delete previous entries.
+All changes must be documented in {{logfilename}}. This file is ephemeral and not preserved in version control, serving as a detailed record of the modification process. The log is strictly append-only - never modify or delete previous entries.
 
-## Log Format Requirements
+### Log Format Requirements
 
 - The log is a chronological narrative of decisions and changes
 - Each entry must include a timestamp
@@ -145,7 +78,7 @@ All changes must be documented in log.md. This file is ephemeral and not preserv
 - If technical examples are needed for clarity, reference their location in the files
 - Keep entries focused on what, why, and impact of changes
 
-## Required log.md Structure (Append-Only)
+### Required {{logfilename}} Structure (Append-Only)
 
 1. **Initial Assessment**
    - Current codebase analysis
@@ -200,7 +133,7 @@ Each batch of changes must be documented as a new entry before moving to user te
 1. Group changes by logical area or related functionality
 2. Batch process all changes within that logical area together
 3. Apply the batch as a single cohesive change
-4. Document the batch of changes in log.md
+4. Document the batch of changes in {{logfilename}}
 5. Allow user to test the changes
 6. Upon user confirmation:
    - Move to next logical area

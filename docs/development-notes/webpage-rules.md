@@ -236,10 +236,10 @@ body {
    - Use semantic naming (e.g., --color-primary vs --blue)
    - Maintain single source of truth
    - Use consistent variable naming patterns:
-     * Colors: --color-{purpose}
-     * Spacing: --spacing-{size}
-     * Typography: --font-size-{size}
-     * Components: --{component}-{property}
+     - Colors: --color-{purpose}
+     - Spacing: --spacing-{size}
+     - Typography: --font-size-{size}
+     - Components: --{component}-{property}
 
 3. Components:
    - Encapsulate styles

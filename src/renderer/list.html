@@ -8,6 +8,7 @@
   <base href="./">
   <link rel="stylesheet" href="styles/styles.css">
   <script type="module" src="scripts/init.js"></script>
+  <script type="module" src="scripts/list.js"></script>
 </head>
 <body>
   <div id="header-container"></div>
@@ -15,7 +16,12 @@
   <main role="main">
     <div class="content">
       <div class="content-wrapper">
-        <h1 id="content-table-title" class="sr-only">Content List</h1>
+        <div class="content-header">
+          <h1 id="content-table-title">Content List</h1>
+          <button id="add-entry" class="primary-button" aria-label="Add new content">
+            Add Entry
+          </button>
+        </div>
         
         <div class="content-table-header">
           <div class="search-filters" role="search">
