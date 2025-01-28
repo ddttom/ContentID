@@ -42,6 +42,11 @@
   --text-lg: 1.125rem;
   --text-xl: 1.25rem;
   --text-2xl: 1.5rem;
+
+  /* Font weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
   
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -64,4 +69,8 @@
   --z-modal: 1040;
   --z-popover: 1050;
   --z-tooltip: 1060;
+
+  /* Component sizes */
+  --header-height: 4rem;
+  --toolbar-height: 3rem;
 }

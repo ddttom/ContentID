@@ -16,8 +16,53 @@ export async function loadComponent(path, targetSelector) {
       throw new Error(`Target element not found: ${targetSelector}`);
     }
     target.innerHTML = html;
+
+    // Handle header specific logic after loading
+    if (path.includes('header.html')) {
+      setupHeader();
+    }
   } catch (error) {
     console.error('Error loading component:', error);
+  }
+}
+
+/**
+ * Setup header based on current page
+ */
+function setupHeader() {
+  const marketingNav = document.querySelector('[data-marketing-nav]');
+  if (!marketingNav) return;
+
+  // Only show marketing nav on index page
+  const isIndexPage = window.location.pathname.endsWith('index.html') || 
+                     window.location.pathname.endsWith('/');
+  marketingNav.style.display = isIndexPage ? 'flex' : 'none';
+
+  // Setup toolbar content based on current page
+  setupToolbar();
+}
+
+/**
+ * Setup toolbar content based on current page
+ */
+function setupToolbar() {
+  const toolbar = document.querySelector('.toolbar');
+  const pageTitle = toolbar?.querySelector('.page-title');
+  const pageActions = toolbar?.querySelector('.page-actions');
+  if (!toolbar || !pageTitle || !pageActions) return;
+
+  const pathname = window.location.pathname;
+  
+  // Set page specific content
+  if (pathname.includes('entry.html')) {
+    pageTitle.textContent = 'Content Entry';
+    pageActions.innerHTML = '<button class="action-btn">Add Entry</button>';
+  } else if (pathname.includes('list.html')) {
+    pageTitle.textContent = 'Content List';
+    pageActions.innerHTML = '<button class="action-btn">New Content</button>';
+  } else {
+    // Hide toolbar on pages without actions
+    toolbar.style.display = 'none';
   }
 }
 
