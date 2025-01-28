@@ -5,7 +5,7 @@ globs:
 # AI Code Modification Prompt Template v1.3
 
 1. Task Definition
-   - mdc file for cline, genberic context
+   - mdc file for cline, generic context
 
    - logfilename:gen-log.txt docs/development-notes/logs folder
 
