@@ -29,7 +29,7 @@ contentid/
 ├── src/
 │   ├── main/           # Server-side code
 │   │   └── web-server.js
-│   ├── renderer/       # Frontend assets
+│   ├── public/        # Frontend assets
 │   │   ├── components/ # Reusable UI components
 │   │   │   ├── header.html
 │   │   │   └── footer.html

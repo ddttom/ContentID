@@ -49,7 +49,7 @@
   - /services - Shared services (ES Modules)
     - /api - API endpoints
     - /db - Database operations
-  - /renderer - Frontend code (ES Modules)
+  - /public - Frontend code (ES Modules)
     - /scripts - JavaScript modules
     - /styles - CSS files
     - /components - Reusable HTML components

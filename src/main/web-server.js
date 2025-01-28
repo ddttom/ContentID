@@ -67,9 +67,9 @@ app.use(cors({
 // API routes
 app.use('/api', contentApi);
 
-// Serve static files from renderer directory
-const rendererPath = path.join(__dirname, '../renderer');
-app.use(express.static(rendererPath, {
+// Serve static files from public directory
+const publicPath = path.join(__dirname, '../public');
+app.use(express.static(publicPath, {
   setHeaders: (res, path) => {
     // Set proper cache headers
     const cacheControl = path.endsWith('.html') ? 'no-store' : 'public, max-age=31536000, immutable';
@@ -90,15 +90,15 @@ app.use(express.static(rendererPath, {
 
 // Try to serve the actual file first, then fall back to index.html
 app.get('*', (req, res) => {
-  const filePath = path.join(rendererPath, req.path);
+  const filePath = path.join(publicPath, req.path);
   if (path.extname(req.path) === '.html' && req.path !== '/index.html') {
     res.sendFile(filePath, (err) => {
       if (err) {
-        res.sendFile(path.join(rendererPath, 'index.html'));
+        res.sendFile(path.join(publicPath, 'index.html'));
       }
     });
   } else {
-    res.sendFile(path.join(rendererPath, 'index.html'));
+    res.sendFile(path.join(publicPath, 'index.html'));
   }
 });
 

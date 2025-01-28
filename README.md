@@ -76,7 +76,7 @@ project/
 ├── src/
 │   ├── main/           # Server-side code (ES Modules)
 │   │   └── web-server.js  # HTTP/2 server implementation
-│   ├── renderer/       # Frontend code (ES Modules)
+│   ├── public/        # Frontend code (ES Modules)
 │   │   ├── styles/     # CSS architecture
 │   │   │   ├── base/          # Base styles
 │   │   │   │   ├── _variables.css  # Design tokens

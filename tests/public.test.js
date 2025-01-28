@@ -1,6 +1,6 @@
-import { App } from '../src/renderer/index.js';
+import { App } from '../src/public/index.js';
 
-describe('Renderer Process', () => {
+describe('Frontend Process', () => {
   beforeEach(() => {
     // Set up a basic DOM structure
     document.body.innerHTML = `
@@ -24,6 +24,6 @@ describe('Renderer Process', () => {
   test('should log initialization message', () => {
     const consoleSpy = jest.spyOn(console, 'log');
     new App();
-    expect(consoleSpy).toHaveBeenCalledWith('Renderer process initialized');
+    expect(consoleSpy).toHaveBeenCalledWith('Frontend process initialized');
   });
 });

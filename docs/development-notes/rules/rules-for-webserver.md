@@ -108,7 +108,7 @@ app.use(cors({
 }));
 
 // Serve static files
-app.use(express.static(path.join(__dirname, '../renderer'), {
+app.use(express.static(path.join(__dirname, '../public'), {
   setHeaders: (res, path) => {
     const cacheControl = path.endsWith('.html') ? 'no-store' : 'public, max-age=31536000, immutable';
     res.setHeader('Cache-Control', cacheControl);
@@ -122,7 +122,7 @@ app.use(express.static(path.join(__dirname, '../renderer'), {
 
 // SPA fallback
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../renderer/index.html'));
+  res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 // HTTP/2 server options
