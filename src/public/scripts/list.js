@@ -26,11 +26,6 @@ async function loadContent() {
 
 // Setup event listeners
 function setupEventListeners() {
-  // Add entry button
-  document.getElementById('add-entry').addEventListener('click', () => {
-    window.location.href = 'entry.html';
-  });
-
   // Search input
   document.querySelector('.search-input').addEventListener('input', (e) => {
     filterContent();

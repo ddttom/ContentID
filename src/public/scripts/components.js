@@ -56,13 +56,21 @@ function setupToolbar() {
   // Set page specific content
   if (pathname.includes('entry.html')) {
     pageTitle.textContent = 'Content Entry';
-    pageActions.innerHTML = '<button class="action-btn">Add Entry</button>';
+    pageActions.innerHTML = '<button class="action-btn" id="save-entry">Save Entry</button>';
   } else if (pathname.includes('list.html')) {
     pageTitle.textContent = 'Content List';
-    pageActions.innerHTML = '<button class="action-btn">New Content</button>';
+    pageActions.innerHTML = '<button class="action-btn" id="add-entry">Add Entry</button>';
   } else {
     // Hide toolbar on pages without actions
     toolbar.style.display = 'none';
+  }
+
+  // Setup toolbar action handlers
+  const addEntryBtn = pageActions.querySelector('#add-entry');
+  if (addEntryBtn) {
+    addEntryBtn.addEventListener('click', () => {
+      window.location.href = 'entry.html';
+    });
   }
 }
 

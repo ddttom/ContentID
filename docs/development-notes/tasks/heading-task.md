@@ -4,7 +4,7 @@
   
 Taskname: heading-task
 Title: reorder heading design
-Scope: reorder the heading.html, it should only have marketing links if its displayed within index.html, ier as it currently stands for index.html but when used elsewhere it should only show ContentId link and login link.  Each page should have a toolbar underneath the header, with the page actions like add entry in the toolbar  
+Scope: reorder the heading.html, it should only have marketing links if it is displayed within index.html, ier as it currently stands but when used elsewhere it should only show Home link and login link. Each page should have a toolbar underneath the header, with the page actions like add entry in the toolbar  
 logfilename: same as the Taskname with -log.txt appended in docs/development-notes/logs folder
 
 1. Context and Role
