@@ -1,23 +1,30 @@
+/* Hero section override */
 .about-hero {
-  background-color: var(--primary-dark);
-  color: var(--text-light);
+  background: var(--color-primary-dark);
 }
 
+.about-hero h1,
+.about-hero p {
+  color: var(--color-background);
+}
+
+/* Users section */
 .users-section {
-  padding: 4rem 0;
-  background-color: var(--bg-light);
+  padding: var(--spacing-xxl) var(--spacing-md);
+  background-color: var(--color-background-light);
 }
 
 .users-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
 }
 
 .users-grid h3 {
-  color: var(--primary);
-  margin-bottom: 1rem;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-md);
+  font-size: var(--font-size-xl);
 }
 
 .users-grid ul {
@@ -26,62 +33,73 @@
 }
 
 .users-grid li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border-color);
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: var(--font-size-base);
 }
 
+/* Objectives section */
 .objectives-section {
-  padding: 4rem 0;
-  background-color: var(--bg-dark);
-  color: var(--text-light);
+  padding: var(--spacing-xxl) var(--spacing-md);
+  background-color: var(--color-primary-dark);
+  color: var(--color-background);
+}
+
+.objectives-section h2 {
+  color: var(--color-background);
 }
 
 .objectives-list {
   list-style: none;
   padding: 0;
-  margin-top: 2rem;
+  margin-top: var(--spacing-xl);
 }
 
 .objectives-list li {
-  padding: 1rem 0;
-  border-bottom: 1px solid var(--border-color-light);
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
-  padding-left: 2rem;
+  padding-left: var(--spacing-xl);
+  font-size: var(--font-size-lg);
 }
 
 .objectives-list li::before {
   content: "→";
   position: absolute;
   left: 0;
-  color: var(--accent);
+  color: var(--color-background);
 }
 
+/* Performance section */
 .performance-section {
-  padding: 4rem 0;
-  background-color: var(--bg-light);
+  padding: var(--spacing-xxl) var(--spacing-md);
+  background-color: var(--color-background-light);
 }
 
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-xl);
 }
 
 .metric {
-  padding: 2rem;
-  background-color: var(--bg-white);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-xl);
+  background-color: var(--color-background);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow);
   text-align: center;
 }
 
 .metric h3 {
-  color: var(--primary);
-  margin-bottom: 1rem;
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-md);
+  font-size: var(--font-size-lg);
 }
 
 .metric p {
-  color: var(--text-dark);
-  font-size: 1.1rem;
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
 }

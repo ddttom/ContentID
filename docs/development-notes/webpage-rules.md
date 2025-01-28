@@ -112,9 +112,53 @@ styles/
 ```css
 /* _variables.css - Design tokens */
 :root {
+  /* Colors */
   --color-primary: #007bff;
+  --color-primary-dark: #0056b3;
+  --color-primary-light: #3395ff;
+  --color-background: #ffffff;
+  --color-background-light: #f8f9fa;
+  --color-text: #1d1d1f;
+  --color-text-light: #6c757d;
+  --color-border: #dee2e6;
+  --color-success: #28a745;
+  --color-warning: #ffc107;
+
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-xxl: 4rem;
+
+  /* Typography */
+  --font-size-sm: 0.875rem;
   --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-xxl: 1.5rem;
+  --font-size-xxxl: 2rem;
+
+  /* Font weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* Line heights */
+  --line-height: 1.5;
+  --line-height-tight: 1.25;
+
+  /* Container widths */
+  --container-max-width: 1200px;
+
+  /* Border radius */
+  --border-radius: 4px;
+  --border-radius-lg: 8px;
+
+  /* Box shadows */
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --box-shadow-lg: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* _reset.css - Base styles */
@@ -122,6 +166,8 @@ body {
   margin: 0;
   font-family: var(--font-family);
   line-height: var(--line-height);
+  color: var(--color-text);
+  background: var(--color-background);
 }
 
 /* _utilities.css - Helper classes */
@@ -142,6 +188,8 @@ body {
   top: 0;
   width: 100%;
   z-index: var(--z-index-header);
+  background: var(--color-background);
+  box-shadow: var(--box-shadow);
 }
 
 /* _footer.css */
@@ -183,28 +231,48 @@ body {
    - Follow import order
 
 2. Variables:
-   - Use CSS custom properties
+   - Use CSS custom properties for all theme values
    - Define tokens in _variables.css
-   - Use semantic naming
+   - Use semantic naming (e.g., --color-primary vs --blue)
    - Maintain single source of truth
+   - Use consistent variable naming patterns:
+     * Colors: --color-{purpose}
+     * Spacing: --spacing-{size}
+     * Typography: --font-size-{size}
+     * Components: --{component}-{property}
 
 3. Components:
    - Encapsulate styles
    - Avoid deep nesting
    - Use meaningful class names
    - Keep components independent
+   - Follow consistent spacing patterns
+   - Use theme variables for all values
 
 4. Maintainability:
    - Write reusable code
    - Document complex styles
    - Use consistent formatting
    - Follow naming conventions
+   - Maintain responsive design patterns
+   - Use grid system consistently
 
 5. Performance:
    - Minimize specificity
    - Optimize selectors
    - Reduce redundancy
    - Use efficient properties
+   - Leverage CSS Grid and Flexbox
+   - Implement mobile-first approach
+
+6. Theme Consistency:
+   - Use variables for all theme-related values
+   - Maintain consistent spacing scale
+   - Follow typography hierarchy
+   - Use standard color palette
+   - Apply consistent shadows and borders
+   - Implement standard grid layouts
+   - Use defined breakpoints for responsiveness
 
 ## JavaScript Architecture
 

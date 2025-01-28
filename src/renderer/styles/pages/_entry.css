@@ -1,74 +1,80 @@
 /* Entry page layout */
 .content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+  max-width: var(--container-max-width);
+  margin: 60px auto 0; /* Account for fixed header */
+  padding: var(--spacing-xxl) var(--spacing-md);
 }
 
 .content h1 {
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
-  color: var(--text-dark);
+  font-size: var(--font-size-xxl);
+  margin-bottom: var(--spacing-xl);
+  color: var(--color-text);
+  text-align: center;
 }
 
 /* Content Items */
 .content-items {
-  margin-bottom: 3rem;
+  margin-bottom: var(--spacing-xxl);
 }
 
 .content-items .item {
-  padding: 1rem;
-  border-bottom: 1px solid var(--border-color);
+  padding: var(--spacing-lg);
+  background: var(--color-background-light);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow);
+  margin-bottom: var(--spacing-md);
 }
 
 .content-items h3 {
-  font-size: 1.1rem;
-  margin-bottom: 0.5rem;
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text);
 }
 
 .content-items .meta,
 .content-items .id {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin: 0.25rem 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
+  margin: var(--spacing-xs) 0;
 }
 
 /* Content Identity */
 .content-identity {
-  background-color: var(--bg-white);
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-sm);
-  padding: 2rem;
+  background-color: var(--color-background);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--box-shadow);
+  padding: var(--spacing-xl);
 }
 
 .identity-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: var(--spacing-xl);
 }
 
 .identity-header h2 {
-  font-size: 1.25rem;
+  font-size: var(--font-size-xl);
   margin: 0;
+  color: var(--color-text);
 }
 
 .identity-header .id {
-  color: var(--text-muted);
-  font-size: 0.9rem;
+  color: var(--color-text-light);
+  font-size: var(--font-size-sm);
 }
 
 /* Form sections */
 .content-form section {
-  margin-bottom: 2rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--border-color);
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .content-form h3 {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  color: var(--text-dark);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-md);
+  color: var(--color-text);
 }
 
 .form-group,
@@ -77,24 +83,26 @@
 .parameter-group,
 .requirement-group,
 .temporal-group {
-  margin-bottom: 1rem;
+  margin-bottom: var(--spacing-md);
 }
 
 /* Form inputs */
 label {
   display: block;
-  margin-bottom: 0.5rem;
-  color: var(--text-dark);
-  font-weight: 500;
+  margin-bottom: var(--spacing-xs);
+  color: var(--color-text);
+  font-weight: var(--font-weight-medium);
 }
 
 input[type="text"],
 textarea {
   width: 100%;
-  padding: 0.75rem;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-sm);
-  font-size: 0.95rem;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-base);
+  background: var(--color-background-light);
+  color: var(--color-text);
 }
 
 textarea {
@@ -110,42 +118,44 @@ textarea {
 }
 
 .features-list li {
-  padding: 0.5rem 0;
-  padding-left: 1.5rem;
+  padding: var(--spacing-sm) 0;
+  padding-left: var(--spacing-lg);
   position: relative;
+  color: var(--color-text);
 }
 
 .features-list li::before {
   content: "•";
   position: absolute;
   left: 0;
-  color: var(--primary);
+  color: var(--color-primary);
 }
 
 /* Approvals */
 .approvals-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-md);
 }
 
 .approval {
-  padding: 1rem;
-  background-color: var(--bg-light);
-  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-md);
+  background-color: var(--color-background-light);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 }
 
 .approval .status {
   display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
+  margin-bottom: var(--spacing-sm);
+  font-weight: var(--font-weight-medium);
 }
 
 .approval .date,
 .approval .by {
   display: block;
-  font-size: 0.9rem;
-  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-light);
 }
 
 /* Status indicators */
@@ -155,62 +165,67 @@ textarea {
 }
 
 .status.approved {
-  color: var(--success);
+  color: var(--color-success);
 }
 
 .status.pending {
-  color: var(--warning);
+  color: var(--color-warning);
 }
 
 /* Restrictions and Guidelines */
 .restrictions,
 .style-guidelines {
-  margin-top: 1rem;
-  padding: 1rem;
-  background-color: var(--bg-light);
-  border-radius: var(--border-radius-sm);
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: var(--color-background-light);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
 }
 
 .restrictions h4,
 .style-guidelines h4 {
-  font-size: 1rem;
-  margin-bottom: 0.75rem;
+  font-size: var(--font-size-base);
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text);
 }
 
 /* Revision History */
 .revision-history {
-  margin-top: 1rem;
+  margin-top: var(--spacing-md);
 }
 
 .revision {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border-color);
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid var(--color-border);
 }
 
 .revision .version {
-  font-weight: 500;
-  margin-right: 1rem;
+  font-weight: var(--font-weight-medium);
+  margin-right: var(--spacing-md);
+  color: var(--color-text);
 }
 
 .revision .note {
-  color: var(--text-muted);
-  font-size: 0.9rem;
+  color: var(--color-text-light);
+  font-size: var(--font-size-sm);
 }
 
 /* Content Relationships */
 .relationship {
-  padding: 1rem;
-  background-color: var(--bg-light);
-  border-radius: var(--border-radius-sm);
-  margin-bottom: 0.5rem;
+  padding: var(--spacing-md);
+  background-color: var(--color-background-light);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  margin-bottom: var(--spacing-sm);
 }
 
 .relationship .type {
-  font-weight: 500;
-  margin-right: 1rem;
+  font-weight: var(--font-weight-medium);
+  margin-right: var(--spacing-md);
+  color: var(--color-text);
 }
 
 .relationship .id {
-  color: var(--text-muted);
-  font-size: 0.9rem;
+  color: var(--color-text-light);
+  font-size: var(--font-size-sm);
 }
