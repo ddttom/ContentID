@@ -1,0 +1,90 @@
+{
+  "content": [],
+  "metadata": {
+    "lastId": 0,
+    "version": "1.0.0"
+  },
+  "schema": {
+    "content": {
+      "id": "number",
+      "title": "string",
+      "type": "string",
+      "description": "string",
+      "variations": {
+        "social": "string",
+        "email": "string",
+        "print": "string"
+      },
+      "blocks": {
+        "paragraph": "string",
+        "features": ["string"]
+      },
+      "approvals": {
+        "legal": {
+          "status": "string",
+          "timestamp": "string",
+          "approver": "string"
+        },
+        "marketing": {
+          "status": "string",
+          "timestamp": "string",
+          "approver": "string"
+        },
+        "compliance": {
+          "status": "string",
+          "timestamp": "string",
+          "approver": "string"
+        }
+      },
+      "usage": {
+        "regions": ["string"],
+        "translatable": "boolean",
+        "verbatim_required": "boolean",
+        "restrictions": {
+          "embargo": "string",
+          "confidentiality": "string",
+          "usage_rights": "string"
+        }
+      },
+      "brand": {
+        "trademark_required": "boolean",
+        "slogan_required": "boolean",
+        "style": {
+          "font": "string",
+          "color": "string",
+          "spacing": "string"
+        }
+      },
+      "temporal": {
+        "created_date": "string",
+        "valid_until": "string",
+        "version": "number"
+      },
+      "relationships": [{
+        "type": "string",
+        "id": "string"
+      }],
+      "verification": {
+        "digital_signature": "string",
+        "content_hash": "string",
+        "trust_chain": [{
+          "authority": "string",
+          "signature": "string",
+          "timestamp": "string"
+        }],
+        "status": "string"
+      },
+      "audit": {
+        "created_at": "string",
+        "updated_at": "string",
+        "created_by": "string",
+        "version_history": [{
+          "version": "number",
+          "timestamp": "string",
+          "changes": "string",
+          "editor": "string"
+        }]
+      }
+    }
+  }
+}

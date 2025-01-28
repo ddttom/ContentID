@@ -1,0 +1,83 @@
+.features-hero {
+  background-color: var(--primary-dark);
+  color: var(--text-light);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.feature {
+  padding: 2rem;
+  background-color: var(--bg-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease-in-out;
+}
+
+.feature:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.feature h3 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.feature p {
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+.verification-section {
+  padding: 4rem 0;
+  background-color: var(--bg-light);
+}
+
+.trust-section {
+  padding: 4rem 0;
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+}
+
+.trust-section .feature {
+  background-color: var(--bg-dark-lighter);
+  border: 1px solid var(--border-color-light);
+}
+
+.trust-section .feature h3 {
+  color: var(--accent);
+}
+
+.trust-section .feature p {
+  color: var(--text-light);
+}
+
+.workflows-section {
+  padding: 4rem 0;
+  background-color: var(--bg-light);
+}
+
+.performance-section {
+  padding: 4rem 0;
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+}
+
+.performance-section .feature {
+  background-color: var(--bg-dark-lighter);
+  border: 1px solid var(--border-color-light);
+}
+
+.performance-section .feature h3 {
+  color: var(--accent);
+}
+
+.performance-section .feature p {
+  color: var(--text-light);
+}

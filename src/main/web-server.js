@@ -6,6 +6,7 @@ import compression from 'compression';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import { fileURLToPath } from 'url';
+import { contentApi } from '../services/api/contentApi.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,6 +34,10 @@ app.use(helmet({
   referrerPolicy: { policy: 'same-origin' }
 }));
 
+// Body parsing middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // Compression middleware
 app.use(compression({
   level: 6,
@@ -55,9 +60,12 @@ app.use(limiter);
 // CORS configuration
 app.use(cors({
   origin: process.env.NODE_ENV === 'development' ? '*' : 'https://example.com',
-  methods: ['GET', 'POST'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+// API routes
+app.use('/api', contentApi);
 
 // Serve static files from renderer directory
 const rendererPath = path.join(__dirname, '../renderer');
@@ -70,6 +78,8 @@ app.use(express.static(rendererPath, {
     // Set proper MIME types
     if (path.endsWith('.css')) {
       res.setHeader('Content-Type', 'text/css');
+    } else if (path.endsWith('.js')) {
+      res.setHeader('Content-Type', 'application/javascript');
     }
   },
   // Enable directory indexing for block modules

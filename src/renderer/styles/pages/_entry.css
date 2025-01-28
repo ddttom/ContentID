@@ -1,48 +1,216 @@
-/* Entry page specific styles */
-.content-editor {
-  padding: var(--spacing-xl);
-  max-width: var(--container-max-width);
-  margin: 60px auto 0; /* Account for fixed header */
+/* Entry page layout */
+.content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
 }
 
-/* Entry form specific overrides */
-.content-form {
-  background: var(--color-background);
+.content h1 {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  color: var(--text-dark);
 }
 
-/* Entry page specific form section spacing */
-.form-section:first-of-type {
-  margin-top: 0;
+/* Content Items */
+.content-items {
+  margin-bottom: 3rem;
 }
 
-.form-section:last-of-type {
-  margin-bottom: var(--spacing-xl);
+.content-items .item {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
-/* Entry page specific validation styles */
-.form-group input:invalid,
-.form-group select:invalid,
-.form-group textarea:invalid {
-  border-color: var(--color-danger);
+.content-items h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
 }
 
-.form-group input:invalid:focus,
-.form-group select:invalid:focus,
-.form-group textarea:invalid:focus {
-  outline-color: var(--color-danger);
+.content-items .meta,
+.content-items .id {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0.25rem 0;
 }
 
-/* Required field indicator */
-.form-group label[for]:has(+ input[required]),
-.form-group label[for]:has(+ select[required]),
-.form-group label[for]:has(+ textarea[required]) {
+/* Content Identity */
+.content-identity {
+  background-color: var(--bg-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  padding: 2rem;
+}
+
+.identity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.identity-header h2 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.identity-header .id {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Form sections */
+.content-form section {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.content-form h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+.form-group,
+.variation-group,
+.block-group,
+.parameter-group,
+.requirement-group,
+.temporal-group {
+  margin-bottom: 1rem;
+}
+
+/* Form inputs */
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.95rem;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Features list */
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.features-list li {
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
   position: relative;
 }
 
-.form-group label[for]:has(+ input[required])::after,
-.form-group label[for]:has(+ select[required])::after,
-.form-group label[for]:has(+ textarea[required])::after {
-  content: "*";
-  color: var(--color-danger);
-  margin-left: var(--spacing-xs);
+.features-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--primary);
+}
+
+/* Approvals */
+.approvals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.approval {
+  padding: 1rem;
+  background-color: var(--bg-light);
+  border-radius: var(--border-radius-sm);
+}
+
+.approval .status {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.approval .date,
+.approval .by {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* Status indicators */
+.status {
+  display: inline-flex;
+  align-items: center;
+}
+
+.status.approved {
+  color: var(--success);
+}
+
+.status.pending {
+  color: var(--warning);
+}
+
+/* Restrictions and Guidelines */
+.restrictions,
+.style-guidelines {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: var(--bg-light);
+  border-radius: var(--border-radius-sm);
+}
+
+.restrictions h4,
+.style-guidelines h4 {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Revision History */
+.revision-history {
+  margin-top: 1rem;
+}
+
+.revision {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.revision .version {
+  font-weight: 500;
+  margin-right: 1rem;
+}
+
+.revision .note {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Content Relationships */
+.relationship {
+  padding: 1rem;
+  background-color: var(--bg-light);
+  border-radius: var(--border-radius-sm);
+  margin-bottom: 0.5rem;
+}
+
+.relationship .type {
+  font-weight: 500;
+  margin-right: 1rem;
+}
+
+.relationship .id {
+  color: var(--text-muted);
+  font-size: 0.9rem;
 }

@@ -4,201 +4,192 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';">
-  <title>New Content Entry - ContentID Manager</title>
-  <base href="./">
+  <title>Content Digital Identity Manager</title>
   <link rel="stylesheet" href="styles/styles.css">
   <script type="module" src="scripts/init.js"></script>
+  <script type="module" src="scripts/entry.js"></script>
 </head>
 <body>
   <div id="header-container"></div>
 
   <main role="main">
     <div class="content">
-      <div class="content-editor" role="region" aria-labelledby="form-title">
-        <h1 id="form-title" class="sr-only">New Content Entry</h1>
-        
-        <form class="content-form" role="form" aria-describedby="form-status">
-          <div id="form-status" class="status-message" role="status" aria-live="polite"></div>
+      <h1>Content Digital Identity Manager</h1>
 
-          <!-- Content Details -->
-          <section class="form-section" data-section="details" role="region" aria-labelledby="details-title">
-            <h2 id="details-title">Content Details</h2>
+      <section class="content-items">
+        <h2>Content Items</h2>
+        <div class="item">
+          <h3>iPhone 16 Pro</h3>
+          <p class="meta">Type: product_name</p>
+          <p class="id">ID: 550e8400-e29b-41d4-a716-446655440000</p>
+        </div>
+        <div class="item">
+          <h3>iPhone 16 Pro Description</h3>
+          <p class="meta">Type: product_description</p>
+          <p class="id">ID: 550e8400-e29b-41d4-a716-446655440001</p>
+        </div>
+      </section>
+
+      <section class="content-identity">
+        <div class="identity-header">
+          <h2>Content Digital Identity</h2>
+          <p class="id">ID: 550e8400-e29b-41d4-a716-446655440001</p>
+        </div>
+
+        <form class="content-form" role="form">
+          <section class="content-details">
+            <h3>Content Details</h3>
             <div class="form-group">
-              <label for="title">Title</label>
-              <input type="text" id="title" name="title" required aria-required="true">
+              <label for="title">Title:</label>
+              <input type="text" id="title" name="title" value="iPhone 16 Pro Description" required>
             </div>
             <div class="form-group">
-              <label for="type">Type</label>
-              <select id="type" name="type" required aria-required="true">
-                <option value="">Select Type</option>
-                <option value="product_name">Product Name</option>
-                <option value="product_description">Product Description</option>
-                <option value="marketing_copy">Marketing Copy</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="description">Description</label>
-              <textarea id="description" name="description" required aria-required="true"></textarea>
+              <label for="description">Description:</label>
+              <textarea id="description" name="description" required>Experience the power of innovation with the most advanced iPhone ever.</textarea>
             </div>
           </section>
 
-          <!-- Variations -->
-          <section class="form-section" data-section="variations" role="region" aria-labelledby="variations-title">
-            <h2 id="variations-title">Variations</h2>
-            <div class="variations-container">
-              <div class="variation-group">
-                <h3 id="social-title">Social</h3>
-                <textarea name="variation_social" 
-                         aria-labelledby="social-title"
-                         placeholder="Social media variation"></textarea>
-              </div>
-              <div class="variation-group">
-                <h3 id="email-title">Email</h3>
-                <textarea name="variation_email" 
-                         aria-labelledby="email-title"
-                         placeholder="Email variation"></textarea>
-              </div>
-              <div class="variation-group">
-                <h3 id="print-title">Print</h3>
-                <textarea name="variation_print" 
-                         aria-labelledby="print-title"
-                         placeholder="Print variation"></textarea>
-              </div>
+          <section class="variations">
+            <h3>Variations:</h3>
+            <div class="variation-group">
+              <label>social:</label>
+              <input type="text" name="variation_social" value="Unleash your creativity with iPhone 16 Pro">
+            </div>
+            <div class="variation-group">
+              <label>email:</label>
+              <input type="text" name="variation_email" value="Discover what iPhone 16 Pro can do for you">
+            </div>
+            <div class="variation-group">
+              <label>print:</label>
+              <input type="text" name="variation_print" value="iPhone 16 Pro: Where innovation meets excellence">
             </div>
           </section>
 
-          <!-- Content Blocks -->
-          <section class="form-section" data-section="blocks" role="region" aria-labelledby="blocks-title">
-            <h2 id="blocks-title">Content Blocks</h2>
-            <div class="content-blocks-container">
-              <div class="form-group">
-                <label for="paragraph">Paragraph</label>
-                <textarea id="paragraph" name="block_paragraph"></textarea>
-              </div>
-              <div class="form-group">
-                <label for="features">Features</label>
-                <textarea id="features" name="block_features"></textarea>
-              </div>
+          <section class="content-blocks">
+            <h3>Content Blocks:</h3>
+            <div class="block-group">
+              <label>paragraph:</label>
+              <textarea name="block_paragraph">Experience the power of innovation with the most advanced iPhone ever.</textarea>
+            </div>
+            <div class="block-group">
+              <label>features:</label>
+              <ul class="features-list">
+                <li>Advanced camera system</li>
+                <li>All-day battery life</li>
+                <li>Powerful chip</li>
+              </ul>
             </div>
           </section>
 
-          <!-- Approvals -->
-          <section class="form-section" data-section="approvals" role="region" aria-labelledby="approvals-title">
-            <h2 id="approvals-title">Approvals</h2>
-            <div class="approvals-grid" role="group" aria-label="Approval statuses">
-              <div class="approval-item">
-                <label id="legal-label">Legal</label>
-                <div class="approval-status" data-status="pending" role="status" aria-labelledby="legal-label">
-                  <span class="status-text">Pending</span>
-                </div>
+          <section class="approvals">
+            <h3>Approvals</h3>
+            <div class="approvals-grid">
+              <div class="approval">
+                <span class="status approved">Legal ✓</span>
+                <span class="date">01/01/2024</span>
+                <span class="by">By: John Smith</span>
               </div>
-              <div class="approval-item">
-                <label id="marketing-label">Marketing</label>
-                <div class="approval-status" data-status="pending" role="status" aria-labelledby="marketing-label">
-                  <span class="status-text">Pending</span>
-                </div>
+              <div class="approval">
+                <span class="status approved">Marketing ✓</span>
+                <span class="date">02/01/2024</span>
+                <span class="by">By: Sarah Johnson</span>
               </div>
-              <div class="approval-item">
-                <label id="compliance-label">Compliance</label>
-                <div class="approval-status" data-status="pending" role="status" aria-labelledby="compliance-label">
-                  <span class="status-text">Pending</span>
-                </div>
+              <div class="approval">
+                <span class="status pending">Compliance ✗</span>
               </div>
             </div>
           </section>
 
-          <!-- Usage Parameters -->
-          <section class="form-section" data-section="usage" role="region" aria-labelledby="usage-title">
-            <h2 id="usage-title">Usage Parameters</h2>
-            <div class="form-group">
-              <label id="regions-label">Regions</label>
-              <div class="checkbox-group" role="group" aria-labelledby="regions-label">
-                <label><input type="checkbox" name="region_na" value="NA"> North America</label>
-                <label><input type="checkbox" name="region_eu" value="EU"> Europe</label>
-                <label><input type="checkbox" name="region_apac" value="APAC"> Asia Pacific</label>
+          <section class="usage-parameters">
+            <h3>Usage Parameters</h3>
+            <div class="parameter-group">
+              <label>Regions:</label>
+              <span class="regions">NA, EU, APAC</span>
+            </div>
+            <div class="parameter-group">
+              <label>Translatable:</label>
+              <span class="status approved">✓</span>
+            </div>
+            <div class="parameter-group">
+              <label>Verbatim Required:</label>
+              <span class="status pending">✗</span>
+            </div>
+            <div class="restrictions">
+              <h4>Restrictions:</h4>
+              <div class="restriction-group">
+                <label>Embargo:</label>
+                <span>14/01/2025</span>
               </div>
-            </div>
-            <div class="form-group">
-              <label for="translatable">Translatable</label>
-              <input type="checkbox" id="translatable" name="translatable">
-            </div>
-            <div class="form-group">
-              <label for="verbatim">Verbatim Required</label>
-              <input type="checkbox" id="verbatim" name="verbatim_required">
-            </div>
-          </section>
-
-          <!-- Brand Requirements -->
-          <section class="form-section" data-section="brand" role="region" aria-labelledby="brand-title">
-            <h2 id="brand-title">Brand Requirements</h2>
-            <div class="form-group">
-              <label for="trademark">Trademark</label>
-              <input type="checkbox" id="trademark" name="trademark_required">
-            </div>
-            <div class="form-group">
-              <label for="slogan">Slogan</label>
-              <input type="checkbox" id="slogan" name="slogan_required">
-            </div>
-            <div class="style-guidelines" role="group" aria-labelledby="style-title">
-              <h3 id="style-title">Style Guidelines</h3>
-              <div class="form-group">
-                <label id="font-label">Font</label>
-                <input type="text" name="style_font" value="SF Pro Text" readonly aria-labelledby="font-label">
+              <div class="restriction-group">
+                <label>Confidentiality:</label>
+                <span>public</span>
               </div>
-              <div class="form-group">
-                <label id="color-label">Color</label>
-                <input type="text" name="style_color" value="#1D1D1F" readonly aria-labelledby="color-label">
-              </div>
-              <div class="form-group">
-                <label id="spacing-label">Spacing</label>
-                <input type="text" name="style_spacing" value="relaxed" readonly aria-labelledby="spacing-label">
+              <div class="restriction-group">
+                <label>Usage Rights:</label>
+                <span>unrestricted</span>
               </div>
             </div>
           </section>
 
-          <!-- Temporal Context -->
-          <section class="form-section" data-section="temporal" role="region" aria-labelledby="temporal-title">
-            <h2 id="temporal-title">Temporal Context</h2>
-            <div class="form-group">
-              <label for="created">Created</label>
-              <input type="date" id="created" name="created_date" required aria-required="true">
+          <section class="brand-requirements">
+            <h3>Brand Requirements</h3>
+            <div class="requirement-group">
+              <label>Trademark:</label>
+              <span class="status pending">✗</span>
             </div>
-            <div class="form-group">
-              <label for="valid_until">Valid Until</label>
-              <input type="date" id="valid_until" name="valid_until" required aria-required="true">
+            <div class="requirement-group">
+              <label>Slogan:</label>
+              <span class="status approved">✓</span>
             </div>
-            <div class="form-group">
-              <label for="version">Version</label>
-              <input type="text" id="version" name="version" value="1" readonly>
-            </div>
-          </section>
-
-          <!-- Content Relationships -->
-          <section class="form-section" data-section="relationships" role="region" aria-labelledby="relationships-title">
-            <h2 id="relationships-title">Content Relationships</h2>
-            <div class="relationships-container">
-              <div class="relationship-item">
-                <input type="text" 
-                       class="relationship-search" 
-                       placeholder="Search content..."
-                       aria-label="Search for related content"
-                       aria-controls="relationship-results">
-                <div id="relationship-results" 
-                     class="relationship-results" 
-                     role="listbox" 
-                     aria-label="Search results"></div>
+            <div class="style-guidelines">
+              <h4>Style Guidelines:</h4>
+              <div class="guideline">
+                <label>Font:</label>
+                <span>SF Pro Text</span>
+              </div>
+              <div class="guideline">
+                <label>Color:</label>
+                <span>#1D1D1F</span>
+              </div>
+              <div class="guideline">
+                <label>Spacing:</label>
+                <span>relaxed</span>
               </div>
             </div>
           </section>
 
-          <!-- Form Actions -->
-          <div class="form-actions">
-            <button type="button" class="save-draft" aria-label="Save as draft">Save Draft</button>
-            <button type="submit" class="save-content">Save Content</button>
-            <button type="button" class="cancel" aria-label="Cancel and return to list">Cancel</button>
-          </div>
+          <section class="temporal-context">
+            <h3>Temporal Context</h3>
+            <div class="temporal-group">
+              <label>Created:</label>
+              <span>2024-12-01</span>
+            </div>
+            <div class="temporal-group">
+              <label>Valid Until:</label>
+              <span>2025-12-31</span>
+            </div>
+            <div class="temporal-group">
+              <label>Version:</label>
+              <span>1</span>
+            </div>
+            <div class="revision-history">
+              <h4>Revision History:</h4>
+              <div class="revision">
+                <span class="version">v1.0 - 2024-12-01</span>
+                <span class="note">Initial creation (by Sarah Johnson)</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="content-relationships">
+            <h3>Content Relationships</h3>
+            <div class="relationship">
+              <span class="type">product_name</span>
+              <span class="id">ID: 550e8400-e29b-41d4-a716-446655440000</span>
+            </div>
+          </section>
         </form>
-      </div>
+      </section>
     </div>
   </main>
 
