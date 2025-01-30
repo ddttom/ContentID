@@ -1,7 +1,85 @@
 {
-  "content": [],
+  "content": [
+    {
+      "id": 1,
+      "title": "",
+      "type": null,
+      "description": "",
+      "variations": {},
+      "blocks": {
+        "features": []
+      },
+      "approvals": {
+        "legal": {
+          "status": "pending",
+          "timestamp": null,
+          "approver": null
+        },
+        "marketing": {
+          "status": "pending",
+          "timestamp": null,
+          "approver": null
+        },
+        "compliance": {
+          "status": "pending",
+          "timestamp": null,
+          "approver": null
+        }
+      },
+      "usage": {
+        "regions": [],
+        "translatable": false,
+        "verbatim_required": false,
+        "restrictions": {
+          "embargo": null,
+          "confidentiality": "public",
+          "usage_rights": "unrestricted"
+        }
+      },
+      "brand": {
+        "trademark_required": false,
+        "slogan_required": false,
+        "style": {
+          "font": "SF Pro Text",
+          "color": "#1D1D1F",
+          "spacing": "relaxed"
+        }
+      },
+      "temporal": {
+        "created_date": "2025-01-30",
+        "valid_until": null,
+        "version": 1
+      },
+      "relationships": [],
+      "verification": {
+        "digital_signature": "727f62ed14e88e33396b0a4b938b89f6cc21da5a2d75a713d2a928a70b0129d2",
+        "content_hash": "397bd8d81dfe513d8eb73894e4301dee12149ec69b03f4aa403bbe84d7bbb7ea",
+        "trust_chain": [
+          {
+            "authority": "system",
+            "signature": "abac2bab959bcfd3fe2da114d2c47fa3cfdfd8184ecad17e9e59f291855a5250",
+            "timestamp": "2025-01-30T17:50:31.483Z"
+          }
+        ],
+        "status": "pending"
+      },
+      "audit": {
+        "created_at": "2025-01-30T17:50:31.483Z",
+        "updated_at": "2025-01-30T17:50:31.483Z",
+        "created_by": "system",
+        "version_history": [
+          {
+            "version": 1,
+            "timestamp": "2025-01-30T17:50:31.483Z",
+            "changes": "Initial creation",
+            "editor": "system"
+          }
+        ]
+      }
+    }
+  ],
   "metadata": {
-    "lastId": 0,
+    "lastId": 1,
     "version": "1.0.0"
   },
   "schema": {
@@ -17,7 +95,9 @@
       },
       "blocks": {
         "paragraph": "string",
-        "features": ["string"]
+        "features": [
+          "string"
+        ]
       },
       "approvals": {
         "legal": {
@@ -37,7 +117,9 @@
         }
       },
       "usage": {
-        "regions": ["string"],
+        "regions": [
+          "string"
+        ],
         "translatable": "boolean",
         "verbatim_required": "boolean",
         "restrictions": {
@@ -60,30 +142,36 @@
         "valid_until": "string",
         "version": "number"
       },
-      "relationships": [{
-        "type": "string",
-        "id": "string"
-      }],
+      "relationships": [
+        {
+          "type": "string",
+          "id": "string"
+        }
+      ],
       "verification": {
         "digital_signature": "string",
         "content_hash": "string",
-        "trust_chain": [{
-          "authority": "string",
-          "signature": "string",
-          "timestamp": "string"
-        }],
+        "trust_chain": [
+          {
+            "authority": "string",
+            "signature": "string",
+            "timestamp": "string"
+          }
+        ],
         "status": "string"
       },
       "audit": {
         "created_at": "string",
         "updated_at": "string",
         "created_by": "string",
-        "version_history": [{
-          "version": "number",
-          "timestamp": "string",
-          "changes": "string",
-          "editor": "string"
-        }]
+        "version_history": [
+          {
+            "version": "number",
+            "timestamp": "string",
+            "changes": "string",
+            "editor": "string"
+          }
+        ]
       }
     }
   }

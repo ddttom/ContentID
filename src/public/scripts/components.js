@@ -36,7 +36,7 @@ function setupHeader() {
   // Only show marketing nav on index page
   const isIndexPage = window.location.pathname.endsWith('index.html') || 
                      window.location.pathname.endsWith('/');
-  marketingNav.style.display = isIndexPage ? 'flex' : 'none';
+  marketingNav.classList.toggle('show-marketing', isIndexPage);
 
   // Setup toolbar content based on current page
   setupToolbar();

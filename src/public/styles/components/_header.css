@@ -32,9 +32,14 @@
 }
 
 .header .nav {
-  display: flex;
+  display: none; /* Hide by default */
   gap: var(--spacing-md);
   margin: 0 var(--spacing-xl);
+}
+
+/* Show marketing nav only on index page */
+.header .nav.show-marketing {
+  display: flex;
 }
 
 .header .nav a {
