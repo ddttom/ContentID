@@ -50,10 +50,10 @@ app.use(compression({
   }
 }));
 
-// Rate limiting
+// Rate limiting - more lenient for development
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
+  max: process.env.NODE_ENV === 'development' ? 1000 : 100 // Higher limit for development
 });
 app.use(limiter);
 
@@ -69,23 +69,32 @@ app.use('/api', contentApi);
 
 // Serve static files from public directory
 const publicPath = path.join(__dirname, '../public');
+
+// MIME type middleware for CSS files
+app.use((req, res, next) => {
+  const cssPattern = /\/_?[^/]+\.css$/i;
+  if (cssPattern.test(req.path)) {
+    res.type('text/css');
+  }
+  next();
+});
+
+// Static file serving
 app.use(express.static(publicPath, {
-  setHeaders: (res, path) => {
+  setHeaders: (res, filePath) => {
     // Set proper cache headers
-    const cacheControl = path.endsWith('.html') ? 'no-store' : 'public, max-age=31536000, immutable';
+    const cacheControl = filePath.endsWith('.html') ? 'no-store' : 'public, max-age=31536000, immutable';
     res.setHeader('Cache-Control', cacheControl);
 
-    // Set proper MIME types
-    if (path.endsWith('.css')) {
+    // Ensure CSS files have correct MIME type
+    if (filePath.endsWith('.css')) {
       res.setHeader('Content-Type', 'text/css');
-    } else if (path.endsWith('.js')) {
-      res.setHeader('Content-Type', 'application/javascript');
     }
   },
-  // Enable directory indexing for block modules
+  // Enable directory indexing
   index: ['index.html'],
-  // Allow loading of .js modules
-  extensions: ['js', 'css', 'html']
+  // Allow loading of modules with proper extensions
+  extensions: ['.js', '.css', '.html']
 }));
 
 // Try to serve the actual file first, then fall back to index.html

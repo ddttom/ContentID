@@ -14,7 +14,7 @@
   max-width: var(--container-xl);
   height: 100%;
   margin: 0 auto;
-  padding: 0 var(--spacing-md);
+  padding: 0 var(--side-padding);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,7 +32,7 @@
 }
 
 .header .nav {
-  display: none; /* Hide by default */
+  display: none;
   gap: var(--spacing-md);
   margin: 0 var(--spacing-xl);
 }
@@ -89,7 +89,7 @@
   max-width: var(--container-xl);
   height: 100%;
   margin: 0 auto;
-  padding: 0 var(--spacing-md);
+  padding: 0 var(--side-padding);
   display: flex;
   justify-content: space-between;
   align-items: center;

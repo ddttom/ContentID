@@ -14,52 +14,20 @@
   <main role="main">
     <div class="content">
       <div class="content-editor" role="region" aria-labelledby="editor-title">
-        <h1 id="editor-title" class="sr-only">Edit Content</h1>
-
-        <!-- Version Info -->
-        <div class="version-info" role="status" aria-live="polite">
-          <div class="current-version">
-            <span class="label">Current Version:</span>
-            <span class="version-number" aria-label="Current version number">Loading...</span>
-          </div>
-          <button class="view-history" 
-                  aria-haspopup="dialog" 
-                  aria-controls="history-modal">View History</button>
-        </div>
-
-        <!-- Version History Modal -->
-        <div id="history-modal" 
-             class="history-modal" 
-             role="dialog" 
-             aria-labelledby="history-title" 
-             aria-modal="true" 
-             hidden>
-          <div class="modal-content">
-            <div class="modal-header">
-              <h2 id="history-title">Version History</h2>
-              <button class="close-modal" 
-                      aria-label="Close history modal">&times;</button>
-            </div>
-            <div class="modal-body">
-              <div class="history-list" role="list" aria-label="Version history entries"></div>
-            </div>
-          </div>
-        </div>
+        <h1 id="editor-title">Edit Content</h1>
 
         <!-- Content Form -->
-        <form class="content-form" role="form" aria-describedby="form-status">
-          <div id="form-status" class="status-message" role="status" aria-live="polite"></div>
-
+        <form class="content-form" role="form">
           <!-- Content Details -->
-          <section class="form-section" data-section="details" role="region" aria-labelledby="details-title">
-            <h2 id="details-title">Content Details</h2>
+          <section class="form-section" data-section="details">
+            <h2>Content Details</h2>
             <div class="form-group">
               <label for="title">Title</label>
-              <input type="text" id="title" name="title" required aria-required="true">
+              <input type="text" id="title" name="title" required>
             </div>
             <div class="form-group">
               <label for="type">Type</label>
-              <select id="type" name="type" required aria-required="true">
+              <select id="type" name="type" required>
                 <option value="">Select Type</option>
                 <option value="product_name">Product Name</option>
                 <option value="product_description">Product Description</option>
@@ -68,38 +36,32 @@
             </div>
             <div class="form-group">
               <label for="description">Description</label>
-              <textarea id="description" name="description" required aria-required="true"></textarea>
+              <textarea id="description" name="description" required></textarea>
             </div>
           </section>
 
           <!-- Variations -->
-          <section class="form-section" data-section="variations" role="region" aria-labelledby="variations-title">
-            <h2 id="variations-title">Variations</h2>
+          <section class="form-section" data-section="variations">
+            <h2>Variations</h2>
             <div class="variations-container">
               <div class="variation-group">
-                <h3 id="social-title">Social</h3>
-                <textarea name="variation_social" 
-                         aria-labelledby="social-title"
-                         placeholder="Social media variation"></textarea>
+                <h3>Social</h3>
+                <textarea name="variation_social" placeholder="Social media variation"></textarea>
               </div>
               <div class="variation-group">
-                <h3 id="email-title">Email</h3>
-                <textarea name="variation_email" 
-                         aria-labelledby="email-title"
-                         placeholder="Email variation"></textarea>
+                <h3>Email</h3>
+                <textarea name="variation_email" placeholder="Email variation"></textarea>
               </div>
               <div class="variation-group">
-                <h3 id="print-title">Print</h3>
-                <textarea name="variation_print" 
-                         aria-labelledby="print-title"
-                         placeholder="Print variation"></textarea>
+                <h3>Print</h3>
+                <textarea name="variation_print" placeholder="Print variation"></textarea>
               </div>
             </div>
           </section>
 
           <!-- Content Blocks -->
-          <section class="form-section" data-section="blocks" role="region" aria-labelledby="blocks-title">
-            <h2 id="blocks-title">Content Blocks</h2>
+          <section class="form-section" data-section="blocks">
+            <h2>Content Blocks</h2>
             <div class="content-blocks-container">
               <div class="form-group">
                 <label for="paragraph">Paragraph</label>
@@ -112,167 +74,11 @@
             </div>
           </section>
 
-          <!-- Approvals -->
-          <section class="form-section" data-section="approvals" role="region" aria-labelledby="approvals-title">
-            <h2 id="approvals-title">Approvals</h2>
-            <div class="approvals-grid" role="group" aria-label="Approval statuses">
-              <div class="approval-item">
-                <label id="legal-label">Legal</label>
-                <div class="approval-status" 
-                     data-status="pending" 
-                     role="status" 
-                     aria-labelledby="legal-label">
-                  <span class="status-text">Pending</span>
-                  <span class="approver" aria-label="Approver"></span>
-                  <span class="approval-date" aria-label="Approval date"></span>
-                </div>
-              </div>
-              <div class="approval-item">
-                <label id="marketing-label">Marketing</label>
-                <div class="approval-status" 
-                     data-status="pending" 
-                     role="status" 
-                     aria-labelledby="marketing-label">
-                  <span class="status-text">Pending</span>
-                  <span class="approver" aria-label="Approver"></span>
-                  <span class="approval-date" aria-label="Approval date"></span>
-                </div>
-              </div>
-              <div class="approval-item">
-                <label id="compliance-label">Compliance</label>
-                <div class="approval-status" 
-                     data-status="pending" 
-                     role="status" 
-                     aria-labelledby="compliance-label">
-                  <span class="status-text">Pending</span>
-                  <span class="approver" aria-label="Approver"></span>
-                  <span class="approval-date" aria-label="Approval date"></span>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- Usage Parameters -->
-          <section class="form-section" data-section="usage" role="region" aria-labelledby="usage-title">
-            <h2 id="usage-title">Usage Parameters</h2>
-            <div class="form-group">
-              <label id="regions-label">Regions</label>
-              <div class="checkbox-group" role="group" aria-labelledby="regions-label">
-                <label><input type="checkbox" name="region_na" value="NA"> North America</label>
-                <label><input type="checkbox" name="region_eu" value="EU"> Europe</label>
-                <label><input type="checkbox" name="region_apac" value="APAC"> Asia Pacific</label>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="translatable">Translatable</label>
-              <input type="checkbox" id="translatable" name="translatable">
-            </div>
-            <div class="form-group">
-              <label for="verbatim">Verbatim Required</label>
-              <input type="checkbox" id="verbatim" name="verbatim_required">
-            </div>
-          </section>
-
-          <!-- Brand Requirements -->
-          <section class="form-section" data-section="brand" role="region" aria-labelledby="brand-title">
-            <h2 id="brand-title">Brand Requirements</h2>
-            <div class="form-group">
-              <label for="trademark">Trademark</label>
-              <input type="checkbox" id="trademark" name="trademark_required">
-            </div>
-            <div class="form-group">
-              <label for="slogan">Slogan</label>
-              <input type="checkbox" id="slogan" name="slogan_required">
-            </div>
-            <div class="style-guidelines" role="group" aria-labelledby="style-title">
-              <h3 id="style-title">Style Guidelines</h3>
-              <div class="form-group">
-                <label id="font-label">Font</label>
-                <input type="text" 
-                       name="style_font" 
-                       value="SF Pro Text" 
-                       readonly 
-                       aria-labelledby="font-label">
-              </div>
-              <div class="form-group">
-                <label id="color-label">Color</label>
-                <input type="text" 
-                       name="style_color" 
-                       value="#1D1D1F" 
-                       readonly 
-                       aria-labelledby="color-label">
-              </div>
-              <div class="form-group">
-                <label id="spacing-label">Spacing</label>
-                <input type="text" 
-                       name="style_spacing" 
-                       value="relaxed" 
-                       readonly 
-                       aria-labelledby="spacing-label">
-              </div>
-            </div>
-          </section>
-
-          <!-- Temporal Context -->
-          <section class="form-section" data-section="temporal" role="region" aria-labelledby="temporal-title">
-            <h2 id="temporal-title">Temporal Context</h2>
-            <div class="form-group">
-              <label for="created">Created</label>
-              <input type="date" 
-                     id="created" 
-                     name="created_date" 
-                     required 
-                     readonly 
-                     aria-required="true">
-            </div>
-            <div class="form-group">
-              <label for="valid_until">Valid Until</label>
-              <input type="date" 
-                     id="valid_until" 
-                     name="valid_until" 
-                     required 
-                     aria-required="true">
-            </div>
-            <div class="form-group">
-              <label for="version">Version</label>
-              <input type="text" 
-                     id="version" 
-                     name="version" 
-                     readonly>
-            </div>
-          </section>
-
-          <!-- Content Relationships -->
-          <section class="form-section" data-section="relationships" role="region" aria-labelledby="relationships-title">
-            <h2 id="relationships-title">Content Relationships</h2>
-            <div class="relationships-container">
-              <div class="relationship-item">
-                <input type="text" 
-                       class="relationship-search" 
-                       placeholder="Search content..."
-                       aria-label="Search for related content"
-                       aria-controls="relationship-results">
-                <div id="relationship-results" 
-                     class="relationship-results" 
-                     role="listbox" 
-                     aria-label="Search results"></div>
-                <div class="selected-relationships" 
-                     role="list" 
-                     aria-label="Selected relationships"></div>
-              </div>
-            </div>
-          </section>
-
           <!-- Form Actions -->
           <div class="form-actions">
-            <button type="button" 
-                    class="delete-content" 
-                    aria-label="Delete content permanently">Delete</button>
-            <button type="submit" 
-                    class="update-content">Update Content</button>
-            <button type="button" 
-                    class="cancel" 
-                    aria-label="Cancel and return to list">Cancel</button>
+            <button type="button" class="cancel">Cancel</button>
+            <button type="button" class="delete-content">Delete</button>
+            <button type="submit" class="update-content">Update Content</button>
           </div>
         </form>
       </div>

@@ -107,7 +107,7 @@ styles/
 │   ├── _list.css         # Content listing styles
 │   ├── _entry.css        # Content entry styles
 │   └── _editor.css       # Content editor styles
-└── styles.css            # Main stylesheet with imports
+└── styles.css            # Main stylesheet
 ```
 
 ### CSS Organization
@@ -118,113 +118,43 @@ styles/
 /* _variables.css - Design tokens */
 :root {
   /* Colors */
-  --color-primary: #007bff;
-  --color-primary-dark: #0056b3;
-  --color-primary-light: #3395ff;
-  --color-background: #ffffff;
-  --color-background-light: #f8f9fa;
-  --color-text: #1d1d1f;
-  --color-text-light: #6c757d;
-  --color-border: #dee2e6;
-  --color-success: #28a745;
-  --color-warning: #ffc107;
-
+  --primary: #007AFF;
+  --primary-dark: #0051A8;
+  --primary-light: #47A3FF;
+  --accent: #FF9500;
+  
+  /* Text colors */
+  --text-dark: #1D1D1F;
+  --text-light: #FFFFFF;
+  --text-muted: #86868B;
+  
+  /* Background colors */
+  --bg-white: #FFFFFF;
+  --bg-light: #F5F5F7;
+  
+  /* Border colors */
+  --border-color: #D2D2D7;
+  
   /* Spacing */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
   --spacing-md: 1rem;
   --spacing-lg: 1.5rem;
   --spacing-xl: 2rem;
-  --spacing-xxl: 4rem;
-
-  /* Typography */
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-xxl: 1.5rem;
-  --font-size-xxxl: 2rem;
-
-  /* Font weights */
-  --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-bold: 700;
-
-  /* Line heights */
-  --line-height: 1.5;
-  --line-height-tight: 1.25;
-
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  
   /* Container widths */
-  --container-max-width: 1200px;
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
 
-  /* Border radius */
-  --border-radius: 4px;
-  --border-radius-lg: 8px;
-
-  /* Box shadows */
-  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --box-shadow-lg: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Component sizes */
+  --header-height: 4rem;
+  --toolbar-height: 3rem;
+  --side-padding: max(var(--spacing-md), calc((100vw - var(--container-xl)) / 2));
 }
-
-/* _reset.css - Base styles */
-body {
-  margin: 0;
-  font-family: var(--font-family);
-  line-height: var(--line-height);
-  color: var(--color-text);
-  background: var(--color-background);
-}
-
-/* _utilities.css - Helper classes */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-```
-
-#### Component Styles
-
-```css
-/* _header.css */
-.header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: var(--z-index-header);
-  background: var(--color-background);
-  box-shadow: var(--box-shadow);
-}
-
-/* _footer.css */
-.footer {
-  background: var(--color-background-light);
-  padding: var(--spacing-xl) 0;
-}
-
-/* _forms.css */
-.form-group {
-  margin-bottom: var(--spacing-lg);
-}
-```
-
-#### Main Stylesheet
-
-```css
-/* styles.css */
-@import './base/_variables.css';
-@import './base/_reset.css';
-@import './base/_utilities.css';
-
-@import './components/_header.css';
-@import './components/_footer.css';
-@import './components/_forms.css';
-
-@import './pages/_index.css';
-@import './pages/_list.css';
-@import './pages/_entry.css';
-@import './pages/_editor.css';
 ```
 
 ### CSS Best Practices
@@ -234,16 +164,16 @@ body {
    - Use consistent naming patterns
    - Maintain clear file structure
    - Follow import order
+   - Keep all styles in appropriate CSS files (no inline styles)
 
 2. Variables:
    - Use CSS custom properties for all theme values
    - Define tokens in _variables.css
-   - Use semantic naming (e.g., --color-primary vs --blue)
+   - Use semantic naming
    - Maintain single source of truth
    - Use consistent variable naming patterns:
-     - Colors: --color-{purpose}
+     - Colors: --primary, --text-dark, etc.
      - Spacing: --spacing-{size}
-     - Typography: --font-size-{size}
      - Components: --{component}-{property}
 
 3. Components:
@@ -251,16 +181,19 @@ body {
    - Avoid deep nesting
    - Use meaningful class names
    - Keep components independent
-   - Follow consistent spacing patterns
+   - Follow consistent spacing patterns:
+     - Use --spacing-xl for section margins
+     - Use --spacing-md for form element padding
+     - Use --spacing-sm for tight spacing
    - Use theme variables for all values
 
-4. Maintainability:
-   - Write reusable code
-   - Document complex styles
-   - Use consistent formatting
-   - Follow naming conventions
-   - Maintain responsive design patterns
-   - Use grid system consistently
+4. Spacing Guidelines:
+   - Use --spacing-xl (2rem) for main section margins
+   - Use --spacing-md (1rem) for form element padding
+   - Use --spacing-lg (1.5rem) for component padding
+   - Use --side-padding for consistent page margins
+   - Maintain consistent vertical rhythm
+   - Scale spacing based on viewport size
 
 5. Performance:
    - Minimize specificity

@@ -1,13 +1,14 @@
 /* Hero section */
 .hero {
   background: var(--bg-light);
-  padding: var(--spacing-2xl) var(--spacing-md);
+  padding: var(--spacing-2xl) 0;
   text-align: center;
 }
 
 .hero-wrapper {
-  max-width: var(--container-lg);
+  max-width: var(--container-xl);
   margin: 0 auto;
+  padding: 0 var(--side-padding);
 }
 
 .hero h1 {
@@ -19,6 +20,7 @@
 .hero .content {
   max-width: var(--container-md);
   margin: 0 auto;
+  padding: 0;
 }
 
 .hero p {
@@ -45,13 +47,14 @@
 
 /* Content section */
 .content {
-  padding: var(--spacing-2xl) var(--spacing-md);
+  padding: var(--spacing-2xl) 0;
   background: var(--bg-white);
 }
 
 .content-wrapper {
   max-width: var(--container-xl);
   margin: 0 auto;
+  padding: 0 var(--side-padding);
 }
 
 .content h2 {
@@ -87,13 +90,14 @@
 
 /* Steps section */
 .steps {
-  padding: var(--spacing-2xl) var(--spacing-md);
+  padding: var(--spacing-2xl) 0;
   background: var(--bg-light);
 }
 
 .steps-wrapper {
   max-width: var(--container-xl);
   margin: 0 auto;
+  padding: 0 var(--side-padding);
 }
 
 .steps h2 {
@@ -141,4 +145,18 @@
 .step .text p {
   color: var(--text-muted);
   line-height: 1.5;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .grid,
+  .step-items {
+    grid-template-columns: 1fr;
+  }
+
+  .step {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
 }
