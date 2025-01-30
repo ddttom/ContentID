@@ -9,7 +9,7 @@ A distributed digital identity system for content verification that enables AI s
 - Verification authority management
 - Trust chain validation
 - Content lifecycle tracking
-- Web interface (<http://localhost:3000>)
+- Web interface (http://localhost:3000)
 - Built-in logging system
 - Content Management Interface:
   - Content listing with search and filtering
@@ -53,6 +53,10 @@ A distributed digital identity system for content verification that enables AI s
 - Semantic HTML structure
 - Modular CSS architecture
 - Progressive enhancement
+- Context-aware components:
+  - Header adapts to page context (marketing links only on index)
+  - Page-specific toolbars for actions
+  - Dynamic content loading
 
 ### Shared Services (ES Modules)
 

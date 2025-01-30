@@ -21,7 +21,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self';">
-  <base href="./">
   <title>ContentID Manager</title>
   <link rel="stylesheet" href="styles/styles.css">
   <script type="module" src="scripts/init.js"></script>
@@ -45,6 +44,12 @@
 <!-- Footer Component Container -->
 <div id="footer-container"></div>
 ```
+
+### Header Component Rules
+
+- Marketing navigation (Features, Pricing, About) only shown on index.html
+- Other pages show only Home link and Login button
+- Each page has a toolbar underneath header with page-specific actions
 
 ### Component Loading
 
