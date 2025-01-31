@@ -1,0 +1,172 @@
+Initial Assessment - 2025-01-28 13:03
+Current codebase analysis:
+- Header component is currently static with all navigation links shown on every page
+- Components are loaded via components.js loadComponent function
+- No existing toolbar implementation for page actions
+- Header styling defined in _header.css
+
+Task Information:
+- Modify header to show marketing links only on index.html
+- Other pages should only show ContentID and login
+- Add toolbar under header for page actions
+- Keep changes minimal and maintain existing patterns
+
+Change Batch #1: Header Component Modification
+Timestamp: 2025-01-28 13:03
+Location: src/renderer/components/header.html
+
+Changes:
+- Split header into two variants using data attributes
+- Maintain existing HTML structure and class names
+- Add conditional display logic for navigation links
+- Added toolbar section under header
+- Made logo a clickable link to index.html
+
+Key Decisions:
+- Use data-page attribute to control navigation visibility
+- Keep markup structure consistent across variants
+- Maintain existing CSS classes and styling
+
+Change Batch #2: Components.js Update
+Timestamp: 2025-01-28 13:03
+Location: src/renderer/scripts/components.js
+
+Changes:
+- Added setupHeader function to handle conditional navigation
+- Added setupToolbar function for page-specific actions
+- Enhanced loadComponent to handle header-specific logic
+- Implemented page detection for marketing nav visibility
+- Added toolbar action button event handlers
+
+Key Decisions:
+- Use window.location.pathname for page detection
+- Maintain existing component loading structure
+- Add toolbar setup within header initialization
+- Handle page-specific actions in toolbar setup
+
+Change Batch #3: CSS Styling Update
+Timestamp: 2025-01-28 13:04
+Location: src/renderer/styles/components/_header.css
+
+Changes:
+- Added toolbar styles matching existing design patterns
+- Positioned toolbar below fixed header
+- Added styles for page title and action buttons
+- Maintained consistent use of CSS variables
+
+Key Decisions:
+- Match existing color scheme and spacing
+- Use consistent CSS variable naming
+- Maintain responsive design patterns
+- Keep styles modular and specific
+
+Change Batch #4: Variables Update
+Timestamp: 2025-01-28 13:06
+Location: src/renderer/styles/base/_variables.css
+
+Changes:
+- Added --header-height variable
+- Added --toolbar-height variable
+- Added font-weight variables
+- Updated header and toolbar styles to use new variables
+
+Key Decisions:
+- Use consistent sizing for header and toolbar
+- Maintain existing variable naming patterns
+- Add proper spacing for fixed positioning
+- Keep responsive design in mind
+
+Change Batch #5: Index Page Styling Fix
+Timestamp: 2025-01-28 13:30
+Location: src/renderer/styles/pages/_index.css
+
+Changes:
+- Updated CSS variable names to match _variables.css
+- Removed hardcoded margin-top from hero section
+- Fixed spacing and layout issues
+- Updated color variables to match system
+
+Key Decisions:
+- Maintain consistent variable naming across all files
+- Use proper spacing with fixed header and toolbar
+- Keep responsive design working
+- Ensure consistent typography
+
+Change Batch #6: List Page Update
+Timestamp: 2025-01-28 16:18
+Location: src/renderer/list.html, src/renderer/scripts/list.js
+
+Changes:
+- Removed duplicate "Add Entry" button from content header
+- Moved add entry functionality to toolbar
+- Updated list.js to remove old button event listener
+- Enhanced components.js to handle list page toolbar actions
+
+Key Decisions:
+- Keep page actions consistent in toolbar
+- Maintain existing table functionality
+- Preserve search and filter features
+- Keep event handling organized between components.js and list.js
+
+Change Batch #7: Component Loading Fix
+Timestamp: 2025-01-28 16:42
+Location: src/public/scripts/list.js, src/public/scripts/entry.js
+
+Changes:
+- Added import of loadCommonComponents to list.js
+- Updated list.js to properly initialize header and toolbar
+- Updated entry.js to import loadCommonComponents
+- Connected Save Entry button in toolbar to form submission
+- Added automatic redirect to list.html after successful save
+
+Key Decisions:
+- Use consistent component loading across all pages
+- Maintain proper initialization order
+- Keep form submission handling in entry.js
+- Ensure proper event handling for toolbar buttons
+
+Change Batch #8: Base href Cleanup
+Timestamp: 2025-01-30 12:05
+Location: src/public/list.html, src/public/editor.html, docs/development-notes/rules/webpage-rules.md
+
+Changes:
+- Removed base href tag from list.html and editor.html
+- Updated webpage-rules.md to remove base href from base template
+- Added Header Component Rules section to webpage-rules.md
+- Updated README.md to document context-aware components
+
+Key Decisions:
+- Remove unnecessary base href tags as they're not needed with proper server configuration
+- Document header's conditional behavior in development standards
+- Keep all HTML files consistent in their structure
+- Maintain proper path resolution through server configuration
+
+Change Batch #9: Marketing Nav CSS Fix
+Timestamp: 2025-01-30 12:47
+Location: src/public/styles/components/_header.css, src/public/scripts/components.js
+
+Changes:
+- Updated header CSS to hide marketing nav by default using display: none
+- Added show-marketing class to control nav visibility
+- Changed components.js to use classList.toggle instead of style.display
+- Ensured proper nav visibility before JavaScript loads
+
+Key Decisions:
+- Use CSS classes for visibility control instead of inline styles
+- Maintain proper progressive enhancement
+- Keep nav hidden by default for non-index pages
+- Use consistent class naming pattern
+
+Testing Notes:
+- Verify header displays correctly on index.html (with marketing links)
+- Verify header displays correctly on other pages (without marketing links)
+- Check toolbar visibility and styling on pages with actions
+- Ensure responsive design works on all screen sizes
+- Test page action buttons functionality
+- Verify proper spacing with fixed header and toolbar
+- Check logo link functionality
+- Verify all CSS variables are properly defined and used
+- Test list page functionality (add entry, search, filters)
+- Verify table pagination still works correctly
+- Test entry page Save Entry functionality
+- Verify proper redirection after content save
