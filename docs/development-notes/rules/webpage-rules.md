@@ -45,6 +45,33 @@
 <div id="footer-container"></div>
 ```
 
+### Page Structure Rules
+
+1. Container Elements:
+   - Avoid unnecessary wrapper elements
+   - Apply styles directly to semantic elements where possible
+   - Use container classes only when needed for width constraints
+   - Maintain proper spacing through CSS variables
+
+2. Section Organization:
+   ```html
+   <section class="hero" aria-labelledby="section-title">
+     <h1 id="section-title">Section Title</h1>
+     <div class="content">
+       <!-- Direct content here, no extra wrappers -->
+     </div>
+   </section>
+   ```
+
+3. Grid Layouts:
+   ```html
+   <div class="grid" role="list">
+     <div class="item" role="listitem">
+       <!-- Direct content here -->
+     </div>
+   </div>
+   ```
+
 ### Header Component Rules
 
 - Marketing navigation (Features, Pricing, About) only shown on index.html
@@ -135,6 +162,16 @@ styles/
   /* Border colors */
   --border-color: #D2D2D7;
   
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  
+  /* Border radius */
+  --border-radius: 8px;
+  --border-radius-sm: 4px;
+  --border-radius-lg: 12px;
+  
   /* Spacing */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
@@ -187,15 +224,30 @@ styles/
      - Use --spacing-sm for tight spacing
    - Use theme variables for all values
 
-4. Spacing Guidelines:
-   - Use --spacing-xl (2rem) for main section margins
-   - Use --spacing-md (1rem) for form element padding
-   - Use --spacing-lg (1.5rem) for component padding
-   - Use --side-padding for consistent page margins
-   - Maintain consistent vertical rhythm
-   - Scale spacing based on viewport size
+4. Layout Patterns:
+   - Use white background cards with shadows for content sections
+   - Apply consistent border radius and shadows
+   - Maintain proper spacing between elements
+   - Use grid layouts for responsive design
+   - Alternate section backgrounds (light/white) for visual balance
+   - Add subtle hover effects for interactive elements
 
-5. Performance:
+5. Section Styling:
+   - Hero sections:
+     - White background card with shadow
+     - Centered content with proper spacing
+     - Clear call-to-action buttons
+   - Feature sections:
+     - Light background cards with shadow
+     - Consistent spacing and typography
+     - Subtle hover effects
+   - Step sections:
+     - White cards with prominent number circles
+     - Clear text hierarchy
+     - Proper spacing between elements
+     - Enhanced visual hierarchy
+
+6. Performance:
    - Minimize specificity
    - Optimize selectors
    - Reduce redundancy
@@ -203,7 +255,7 @@ styles/
    - Leverage CSS Grid and Flexbox
    - Implement mobile-first approach
 
-6. Theme Consistency:
+7. Theme Consistency:
    - Use variables for all theme-related values
    - Maintain consistent spacing scale
    - Follow typography hierarchy

@@ -12,159 +12,162 @@
 <body>
   <div id="header-container"></div>
 
-  <main role="main">
-    <div class="content">
-      <h1>Content Digital Identity Manager</h1>
+  <main role="main" class="entry-page">
+    <h1>Content Digital Identity Manager</h1>
 
-      <section class="content-items">
-        <h2>Content Items</h2>
-      </section>
+    <section class="content-items" role="region" aria-labelledby="content-items-title">
+      <h2 id="content-items-title">Content Items</h2>
+    </section>
 
-      <section class="content-identity">
-        <div class="identity-header">
-          <h2>Content Digital Identity</h2>
+    <form class="content-form" role="form">
+      <section class="form-section" aria-labelledby="details-title">
+        <h2 id="details-title">Content Details</h2>
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" required>
         </div>
-
-        <form class="content-form" role="form">
-          <section class="content-details">
-            <h3>Content Details</h3>
-            <div class="form-group">
-              <label for="title">Title:</label>
-              <input type="text" id="title" name="title" required>
-            </div>
-            <div class="form-group">
-              <label for="description">Description:</label>
-              <textarea id="description" name="description" required></textarea>
-            </div>
-          </section>
-
-          <section class="variations">
-            <h3>Variations:</h3>
-            <div class="variation-group">
-              <label>social:</label>
-              <input type="text" name="variation_social">
-            </div>
-            <div class="variation-group">
-              <label>email:</label>
-              <input type="text" name="variation_email">
-            </div>
-            <div class="variation-group">
-              <label>print:</label>
-              <input type="text" name="variation_print">
-            </div>
-          </section>
-
-          <section class="content-blocks">
-            <h3>Content Blocks:</h3>
-            <div class="block-group">
-              <label>paragraph:</label>
-              <textarea name="block_paragraph"></textarea>
-            </div>
-            <div class="block-group">
-              <label>features:</label>
-              <ul class="features-list">
-              </ul>
-            </div>
-          </section>
-
-          <section class="approvals">
-            <h3>Approvals</h3>
-            <div class="approvals-grid">
-              <div class="approval">
-                <span class="status pending">Legal ✗</span>
-              </div>
-              <div class="approval">
-                <span class="status pending">Marketing ✗</span>
-              </div>
-              <div class="approval">
-                <span class="status pending">Compliance ✗</span>
-              </div>
-            </div>
-          </section>
-
-          <section class="usage-parameters">
-            <h3>Usage Parameters</h3>
-            <div class="parameter-group">
-              <label>Regions:</label>
-              <span class="regions"></span>
-            </div>
-            <div class="parameter-group">
-              <label>Translatable:</label>
-              <span class="status pending">✗</span>
-            </div>
-            <div class="parameter-group">
-              <label>Verbatim Required:</label>
-              <span class="status pending">✗</span>
-            </div>
-            <div class="restrictions">
-              <h4>Restrictions:</h4>
-              <div class="restriction-group">
-                <label>Embargo:</label>
-                <span></span>
-              </div>
-              <div class="restriction-group">
-                <label>Confidentiality:</label>
-                <span></span>
-              </div>
-              <div class="restriction-group">
-                <label>Usage Rights:</label>
-                <span></span>
-              </div>
-            </div>
-          </section>
-
-          <section class="brand-requirements">
-            <h3>Brand Requirements</h3>
-            <div class="requirement-group">
-              <label>Trademark:</label>
-              <span class="status pending">✗</span>
-            </div>
-            <div class="requirement-group">
-              <label>Slogan:</label>
-              <span class="status pending">✗</span>
-            </div>
-            <div class="style-guidelines">
-              <h4>Style Guidelines:</h4>
-              <div class="guideline">
-                <label>Font:</label>
-                <span></span>
-              </div>
-              <div class="guideline">
-                <label>Color:</label>
-                <span></span>
-              </div>
-              <div class="guideline">
-                <label>Spacing:</label>
-                <span></span>
-              </div>
-            </div>
-          </section>
-
-          <section class="temporal-context">
-            <h3>Temporal Context</h3>
-            <div class="temporal-group">
-              <label>Created:</label>
-              <span></span>
-            </div>
-            <div class="temporal-group">
-              <label>Valid Until:</label>
-              <span></span>
-            </div>
-            <div class="temporal-group">
-              <label>Version:</label>
-              <span></span>
-            </div>
-            <div class="revision-history">
-              <h4>Revision History:</h4>
-            </div>
-          </section>
-
-          <section class="content-relationships">
-            <h3>Content Relationships</h3>
-          </section>
-        </form>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <textarea id="description" name="description" required></textarea>
+        </div>
       </section>
-    </div>
+
+      <section class="form-section" aria-labelledby="variations-title">
+        <h2 id="variations-title">Variations</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="variation_social">Social</label>
+            <input type="text" id="variation_social" name="variation_social">
+          </div>
+          <div class="form-group">
+            <label for="variation_email">Email</label>
+            <input type="text" id="variation_email" name="variation_email">
+          </div>
+          <div class="form-group">
+            <label for="variation_print">Print</label>
+            <input type="text" id="variation_print" name="variation_print">
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="blocks-title">
+        <h2 id="blocks-title">Content Blocks</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="block_paragraph">Paragraph</label>
+            <textarea id="block_paragraph" name="block_paragraph"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="features">Features</label>
+            <ul class="features-list" id="features"></ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="approvals-title">
+        <h2 id="approvals-title">Approvals</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <span class="status pending">Legal ✗</span>
+          </div>
+          <div class="form-group">
+            <span class="status pending">Marketing ✗</span>
+          </div>
+          <div class="form-group">
+            <span class="status pending">Compliance ✗</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="usage-title">
+        <h2 id="usage-title">Usage Parameters</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Regions</label>
+            <span class="regions"></span>
+          </div>
+          <div class="form-group">
+            <label>Translatable</label>
+            <span class="status pending">✗</span>
+          </div>
+          <div class="form-group">
+            <label>Verbatim Required</label>
+            <span class="status pending">✗</span>
+          </div>
+        </div>
+        
+        <h3>Restrictions</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Embargo</label>
+            <span></span>
+          </div>
+          <div class="form-group">
+            <label>Confidentiality</label>
+            <span></span>
+          </div>
+          <div class="form-group">
+            <label>Usage Rights</label>
+            <span></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="brand-title">
+        <h2 id="brand-title">Brand Requirements</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Trademark</label>
+            <span class="status pending">✗</span>
+          </div>
+          <div class="form-group">
+            <label>Slogan</label>
+            <span class="status pending">✗</span>
+          </div>
+        </div>
+        
+        <h3>Style Guidelines</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Font</label>
+            <span></span>
+          </div>
+          <div class="form-group">
+            <label>Color</label>
+            <span></span>
+          </div>
+          <div class="form-group">
+            <label>Spacing</label>
+            <span></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="temporal-title">
+        <h2 id="temporal-title">Temporal Context</h2>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Created</label>
+            <span></span>
+          </div>
+          <div class="form-group">
+            <label>Valid Until</label>
+            <span></span>
+          </div>
+          <div class="form-group">
+            <label>Version</label>
+            <span></span>
+          </div>
+        </div>
+        <div class="revision-history">
+          <h3>Revision History</h3>
+        </div>
+      </section>
+
+      <section class="form-section" aria-labelledby="relationships-title">
+        <h2 id="relationships-title">Content Relationships</h2>
+      </section>
+    </form>
   </main>
 
   <div id="footer-container"></div>

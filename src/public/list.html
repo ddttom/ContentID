@@ -12,60 +12,56 @@
 <body>
   <div id="header-container"></div>
 
-  <main role="main">
-    <div class="content">
-      <div class="content-wrapper">
-        <div class="content-table-header">
-          <div class="search-filters" role="search">
-            <input type="search" 
-                   placeholder="Search content..." 
-                   class="search-input"
-                   aria-label="Search content"
-                   aria-controls="content-table">
-            <select class="filter-type" 
-                    aria-label="Filter by type">
-              <option value="">All Types</option>
-            </select>
-            <select class="filter-status" 
-                    aria-label="Filter by status">
-              <option value="">All Statuses</option>
-            </select>
-          </div>
-        </div>
-        
-        <table class="content-table" 
-               id="content-table"
-               role="grid"
-               aria-label="Content items">
-          <thead>
-            <tr role="row">
-              <th role="columnheader" aria-sort="none">ID</th>
-              <th role="columnheader" aria-sort="none">Title</th>
-              <th role="columnheader" aria-sort="none">Type</th>
-              <th role="columnheader" aria-sort="none">Approval Status</th>
-              <th role="columnheader" aria-sort="none">Created Date</th>
-              <th role="columnheader" aria-sort="none">Valid Until</th>
-              <th role="columnheader" aria-sort="none">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Content rows will be populated by JavaScript -->
-          </tbody>
-        </table>
+  <main role="main" class="list-page">
+    <section class="search" role="search">
+      <input type="search" 
+             placeholder="Search content..." 
+             class="search-input"
+             aria-label="Search content"
+             aria-controls="content-table">
+      <select class="filter-type" 
+              aria-label="Filter by type">
+        <option value="">All Types</option>
+      </select>
+      <select class="filter-status" 
+              aria-label="Filter by status">
+        <option value="">All Statuses</option>
+      </select>
+    </section>
+      
+    <section class="content" role="region" aria-label="Content items">
+      <table class="table" 
+             id="content-table"
+             role="grid"
+             aria-label="Content items">
+        <thead>
+          <tr role="row">
+            <th role="columnheader" aria-sort="none">ID</th>
+            <th role="columnheader" aria-sort="none">Title</th>
+            <th role="columnheader" aria-sort="none">Type</th>
+            <th role="columnheader" aria-sort="none">Approval Status</th>
+            <th role="columnheader" aria-sort="none">Created Date</th>
+            <th role="columnheader" aria-sort="none">Valid Until</th>
+            <th role="columnheader" aria-sort="none">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Content rows will be populated by JavaScript -->
+        </tbody>
+      </table>
 
-        <div class="pagination-controls" role="navigation" aria-label="Pagination">
-          <button class="prev-page" 
-                  aria-label="Previous page"
-                  aria-controls="content-table">Previous</button>
-          <span class="page-info" aria-live="polite">
-            Page <span class="current-page">1</span>
-          </span>
-          <button class="next-page" 
-                  aria-label="Next page"
-                  aria-controls="content-table">Next</button>
-        </div>
-      </div>
-    </div>
+      <nav class="pagination" role="navigation" aria-label="Pagination">
+        <button class="prev-page" 
+                aria-label="Previous page"
+                aria-controls="content-table">Previous</button>
+        <span class="page-info" aria-live="polite">
+          Page <span class="current-page">1</span>
+        </span>
+        <button class="next-page" 
+                aria-label="Next page"
+                aria-controls="content-table">Next</button>
+      </nav>
+    </section>
   </main>
 
   <div id="footer-container"></div>
